@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ymt.dao.OrderDao">
+
+<sql id="Simple_Column">
+ select
+ order.id as order_id,
+ order.course_id as order_course_id,
+ order.order_time as order_order_time,
+ order.pay_type as order_pay_type,
+ order.user_id as order_user_id,
+ order.publisher_id as order_publisher_id,
+ order.order_index as order_order_index,
+ order.state as order_state,
+ order.price as order_price,
+ order.number as order_number,
+ order.subject as order_subject,
+ order.name as order_name
+ from order as order 
+</sql>
+
+<sql id="Base_Column">
+ select
+ order.id as order_id,
+ order.course_id as order_course_id,
+ order.order_time as order_order_time,
+ order.pay_type as order_pay_type,
+ order.user_id as order_user_id,
+ order.publisher_id as order_publisher_id,
+ order.order_index as order_order_index,
+ order.state as order_state,
+ order.price as order_price,
+ order.number as order_number,
+ order.subject as order_subject,
+ order.name as order_name
+ from order as order 
+</sql>
+
+<sql id="Detail_Column">
+ select
+ order.id as order_id,
+ order.course_id as order_course_id,
+ order.order_time as order_order_time,
+ order.pay_type as order_pay_type,
+ order.user_id as order_user_id,
+ order.publisher_id as order_publisher_id,
+ order.order_index as order_order_index,
+ order.state as order_state,
+ order.price as order_price,
+ order.number as order_number,
+ order.subject as order_subject,
+ order.name as order_name
+ from order as order 
+</sql>
+
+<resultMap id="SimpleResultMap" type="cn.ymt.view.simple.OrderSimpleView">
+<id column="order_id" jdbcType="INTEGER" property="id" />
+ <result column="order_course_id" jdbcType="INTEGER" property="course_id" />
+ <result column="order_order_time" jdbcType="TIMESTAMP" property="order_time" />
+ <result column="order_pay_type" jdbcType="TINYINT" property="pay_type" />
+ <result column="order_user_id" jdbcType="INTEGER" property="user_id" />
+ <result column="order_publisher_id" jdbcType="INTEGER" property="publisher_id" />
+ <result column="order_order_index" jdbcType="TINYINT" property="order_index" />
+ <result column="order_state" jdbcType="TINYINT" property="state" />
+ <result column="order_price" jdbcType="DOUBLE" property="price" />
+ <result column="order_number" jdbcType="VARCHAR" property="number" />
+ <result column="order_subject" jdbcType="VARCHAR" property="subject" />
+ <result column="order_name" jdbcType="VARCHAR" property="name" />
+</resultMap>
+
+<resultMap id="BaseResultMap" type="cn.ymt.view.OrderView">
+<id column="order_id" jdbcType="INTEGER" property="id" />
+ <result column="order_course_id" jdbcType="INTEGER" property="course_id" />
+ <result column="order_order_time" jdbcType="TIMESTAMP" property="order_time" />
+ <result column="order_pay_type" jdbcType="TINYINT" property="pay_type" />
+ <result column="order_user_id" jdbcType="INTEGER" property="user_id" />
+ <result column="order_publisher_id" jdbcType="INTEGER" property="publisher_id" />
+ <result column="order_order_index" jdbcType="TINYINT" property="order_index" />
+ <result column="order_state" jdbcType="TINYINT" property="state" />
+ <result column="order_price" jdbcType="DOUBLE" property="price" />
+ <result column="order_number" jdbcType="VARCHAR" property="number" />
+ <result column="order_subject" jdbcType="VARCHAR" property="subject" />
+ <result column="order_name" jdbcType="VARCHAR" property="name" />
+</resultMap>
+
+<resultMap id="DetailResultMap" type="cn.ymt.view.OrderView" extends="BaseResultMap">
+</resultMap>
+
+<delete id="deleteById" parameterType="java.lang.Integer">
+delete from order where id = #{id,jdbcType=INTEGER}
+</delete>
+
+<delete id="deleteByIds">
+delete from order
+where <foreach collection="list" item="i" open="(" close=")" separator=" or "> id=#{i,jdbcType=INTEGER} </foreach>
+  </delete>
+
+<delete id="deleteObjects">
+delete from order
+where <foreach collection="list" item="i" open="(" close=")" separator=" or "> id=#{i.id,jdbcType=INTEGER} </foreach>
+  </delete>
+
+<delete id="deleteByParams" parameterType="cn.ymt.query.OrderQueryParams">
+delete from order 
+<where><if test="condition != null">${condition}</if></where>
+</delete>
+
+<insert id="save" parameterType="cn.ymt.view.OrderView" useGeneratedKeys="true" keyProperty="id">
+insert into order (course_id,order_time,pay_type,user_id,publisher_id,order_index,state,price,number,subject,name) 
+ values(#{course_id,jdbcType=INTEGER},#{order_time,jdbcType=TIMESTAMP},#{pay_type,jdbcType=TINYINT},#{user_id,jdbcType=INTEGER},#{publisher_id,jdbcType=INTEGER},#{order_index,jdbcType=TINYINT},#{state,jdbcType=TINYINT},#{price,jdbcType=DOUBLE},#{number,jdbcType=VARCHAR},#{subject,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR})
+</insert>
+
+<insert id="saveNoNull" parameterType="cn.ymt.view.OrderView" useGeneratedKeys="true" keyProperty="id">
+insert into order
+<trim prefix="(" suffix=")" suffixOverrides=",">
+ <if test="course_id != null">
+course_id,
+</if>
+ <if test="order_time != null">
+order_time,
+</if>
+ <if test="pay_type != null">
+pay_type,
+</if>
+ <if test="user_id != null">
+user_id,
+</if>
+ <if test="publisher_id != null">
+publisher_id,
+</if>
+ <if test="order_index != null">
+order_index,
+</if>
+ <if test="state != null">
+state,
+</if>
+ <if test="price != null">
+price,
+</if>
+ <if test="number != null">
+number,
+</if>
+ <if test="subject != null">
+subject,
+</if>
+ <if test="name != null">
+name,
+</if>
+</trim>
+
+<trim prefix="values(" suffix=")" suffixOverrides=",">
+<if test="course_id != null">
+#{course_id,jdbcType=INTEGER},
+</if>
+<if test="order_time != null">
+#{order_time,jdbcType=TIMESTAMP},
+</if>
+<if test="pay_type != null">
+#{pay_type,jdbcType=TINYINT},
+</if>
+<if test="user_id != null">
+#{user_id,jdbcType=INTEGER},
+</if>
+<if test="publisher_id != null">
+#{publisher_id,jdbcType=INTEGER},
+</if>
+<if test="order_index != null">
+#{order_index,jdbcType=TINYINT},
+</if>
+<if test="state != null">
+#{state,jdbcType=TINYINT},
+</if>
+<if test="price != null">
+#{price,jdbcType=DOUBLE},
+</if>
+<if test="number != null">
+#{number,jdbcType=VARCHAR},
+</if>
+<if test="subject != null">
+#{subject,jdbcType=VARCHAR},
+</if>
+<if test="name != null">
+#{name,jdbcType=VARCHAR},
+</if>
+</trim>
+</insert>
+
+<insert id="saves" >
+insert into order (course_id,order_time,pay_type,user_id,publisher_id,order_index,state,price,number,subject,name) 
+ values <foreach collection="list" item="obj" separator=",">(#{obj.course_id,jdbcType=INTEGER},#{obj.order_time,jdbcType=TIMESTAMP},#{obj.pay_type,jdbcType=TINYINT},#{obj.user_id,jdbcType=INTEGER},#{obj.publisher_id,jdbcType=INTEGER},#{obj.order_index,jdbcType=TINYINT},#{obj.state,jdbcType=TINYINT},#{obj.price,jdbcType=DOUBLE},#{obj.number,jdbcType=VARCHAR},#{obj.subject,jdbcType=VARCHAR},#{obj.name,jdbcType=VARCHAR})</foreach>
+</insert>
+<update id="updateAll" parameterType="cn.ymt.view.OrderView">
+update order 
+set  course_id = #{course_id,jdbcType=INTEGER}, order_time = #{order_time,jdbcType=TIMESTAMP}, pay_type = #{pay_type,jdbcType=TINYINT}, user_id = #{user_id,jdbcType=INTEGER}, publisher_id = #{publisher_id,jdbcType=INTEGER}, order_index = #{order_index,jdbcType=TINYINT}, state = #{state,jdbcType=TINYINT}, price = #{price,jdbcType=DOUBLE}, number = #{number,jdbcType=VARCHAR}, subject = #{subject,jdbcType=VARCHAR}, name = #{name,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER}
+</update>
+ <update id="updateNoNull" parameterType="cn.ymt.view.OrderView">
+update order 
+<set>
+<if test="course_id != null"> course_id = #{course_id,jdbcType=INTEGER},</if>
+<if test="order_time != null"> order_time = #{order_time,jdbcType=TIMESTAMP},</if>
+<if test="pay_type != null"> pay_type = #{pay_type,jdbcType=TINYINT},</if>
+<if test="user_id != null"> user_id = #{user_id,jdbcType=INTEGER},</if>
+<if test="publisher_id != null"> publisher_id = #{publisher_id,jdbcType=INTEGER},</if>
+<if test="order_index != null"> order_index = #{order_index,jdbcType=TINYINT},</if>
+<if test="state != null"> state = #{state,jdbcType=TINYINT},</if>
+<if test="price != null"> price = #{price,jdbcType=DOUBLE},</if>
+<if test="number != null"> number = #{number,jdbcType=VARCHAR},</if>
+<if test="subject != null"> subject = #{subject,jdbcType=VARCHAR},</if>
+<if test="name != null"> name = #{name,jdbcType=VARCHAR},</if></set>
+ where id = #{id,jdbcType=INTEGER}
+</update>
+
+<select id="getBasicById"  resultMap="BaseResultMap" parameterType="java.lang.Integer">
+<include refid="Base_Column" />
+where order.id = #{id,jdbcType=INTEGER}
+</select>
+
+<select id="getDetailById"  resultMap="DetailResultMap" parameterType="java.lang.Integer">
+<include refid="Detail_Column" />
+where order.id = #{id,jdbcType=INTEGER}
+</select>
+
+<select id="count" parameterType="cn.ymt.query.OrderQueryParams" resultType="long">
+select count(distinct order.id) from order as order
+<where>
+<if test="condition != null">(${condition})</if>
+</where>
+</select>
+
+<select id="getDistinctIds" parameterType="cn.ymt.query.OrderQueryParams" resultType="java.lang.Integer">
+select distinct order.id from order as order
+<where>
+<if test="condition != null">(${condition})</if>
+</where>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+</select>
+
+<select id="getSimple" parameterType="cn.ymt.query.OrderQueryParams" resultMap="SimpleResultMap">
+<include refid="Simple_Column" />
+<where>
+<if test="condition != null">(${condition})</if>
+<if test="pojos != null">
+ and <foreach collection="pojos" open="(" close=")" separator=" or " item="pojo">order.id=#{pojo.id,jdbcType=INTEGER}</foreach>
+</if>
+<if test="ids != null">
+ and <foreach collection="ids" open="(" close=")" separator=" or " item="idTemp">order.id=#{idTemp,jdbcType=INTEGER}</foreach>
+</if>
+</where>
+<if test="orderBy != null"> order by ${orderBy}</if>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+</select>
+
+<select id="getBasic" parameterType="cn.ymt.query.OrderQueryParams" resultMap="BaseResultMap">
+<include refid="Base_Column" />
+<where>
+<if test="condition != null">(${condition})</if>
+<if test="pojos != null">
+ and <foreach collection="pojos" open="(" close=")" separator=" or " item="pojo">order.id=#{pojo.id,jdbcType=INTEGER}</foreach>
+</if>
+<if test="ids != null">
+ and <foreach collection="ids" open="(" close=")" separator=" or " item="idTemp">order.id=#{idTemp,jdbcType=INTEGER}</foreach>
+</if>
+</where>
+<if test="orderBy != null"> order by ${orderBy}</if>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+</select>
+
+<select id="getDetail" parameterType="cn.ymt.query.OrderQueryParams" resultMap="DetailResultMap">
+<include refid="Detail_Column" />
+ where order.id in 
+(select * from(select distinct order.id from order as order 
+<where>
+<if test="condition != null">(${condition})</if>
+</where>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+) as ordertempTable)
+</select>
+
+</mapper>

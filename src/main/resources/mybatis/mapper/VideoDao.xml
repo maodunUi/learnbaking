@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ymt.dao.VideoDao">
+
+<sql id="Simple_Column">
+ select
+ video.id as video_id,
+ video.video_url as video_video_url,
+ video.memo as video_memo,
+ video.state as video_state,
+ video.user_id as video_user_id,
+ video.create_time as video_create_time,
+ video.order_index as video_order_index,
+ video.course_id as video_course_id
+ from video as video 
+</sql>
+
+<sql id="Base_Column">
+ select
+ video.id as video_id,
+ video.video_url as video_video_url,
+ video.memo as video_memo,
+ video.state as video_state,
+ video.user_id as video_user_id,
+ video.create_time as video_create_time,
+ video.order_index as video_order_index,
+ video.course_id as video_course_id
+ from video as video 
+</sql>
+
+<sql id="Detail_Column">
+ select
+ video.id as video_id,
+ video.video_url as video_video_url,
+ video.memo as video_memo,
+ video.state as video_state,
+ video.user_id as video_user_id,
+ video.create_time as video_create_time,
+ video.order_index as video_order_index,
+ video.course_id as video_course_id
+ from video as video 
+</sql>
+
+<resultMap id="SimpleResultMap" type="cn.ymt.view.simple.VideoSimpleView">
+<id column="video_id" jdbcType="INTEGER" property="id" />
+ <result column="video_video_url" jdbcType="VARCHAR" property="video_url" />
+ <result column="video_memo" jdbcType="VARCHAR" property="memo" />
+ <result column="video_state" jdbcType="TINYINT" property="state" />
+ <result column="video_user_id" jdbcType="INTEGER" property="user_id" />
+ <result column="video_create_time" jdbcType="TIMESTAMP" property="create_time" />
+ <result column="video_order_index" jdbcType="INTEGER" property="order_index" />
+ <result column="video_course_id" jdbcType="INTEGER" property="course_id" />
+</resultMap>
+
+<resultMap id="BaseResultMap" type="cn.ymt.view.VideoView">
+<id column="video_id" jdbcType="INTEGER" property="id" />
+ <result column="video_video_url" jdbcType="VARCHAR" property="video_url" />
+ <result column="video_memo" jdbcType="VARCHAR" property="memo" />
+ <result column="video_state" jdbcType="TINYINT" property="state" />
+ <result column="video_user_id" jdbcType="INTEGER" property="user_id" />
+ <result column="video_create_time" jdbcType="TIMESTAMP" property="create_time" />
+ <result column="video_order_index" jdbcType="INTEGER" property="order_index" />
+ <result column="video_course_id" jdbcType="INTEGER" property="course_id" />
+</resultMap>
+
+<resultMap id="DetailResultMap" type="cn.ymt.view.VideoView" extends="BaseResultMap">
+</resultMap>
+
+<delete id="deleteById" parameterType="java.lang.Integer">
+delete from video where id = #{id,jdbcType=INTEGER}
+</delete>
+
+<delete id="deleteByIds">
+delete from video
+where <foreach collection="list" item="i" open="(" close=")" separator=" or "> id=#{i,jdbcType=INTEGER} </foreach>
+  </delete>
+
+<delete id="deleteObjects">
+delete from video
+where <foreach collection="list" item="i" open="(" close=")" separator=" or "> id=#{i.id,jdbcType=INTEGER} </foreach>
+  </delete>
+
+<delete id="deleteByParams" parameterType="cn.ymt.query.VideoQueryParams">
+delete from video 
+<where><if test="condition != null">${condition}</if></where>
+</delete>
+
+<insert id="save" parameterType="cn.ymt.view.VideoView" useGeneratedKeys="true" keyProperty="id">
+insert into video (video_url,memo,state,user_id,create_time,order_index,course_id) 
+ values(#{video_url,jdbcType=VARCHAR},#{memo,jdbcType=VARCHAR},#{state,jdbcType=TINYINT},#{user_id,jdbcType=INTEGER},#{create_time,jdbcType=TIMESTAMP},#{order_index,jdbcType=INTEGER},#{course_id,jdbcType=INTEGER})
+</insert>
+
+<insert id="saveNoNull" parameterType="cn.ymt.view.VideoView" useGeneratedKeys="true" keyProperty="id">
+insert into video
+<trim prefix="(" suffix=")" suffixOverrides=",">
+ <if test="video_url != null">
+video_url,
+</if>
+ <if test="memo != null">
+memo,
+</if>
+ <if test="state != null">
+state,
+</if>
+ <if test="user_id != null">
+user_id,
+</if>
+ <if test="create_time != null">
+create_time,
+</if>
+ <if test="order_index != null">
+order_index,
+</if>
+ <if test="course_id != null">
+course_id,
+</if>
+</trim>
+
+<trim prefix="values(" suffix=")" suffixOverrides=",">
+<if test="video_url != null">
+#{video_url,jdbcType=VARCHAR},
+</if>
+<if test="memo != null">
+#{memo,jdbcType=VARCHAR},
+</if>
+<if test="state != null">
+#{state,jdbcType=TINYINT},
+</if>
+<if test="user_id != null">
+#{user_id,jdbcType=INTEGER},
+</if>
+<if test="create_time != null">
+#{create_time,jdbcType=TIMESTAMP},
+</if>
+<if test="order_index != null">
+#{order_index,jdbcType=INTEGER},
+</if>
+<if test="course_id != null">
+#{course_id,jdbcType=INTEGER},
+</if>
+</trim>
+</insert>
+
+<insert id="saves" >
+insert into video (video_url,memo,state,user_id,create_time,order_index,course_id) 
+ values <foreach collection="list" item="obj" separator=",">(#{obj.video_url,jdbcType=VARCHAR},#{obj.memo,jdbcType=VARCHAR},#{obj.state,jdbcType=TINYINT},#{obj.user_id,jdbcType=INTEGER},#{obj.create_time,jdbcType=TIMESTAMP},#{obj.order_index,jdbcType=INTEGER},#{obj.course_id,jdbcType=INTEGER})</foreach>
+</insert>
+<update id="updateAll" parameterType="cn.ymt.view.VideoView">
+update video 
+set  video_url = #{video_url,jdbcType=VARCHAR}, memo = #{memo,jdbcType=VARCHAR}, state = #{state,jdbcType=TINYINT}, user_id = #{user_id,jdbcType=INTEGER}, create_time = #{create_time,jdbcType=TIMESTAMP}, order_index = #{order_index,jdbcType=INTEGER}, course_id = #{course_id,jdbcType=INTEGER} where id = #{id,jdbcType=INTEGER}
+</update>
+ <update id="updateNoNull" parameterType="cn.ymt.view.VideoView">
+update video 
+<set>
+<if test="video_url != null"> video_url = #{video_url,jdbcType=VARCHAR},</if>
+<if test="memo != null"> memo = #{memo,jdbcType=VARCHAR},</if>
+<if test="state != null"> state = #{state,jdbcType=TINYINT},</if>
+<if test="user_id != null"> user_id = #{user_id,jdbcType=INTEGER},</if>
+<if test="create_time != null"> create_time = #{create_time,jdbcType=TIMESTAMP},</if>
+<if test="order_index != null"> order_index = #{order_index,jdbcType=INTEGER},</if>
+<if test="course_id != null"> course_id = #{course_id,jdbcType=INTEGER},</if></set>
+ where id = #{id,jdbcType=INTEGER}
+</update>
+
+<select id="getBasicById"  resultMap="BaseResultMap" parameterType="java.lang.Integer">
+<include refid="Base_Column" />
+where video.id = #{id,jdbcType=INTEGER}
+</select>
+
+<select id="getDetailById"  resultMap="DetailResultMap" parameterType="java.lang.Integer">
+<include refid="Detail_Column" />
+where video.id = #{id,jdbcType=INTEGER}
+</select>
+
+<select id="count" parameterType="cn.ymt.query.VideoQueryParams" resultType="long">
+select count(distinct video.id) from video as video
+<where>
+<if test="condition != null">(${condition})</if>
+</where>
+</select>
+
+<select id="getDistinctIds" parameterType="cn.ymt.query.VideoQueryParams" resultType="java.lang.Integer">
+select distinct video.id from video as video
+<where>
+<if test="condition != null">(${condition})</if>
+</where>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+</select>
+
+<select id="getSimple" parameterType="cn.ymt.query.VideoQueryParams" resultMap="SimpleResultMap">
+<include refid="Simple_Column" />
+<where>
+<if test="condition != null">(${condition})</if>
+<if test="pojos != null">
+ and <foreach collection="pojos" open="(" close=")" separator=" or " item="pojo">video.id=#{pojo.id,jdbcType=INTEGER}</foreach>
+</if>
+<if test="ids != null">
+ and <foreach collection="ids" open="(" close=")" separator=" or " item="idTemp">video.id=#{idTemp,jdbcType=INTEGER}</foreach>
+</if>
+</where>
+<if test="orderBy != null"> order by ${orderBy}</if>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+</select>
+
+<select id="getBasic" parameterType="cn.ymt.query.VideoQueryParams" resultMap="BaseResultMap">
+<include refid="Base_Column" />
+<where>
+<if test="condition != null">(${condition})</if>
+<if test="pojos != null">
+ and <foreach collection="pojos" open="(" close=")" separator=" or " item="pojo">video.id=#{pojo.id,jdbcType=INTEGER}</foreach>
+</if>
+<if test="ids != null">
+ and <foreach collection="ids" open="(" close=")" separator=" or " item="idTemp">video.id=#{idTemp,jdbcType=INTEGER}</foreach>
+</if>
+</where>
+<if test="orderBy != null"> order by ${orderBy}</if>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+</select>
+
+<select id="getDetail" parameterType="cn.ymt.query.VideoQueryParams" resultMap="DetailResultMap">
+<include refid="Detail_Column" />
+ where video.id in 
+(select * from(select distinct video.id from video as video 
+<where>
+<if test="condition != null">(${condition})</if>
+</where>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+) as videotempTable)
+</select>
+
+</mapper>

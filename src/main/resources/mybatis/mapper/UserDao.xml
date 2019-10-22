@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ymt.dao.UserDao">
+
+<sql id="Simple_Column">
+ select
+ user.id as user_id,
+ user.name as user_name,
+ user.password as user_password,
+ user.img_url as user_img_url,
+ user.nick_name as user_nick_name,
+ user.sex as user_sex,
+ user.email as user_email,
+ user.address as user_address,
+ user.age as user_age,
+ user.state as user_state,
+ user.memo as user_memo,
+ user.order_index as user_order_index,
+ user.telphone as user_telphone
+ from user as user 
+</sql>
+
+<sql id="Base_Column">
+ select
+ user.id as user_id,
+ user.name as user_name,
+ user.password as user_password,
+ user.img_url as user_img_url,
+ user.nick_name as user_nick_name,
+ user.sex as user_sex,
+ user.email as user_email,
+ user.address as user_address,
+ user.age as user_age,
+ user.state as user_state,
+ user.memo as user_memo,
+ user.order_index as user_order_index,
+ user.telphone as user_telphone
+ from user as user 
+</sql>
+
+<sql id="Detail_Column">
+ select
+ user.id as user_id,
+ user.name as user_name,
+ user.password as user_password,
+ user.img_url as user_img_url,
+ user.nick_name as user_nick_name,
+ user.sex as user_sex,
+ user.email as user_email,
+ user.address as user_address,
+ user.age as user_age,
+ user.state as user_state,
+ user.memo as user_memo,
+ user.order_index as user_order_index,
+ user.telphone as user_telphone
+ from user as user 
+</sql>
+
+<resultMap id="SimpleResultMap" type="cn.ymt.view.simple.UserSimpleView">
+<id column="user_id" jdbcType="INTEGER" property="id" />
+ <result column="user_name" jdbcType="VARCHAR" property="name" />
+ <result column="user_password" jdbcType="VARCHAR" property="password" />
+ <result column="user_img_url" jdbcType="VARCHAR" property="img_url" />
+ <result column="user_nick_name" jdbcType="VARCHAR" property="nick_name" />
+ <result column="user_sex" jdbcType="TINYINT" property="sex" />
+ <result column="user_email" jdbcType="VARCHAR" property="email" />
+ <result column="user_address" jdbcType="VARCHAR" property="address" />
+ <result column="user_age" jdbcType="INTEGER" property="age" />
+ <result column="user_state" jdbcType="TINYINT" property="state" />
+ <result column="user_memo" jdbcType="VARCHAR" property="memo" />
+ <result column="user_order_index" jdbcType="TINYINT" property="order_index" />
+ <result column="user_telphone" jdbcType="VARCHAR" property="telphone" />
+</resultMap>
+
+<resultMap id="BaseResultMap" type="cn.ymt.view.UserView">
+<id column="user_id" jdbcType="INTEGER" property="id" />
+ <result column="user_name" jdbcType="VARCHAR" property="name" />
+ <result column="user_password" jdbcType="VARCHAR" property="password" />
+ <result column="user_img_url" jdbcType="VARCHAR" property="img_url" />
+ <result column="user_nick_name" jdbcType="VARCHAR" property="nick_name" />
+ <result column="user_sex" jdbcType="TINYINT" property="sex" />
+ <result column="user_email" jdbcType="VARCHAR" property="email" />
+ <result column="user_address" jdbcType="VARCHAR" property="address" />
+ <result column="user_age" jdbcType="INTEGER" property="age" />
+ <result column="user_state" jdbcType="TINYINT" property="state" />
+ <result column="user_memo" jdbcType="VARCHAR" property="memo" />
+ <result column="user_order_index" jdbcType="TINYINT" property="order_index" />
+ <result column="user_telphone" jdbcType="VARCHAR" property="telphone" />
+</resultMap>
+
+<resultMap id="DetailResultMap" type="cn.ymt.view.UserView" extends="BaseResultMap">
+</resultMap>
+
+<delete id="deleteById" parameterType="java.lang.Integer">
+delete from user where id = #{id,jdbcType=INTEGER}
+</delete>
+
+<delete id="deleteByIds">
+delete from user
+where <foreach collection="list" item="i" open="(" close=")" separator=" or "> id=#{i,jdbcType=INTEGER} </foreach>
+  </delete>
+
+<delete id="deleteObjects">
+delete from user
+where <foreach collection="list" item="i" open="(" close=")" separator=" or "> id=#{i.id,jdbcType=INTEGER} </foreach>
+  </delete>
+
+<delete id="deleteByParams" parameterType="cn.ymt.query.UserQueryParams">
+delete from user 
+<where><if test="condition != null">${condition}</if></where>
+</delete>
+
+<insert id="save" parameterType="cn.ymt.view.UserView" useGeneratedKeys="true" keyProperty="id">
+insert into user (name,password,img_url,nick_name,sex,email,address,age,state,memo,order_index,telphone) 
+ values(#{name,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{img_url,jdbcType=VARCHAR},#{nick_name,jdbcType=VARCHAR},#{sex,jdbcType=TINYINT},#{email,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},#{age,jdbcType=INTEGER},#{state,jdbcType=TINYINT},#{memo,jdbcType=VARCHAR},#{order_index,jdbcType=TINYINT},#{telphone,jdbcType=VARCHAR})
+</insert>
+
+<insert id="saveNoNull" parameterType="cn.ymt.view.UserView" useGeneratedKeys="true" keyProperty="id">
+insert into user
+<trim prefix="(" suffix=")" suffixOverrides=",">
+ <if test="name != null">
+name,
+</if>
+ <if test="password != null">
+password,
+</if>
+ <if test="img_url != null">
+img_url,
+</if>
+ <if test="nick_name != null">
+nick_name,
+</if>
+ <if test="sex != null">
+sex,
+</if>
+ <if test="email != null">
+email,
+</if>
+ <if test="address != null">
+address,
+</if>
+ <if test="age != null">
+age,
+</if>
+ <if test="state != null">
+state,
+</if>
+ <if test="memo != null">
+memo,
+</if>
+ <if test="order_index != null">
+order_index,
+</if>
+ <if test="telphone != null">
+telphone,
+</if>
+</trim>
+
+<trim prefix="values(" suffix=")" suffixOverrides=",">
+<if test="name != null">
+#{name,jdbcType=VARCHAR},
+</if>
+<if test="password != null">
+#{password,jdbcType=VARCHAR},
+</if>
+<if test="img_url != null">
+#{img_url,jdbcType=VARCHAR},
+</if>
+<if test="nick_name != null">
+#{nick_name,jdbcType=VARCHAR},
+</if>
+<if test="sex != null">
+#{sex,jdbcType=TINYINT},
+</if>
+<if test="email != null">
+#{email,jdbcType=VARCHAR},
+</if>
+<if test="address != null">
+#{address,jdbcType=VARCHAR},
+</if>
+<if test="age != null">
+#{age,jdbcType=INTEGER},
+</if>
+<if test="state != null">
+#{state,jdbcType=TINYINT},
+</if>
+<if test="memo != null">
+#{memo,jdbcType=VARCHAR},
+</if>
+<if test="order_index != null">
+#{order_index,jdbcType=TINYINT},
+</if>
+<if test="telphone != null">
+#{telphone,jdbcType=VARCHAR},
+</if>
+</trim>
+</insert>
+
+<insert id="saves" >
+insert into user (name,password,img_url,nick_name,sex,email,address,age,state,memo,order_index,telphone) 
+ values <foreach collection="list" item="obj" separator=",">(#{obj.name,jdbcType=VARCHAR},#{obj.password,jdbcType=VARCHAR},#{obj.img_url,jdbcType=VARCHAR},#{obj.nick_name,jdbcType=VARCHAR},#{obj.sex,jdbcType=TINYINT},#{obj.email,jdbcType=VARCHAR},#{obj.address,jdbcType=VARCHAR},#{obj.age,jdbcType=INTEGER},#{obj.state,jdbcType=TINYINT},#{obj.memo,jdbcType=VARCHAR},#{obj.order_index,jdbcType=TINYINT},#{obj.telphone,jdbcType=VARCHAR})</foreach>
+</insert>
+<update id="updateAll" parameterType="cn.ymt.view.UserView">
+update user 
+set  name = #{name,jdbcType=VARCHAR}, password = #{password,jdbcType=VARCHAR}, img_url = #{img_url,jdbcType=VARCHAR}, nick_name = #{nick_name,jdbcType=VARCHAR}, sex = #{sex,jdbcType=TINYINT}, email = #{email,jdbcType=VARCHAR}, address = #{address,jdbcType=VARCHAR}, age = #{age,jdbcType=INTEGER}, state = #{state,jdbcType=TINYINT}, memo = #{memo,jdbcType=VARCHAR}, order_index = #{order_index,jdbcType=TINYINT}, telphone = #{telphone,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER}
+</update>
+ <update id="updateNoNull" parameterType="cn.ymt.view.UserView">
+update user 
+<set>
+<if test="name != null"> name = #{name,jdbcType=VARCHAR},</if>
+<if test="password != null"> password = #{password,jdbcType=VARCHAR},</if>
+<if test="img_url != null"> img_url = #{img_url,jdbcType=VARCHAR},</if>
+<if test="nick_name != null"> nick_name = #{nick_name,jdbcType=VARCHAR},</if>
+<if test="sex != null"> sex = #{sex,jdbcType=TINYINT},</if>
+<if test="email != null"> email = #{email,jdbcType=VARCHAR},</if>
+<if test="address != null"> address = #{address,jdbcType=VARCHAR},</if>
+<if test="age != null"> age = #{age,jdbcType=INTEGER},</if>
+<if test="state != null"> state = #{state,jdbcType=TINYINT},</if>
+<if test="memo != null"> memo = #{memo,jdbcType=VARCHAR},</if>
+<if test="order_index != null"> order_index = #{order_index,jdbcType=TINYINT},</if>
+<if test="telphone != null"> telphone = #{telphone,jdbcType=VARCHAR},</if>
+</set>
+ where id = #{id,jdbcType=INTEGER}
+</update>
+
+<select id="getBasicById"  resultMap="BaseResultMap" parameterType="java.lang.Integer">
+<include refid="Base_Column" />
+where user.id = #{id,jdbcType=INTEGER}
+</select>
+
+<select id="getDetailById"  resultMap="DetailResultMap" parameterType="java.lang.Integer">
+<include refid="Detail_Column" />
+where user.id = #{id,jdbcType=INTEGER}
+</select>
+
+<select id="count" parameterType="cn.ymt.query.UserQueryParams" resultType="long">
+select count(distinct user.id) from user as user
+<where>
+<if test="condition != null">(${condition})</if>
+</where>
+</select>
+
+<select id="getDistinctIds" parameterType="cn.ymt.query.UserQueryParams" resultType="java.lang.Integer">
+select distinct user.id from user as user
+<where>
+<if test="condition != null">(${condition})</if>
+</where>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+</select>
+
+<select id="getSimple" parameterType="cn.ymt.query.UserQueryParams" resultMap="SimpleResultMap">
+<include refid="Simple_Column" />
+<where>
+<if test="condition != null">(${condition})</if>
+<if test="pojos != null">
+ and <foreach collection="pojos" open="(" close=")" separator=" or " item="pojo">user.id=#{pojo.id,jdbcType=INTEGER}</foreach>
+</if>
+<if test="ids != null">
+ and <foreach collection="ids" open="(" close=")" separator=" or " item="idTemp">user.id=#{idTemp,jdbcType=INTEGER}</foreach>
+</if>
+</where>
+<if test="orderBy != null"> order by ${orderBy}</if>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+</select>
+
+<select id="getBasic" parameterType="cn.ymt.query.UserQueryParams" resultMap="BaseResultMap">
+<include refid="Base_Column" />
+<where>
+<if test="condition != null">(${condition})</if>
+<if test="pojos != null">
+ and <foreach collection="pojos" open="(" close=")" separator=" or " item="pojo">user.id=#{pojo.id,jdbcType=INTEGER}</foreach>
+</if>
+<if test="ids != null">
+ and <foreach collection="ids" open="(" close=")" separator=" or " item="idTemp">user.id=#{idTemp,jdbcType=INTEGER}</foreach>
+</if>
+</where>
+<if test="orderBy != null"> order by ${orderBy}</if>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+</select>
+
+<select id="getDetail" parameterType="cn.ymt.query.UserQueryParams" resultMap="DetailResultMap">
+<include refid="Detail_Column" />
+ where user.id in 
+(select * from(select distinct user.id from user as user 
+<where>
+<if test="condition != null">(${condition})</if>
+</where>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+) as usertempTable)
+</select>
+<!--&&&&&&&&&&&&&&&&&&&-->
+
+ <select id="findUserByTelphone" parameterType="cn.ymt.query.UserQueryParams" resultMap="SimpleResultMap">
+ select * from user where telphone = #{telphone,jdbcType=VARCHAR}
+ </select>
+</mapper>

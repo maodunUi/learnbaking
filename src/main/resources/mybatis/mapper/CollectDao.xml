@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ymt.dao.CollectDao">
+
+<sql id="Simple_Column">
+ select
+ collect.id as collect_id,
+ collect.user_id as collect_user_id,
+ collect.type as collect_type,
+ collect.course_id as collect_course_id,
+ collect.detail_id as collect_detail_id,
+ collect.collect_time as collect_collect_time
+ from collect as collect 
+</sql>
+
+<sql id="Base_Column">
+ select
+ collect.id as collect_id,
+ collect.user_id as collect_user_id,
+ collect.type as collect_type,
+ collect.course_id as collect_course_id,
+ collect.detail_id as collect_detail_id,
+ collect.collect_time as collect_collect_time
+ from collect as collect 
+</sql>
+
+<sql id="Detail_Column">
+ select
+ collect.id as collect_id,
+ collect.user_id as collect_user_id,
+ collect.type as collect_type,
+ collect.course_id as collect_course_id,
+ collect.detail_id as collect_detail_id,
+ collect.collect_time as collect_collect_time
+ from collect as collect 
+</sql>
+
+<resultMap id="SimpleResultMap" type="cn.ymt.view.simple.CollectSimpleView">
+<id column="collect_id" jdbcType="INTEGER" property="id" />
+ <result column="collect_user_id" jdbcType="INTEGER" property="user_id" />
+ <result column="collect_type" jdbcType="TINYINT" property="type" />
+ <result column="collect_course_id" jdbcType="INTEGER" property="course_id" />
+ <result column="collect_detail_id" jdbcType="INTEGER" property="detail_id" />
+ <result column="collect_collect_time" jdbcType="TIMESTAMP" property="collect_time" />
+</resultMap>
+
+<resultMap id="BaseResultMap" type="cn.ymt.view.CollectView">
+<id column="collect_id" jdbcType="INTEGER" property="id" />
+ <result column="collect_user_id" jdbcType="INTEGER" property="user_id" />
+ <result column="collect_type" jdbcType="TINYINT" property="type" />
+ <result column="collect_course_id" jdbcType="INTEGER" property="course_id" />
+ <result column="collect_detail_id" jdbcType="INTEGER" property="detail_id" />
+ <result column="collect_collect_time" jdbcType="TIMESTAMP" property="collect_time" />
+</resultMap>
+
+<resultMap id="DetailResultMap" type="cn.ymt.view.CollectView" extends="BaseResultMap">
+</resultMap>
+
+<delete id="deleteById" parameterType="java.lang.Integer">
+delete from collect where id = #{id,jdbcType=INTEGER}
+</delete>
+
+<delete id="deleteByIds">
+delete from collect
+where <foreach collection="list" item="i" open="(" close=")" separator=" or "> id=#{i,jdbcType=INTEGER} </foreach>
+  </delete>
+
+<delete id="deleteObjects">
+delete from collect
+where <foreach collection="list" item="i" open="(" close=")" separator=" or "> id=#{i.id,jdbcType=INTEGER} </foreach>
+  </delete>
+
+<delete id="deleteByParams" parameterType="cn.ymt.query.CollectQueryParams">
+delete from collect 
+<where><if test="condition != null">${condition}</if></where>
+</delete>
+
+<insert id="save" parameterType="cn.ymt.view.CollectView" useGeneratedKeys="true" keyProperty="id">
+insert into collect (user_id,type,course_id,detail_id,collect_time) 
+ values(#{user_id,jdbcType=INTEGER},#{type,jdbcType=TINYINT},#{course_id,jdbcType=INTEGER},#{detail_id,jdbcType=INTEGER},#{collect_time,jdbcType=TIMESTAMP})
+</insert>
+
+<insert id="saveNoNull" parameterType="cn.ymt.view.CollectView" useGeneratedKeys="true" keyProperty="id">
+insert into collect
+<trim prefix="(" suffix=")" suffixOverrides=",">
+ <if test="user_id != null">
+user_id,
+</if>
+ <if test="type != null">
+type,
+</if>
+ <if test="course_id != null">
+course_id,
+</if>
+ <if test="detail_id != null">
+detail_id,
+</if>
+ <if test="collect_time != null">
+collect_time,
+</if>
+</trim>
+
+<trim prefix="values(" suffix=")" suffixOverrides=",">
+<if test="user_id != null">
+#{user_id,jdbcType=INTEGER},
+</if>
+<if test="type != null">
+#{type,jdbcType=TINYINT},
+</if>
+<if test="course_id != null">
+#{course_id,jdbcType=INTEGER},
+</if>
+<if test="detail_id != null">
+#{detail_id,jdbcType=INTEGER},
+</if>
+<if test="collect_time != null">
+#{collect_time,jdbcType=TIMESTAMP},
+</if>
+</trim>
+</insert>
+
+<insert id="saves" >
+insert into collect (user_id,type,course_id,detail_id,collect_time) 
+ values <foreach collection="list" item="obj" separator=",">(#{obj.user_id,jdbcType=INTEGER},#{obj.type,jdbcType=TINYINT},#{obj.course_id,jdbcType=INTEGER},#{obj.detail_id,jdbcType=INTEGER},#{obj.collect_time,jdbcType=TIMESTAMP})</foreach>
+</insert>
+<update id="updateAll" parameterType="cn.ymt.view.CollectView">
+update collect 
+set  user_id = #{user_id,jdbcType=INTEGER}, type = #{type,jdbcType=TINYINT}, course_id = #{course_id,jdbcType=INTEGER}, detail_id = #{detail_id,jdbcType=INTEGER}, collect_time = #{collect_time,jdbcType=TIMESTAMP} where id = #{id,jdbcType=INTEGER}
+</update>
+ <update id="updateNoNull" parameterType="cn.ymt.view.CollectView">
+update collect 
+<set>
+<if test="user_id != null"> user_id = #{user_id,jdbcType=INTEGER},</if>
+<if test="type != null"> type = #{type,jdbcType=TINYINT},</if>
+<if test="course_id != null"> course_id = #{course_id,jdbcType=INTEGER},</if>
+<if test="detail_id != null"> detail_id = #{detail_id,jdbcType=INTEGER},</if>
+<if test="collect_time != null"> collect_time = #{collect_time,jdbcType=TIMESTAMP},</if></set>
+ where id = #{id,jdbcType=INTEGER}
+</update>
+
+<select id="getBasicById"  resultMap="BaseResultMap" parameterType="java.lang.Integer">
+<include refid="Base_Column" />
+where collect.id = #{id,jdbcType=INTEGER}
+</select>
+
+<select id="getDetailById"  resultMap="DetailResultMap" parameterType="java.lang.Integer">
+<include refid="Detail_Column" />
+where collect.id = #{id,jdbcType=INTEGER}
+</select>
+
+<select id="count" parameterType="cn.ymt.query.CollectQueryParams" resultType="long">
+select count(distinct collect.id) from collect as collect
+<where>
+<if test="condition != null">(${condition})</if>
+</where>
+</select>
+
+<select id="getDistinctIds" parameterType="cn.ymt.query.CollectQueryParams" resultType="java.lang.Integer">
+select distinct collect.id from collect as collect
+<where>
+<if test="condition != null">(${condition})</if>
+</where>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+</select>
+
+<select id="getSimple" parameterType="cn.ymt.query.CollectQueryParams" resultMap="SimpleResultMap">
+<include refid="Simple_Column" />
+<where>
+<if test="condition != null">(${condition})</if>
+<if test="pojos != null">
+ and <foreach collection="pojos" open="(" close=")" separator=" or " item="pojo">collect.id=#{pojo.id,jdbcType=INTEGER}</foreach>
+</if>
+<if test="ids != null">
+ and <foreach collection="ids" open="(" close=")" separator=" or " item="idTemp">collect.id=#{idTemp,jdbcType=INTEGER}</foreach>
+</if>
+</where>
+<if test="orderBy != null"> order by ${orderBy}</if>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+</select>
+
+<select id="getBasic" parameterType="cn.ymt.query.CollectQueryParams" resultMap="BaseResultMap">
+<include refid="Base_Column" />
+<where>
+<if test="condition != null">(${condition})</if>
+<if test="pojos != null">
+ and <foreach collection="pojos" open="(" close=")" separator=" or " item="pojo">collect.id=#{pojo.id,jdbcType=INTEGER}</foreach>
+</if>
+<if test="ids != null">
+ and <foreach collection="ids" open="(" close=")" separator=" or " item="idTemp">collect.id=#{idTemp,jdbcType=INTEGER}</foreach>
+</if>
+</where>
+<if test="orderBy != null"> order by ${orderBy}</if>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+</select>
+
+<select id="getDetail" parameterType="cn.ymt.query.CollectQueryParams" resultMap="DetailResultMap">
+<include refid="Detail_Column" />
+ where collect.id in 
+(select * from(select distinct collect.id from collect as collect 
+<where>
+<if test="condition != null">(${condition})</if>
+</where>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+) as collecttempTable)
+</select>
+
+</mapper>

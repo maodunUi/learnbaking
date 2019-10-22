@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ymt.dao.CommentDao">
+
+<sql id="Simple_Column">
+ select
+ comment.id as comment_id,
+ comment.user_id as comment_user_id,
+ comment.message as comment_message,
+ comment.comment_time as comment_comment_time,
+ comment.parent_id as comment_parent_id
+ from comment as comment 
+</sql>
+
+<sql id="Base_Column">
+ select
+ comment.id as comment_id,
+ comment.user_id as comment_user_id,
+ comment.message as comment_message,
+ comment.comment_time as comment_comment_time,
+ comment.parent_id as comment_parent_id
+ from comment as comment 
+</sql>
+
+<sql id="Detail_Column">
+ select
+ comment.id as comment_id,
+ comment.user_id as comment_user_id,
+ comment.message as comment_message,
+ comment.comment_time as comment_comment_time,
+ comment.parent_id as comment_parent_id
+ from comment as comment 
+</sql>
+
+<resultMap id="SimpleResultMap" type="cn.ymt.view.simple.CommentSimpleView">
+<id column="comment_id" jdbcType="INTEGER" property="id" />
+ <result column="comment_user_id" jdbcType="INTEGER" property="user_id" />
+ <result column="comment_message" jdbcType="VARCHAR" property="message" />
+ <result column="comment_comment_time" jdbcType="TIMESTAMP" property="comment_time" />
+ <result column="comment_parent_id" jdbcType="INTEGER" property="parent_id" />
+</resultMap>
+
+<resultMap id="BaseResultMap" type="cn.ymt.view.CommentView">
+<id column="comment_id" jdbcType="INTEGER" property="id" />
+ <result column="comment_user_id" jdbcType="INTEGER" property="user_id" />
+ <result column="comment_message" jdbcType="VARCHAR" property="message" />
+ <result column="comment_comment_time" jdbcType="TIMESTAMP" property="comment_time" />
+ <result column="comment_parent_id" jdbcType="INTEGER" property="parent_id" />
+</resultMap>
+
+<resultMap id="DetailResultMap" type="cn.ymt.view.CommentView" extends="BaseResultMap">
+</resultMap>
+
+<delete id="deleteById" parameterType="java.lang.Integer">
+delete from comment where id = #{id,jdbcType=INTEGER}
+</delete>
+
+<delete id="deleteByIds">
+delete from comment
+where <foreach collection="list" item="i" open="(" close=")" separator=" or "> id=#{i,jdbcType=INTEGER} </foreach>
+  </delete>
+
+<delete id="deleteObjects">
+delete from comment
+where <foreach collection="list" item="i" open="(" close=")" separator=" or "> id=#{i.id,jdbcType=INTEGER} </foreach>
+  </delete>
+
+<delete id="deleteByParams" parameterType="cn.ymt.query.CommentQueryParams">
+delete from comment 
+<where><if test="condition != null">${condition}</if></where>
+</delete>
+
+<insert id="save" parameterType="cn.ymt.view.CommentView" useGeneratedKeys="true" keyProperty="id">
+insert into comment (user_id,message,comment_time,parent_id) 
+ values(#{user_id,jdbcType=INTEGER},#{message,jdbcType=VARCHAR},#{comment_time,jdbcType=TIMESTAMP},#{parent_id,jdbcType=INTEGER})
+</insert>
+
+<insert id="saveNoNull" parameterType="cn.ymt.view.CommentView" useGeneratedKeys="true" keyProperty="id">
+insert into comment
+<trim prefix="(" suffix=")" suffixOverrides=",">
+ <if test="user_id != null">
+user_id,
+</if>
+ <if test="message != null">
+message,
+</if>
+ <if test="comment_time != null">
+comment_time,
+</if>
+ <if test="parent_id != null">
+parent_id,
+</if>
+</trim>
+
+<trim prefix="values(" suffix=")" suffixOverrides=",">
+<if test="user_id != null">
+#{user_id,jdbcType=INTEGER},
+</if>
+<if test="message != null">
+#{message,jdbcType=VARCHAR},
+</if>
+<if test="comment_time != null">
+#{comment_time,jdbcType=TIMESTAMP},
+</if>
+<if test="parent_id != null">
+#{parent_id,jdbcType=INTEGER},
+</if>
+</trim>
+</insert>
+
+<insert id="saves" >
+insert into comment (user_id,message,comment_time,parent_id) 
+ values <foreach collection="list" item="obj" separator=",">(#{obj.user_id,jdbcType=INTEGER},#{obj.message,jdbcType=VARCHAR},#{obj.comment_time,jdbcType=TIMESTAMP},#{obj.parent_id,jdbcType=INTEGER})</foreach>
+</insert>
+<update id="updateAll" parameterType="cn.ymt.view.CommentView">
+update comment 
+set  user_id = #{user_id,jdbcType=INTEGER}, message = #{message,jdbcType=VARCHAR}, comment_time = #{comment_time,jdbcType=TIMESTAMP}, parent_id = #{parent_id,jdbcType=INTEGER} where id = #{id,jdbcType=INTEGER}
+</update>
+ <update id="updateNoNull" parameterType="cn.ymt.view.CommentView">
+update comment 
+<set>
+<if test="user_id != null"> user_id = #{user_id,jdbcType=INTEGER},</if>
+<if test="message != null"> message = #{message,jdbcType=VARCHAR},</if>
+<if test="comment_time != null"> comment_time = #{comment_time,jdbcType=TIMESTAMP},</if>
+<if test="parent_id != null"> parent_id = #{parent_id,jdbcType=INTEGER},</if></set>
+ where id = #{id,jdbcType=INTEGER}
+</update>
+
+<select id="getBasicById"  resultMap="BaseResultMap" parameterType="java.lang.Integer">
+<include refid="Base_Column" />
+where comment.id = #{id,jdbcType=INTEGER}
+</select>
+
+<select id="getDetailById"  resultMap="DetailResultMap" parameterType="java.lang.Integer">
+<include refid="Detail_Column" />
+where comment.id = #{id,jdbcType=INTEGER}
+</select>
+
+<select id="count" parameterType="cn.ymt.query.CommentQueryParams" resultType="long">
+select count(distinct comment.id) from comment as comment
+<where>
+<if test="condition != null">(${condition})</if>
+</where>
+</select>
+
+<select id="getDistinctIds" parameterType="cn.ymt.query.CommentQueryParams" resultType="java.lang.Integer">
+select distinct comment.id from comment as comment
+<where>
+<if test="condition != null">(${condition})</if>
+</where>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+</select>
+
+<select id="getSimple" parameterType="cn.ymt.query.CommentQueryParams" resultMap="SimpleResultMap">
+<include refid="Simple_Column" />
+<where>
+<if test="condition != null">(${condition})</if>
+<if test="pojos != null">
+ and <foreach collection="pojos" open="(" close=")" separator=" or " item="pojo">comment.id=#{pojo.id,jdbcType=INTEGER}</foreach>
+</if>
+<if test="ids != null">
+ and <foreach collection="ids" open="(" close=")" separator=" or " item="idTemp">comment.id=#{idTemp,jdbcType=INTEGER}</foreach>
+</if>
+</where>
+<if test="orderBy != null"> order by ${orderBy}</if>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+</select>
+
+<select id="getBasic" parameterType="cn.ymt.query.CommentQueryParams" resultMap="BaseResultMap">
+<include refid="Base_Column" />
+<where>
+<if test="condition != null">(${condition})</if>
+<if test="pojos != null">
+ and <foreach collection="pojos" open="(" close=")" separator=" or " item="pojo">comment.id=#{pojo.id,jdbcType=INTEGER}</foreach>
+</if>
+<if test="ids != null">
+ and <foreach collection="ids" open="(" close=")" separator=" or " item="idTemp">comment.id=#{idTemp,jdbcType=INTEGER}</foreach>
+</if>
+</where>
+<if test="orderBy != null"> order by ${orderBy}</if>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+</select>
+
+<select id="getDetail" parameterType="cn.ymt.query.CommentQueryParams" resultMap="DetailResultMap">
+<include refid="Detail_Column" />
+ where comment.id in 
+(select * from(select distinct comment.id from comment as comment 
+<where>
+<if test="condition != null">(${condition})</if>
+</where>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+) as commenttempTable)
+</select>
+
+</mapper>
