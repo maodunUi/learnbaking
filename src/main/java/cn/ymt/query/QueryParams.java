@@ -1,8 +1,8 @@
 package cn.ymt.query;
 import java.util.List;
 public abstract class QueryParams<T extends cn.ymt.pojo.BasicModel>{
-protected Integer page;
-protected Integer pageSize;
+protected Integer page = 1;
+protected Integer pageSize = 8;
 protected Integer recordIndex;
 protected String orderBy;
 protected List<Integer> ids;
@@ -26,6 +26,9 @@ protected String condition;
     }
 
     public Integer getRecordIndex() {
+        if(page != null && pageSize != null){
+            recordIndex = (page - 1) * pageSize ;
+        }
         return recordIndex;
     }
 
