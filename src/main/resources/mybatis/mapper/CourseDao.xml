@@ -266,7 +266,8 @@ update course
 <if test="orderIndex != null"> orderIndex = #{orderIndex,jdbcType=TINYINT},</if>
 <if test="state != null"> state = #{state,jdbcType=TINYINT},</if>
 <if test="categoryId != null"> categoryId = #{categoryId,jdbcType=INTEGER},</if>
-<if test="isindex != null"> isindex = #{isindex,jdbcType=TINYINT},</if></set>
+<if test="isindex != null"> isindex = #{isindex,jdbcType=TINYINT},</if>
+</set>
  where id = #{id,jdbcType=INTEGER}
 </update>
 
@@ -338,12 +339,12 @@ select distinct course.id from course as course
 <!--%%%%%%%%%%%%%%-->
 <!--得到首页的六个课程-->
  <select id="getSix" resultMap="SimpleResultMap" parameterType="cn.ymt.query.CourseQueryParams">
-  select * from course where
+  <include refid="Base_Column" />where
   <if test="categoryId != null"> category_id = #{categoryId,jdbcType=INTEGER} and </if>
   isindex = 1 limit 4,6
  </select>
  <select id="getFour" resultMap="SimpleResultMap" parameterType="cn.ymt.query.CourseQueryParams">
-  select * from course where
+  <include refid="Base_Column" /> where
   <if test="categoryId != null"> category_id = #{categoryId,jdbcType=INTEGER} and </if>
    isindex = 1 limit 0,4
  </select>

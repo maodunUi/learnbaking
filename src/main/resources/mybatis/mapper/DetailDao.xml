@@ -278,10 +278,10 @@ select distinct detail.id from detail as detail
 </select>
 <!--&&&&&&&&&&&&&&&&&&&&&&-->
  <!--得到首页四张轮播图-->
- <select id="getFour" resultMap="SimpleResultMap">
-  select * from detail order by addTime desc limit 0,4
+ <select id="getFour" resultMap="BaseResultMap">
+  <include refid="Base_Column" /> order by addTime desc limit 0,4
  </select>
- <select id="getSix" resultMap="SimpleResultMap">
-  select * from detail order by addTime desc limit 4,6
+ <select id="getSix" resultMap="BaseResultMap">
+  <include refid="Base_Column" /> order by addTime desc limit 4,6
  </select>
 </mapper>
