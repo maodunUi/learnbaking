@@ -206,7 +206,8 @@ update detail
 <if test="userId != null"> userId = #{userId,jdbcType=INTEGER},</if>
 <if test="introduce != null"> introduce = #{introduce,jdbcType=VARCHAR},</if>
 <if test="materials != null"> materials = #{materials,jdbcType=VARCHAR},</if>
-<if test="step != null"> step = #{step,jdbcType=LONGVARCHAR},</if></set>
+<if test="step != null"> step = #{step,jdbcType=LONGVARCHAR},</if>
+</set>
  where id = #{id,jdbcType=INTEGER}
 </update>
 
@@ -278,9 +279,9 @@ select distinct detail.id from detail as detail
 <!--&&&&&&&&&&&&&&&&&&&&&&-->
  <!--得到首页四张轮播图-->
  <select id="getFour" resultMap="SimpleResultMap">
-  select * from detail order by add_time desc limit 0,4
+  select * from detail order by addTime desc limit 0,4
  </select>
  <select id="getSix" resultMap="SimpleResultMap">
-  select * from detail order by add_time desc limit 4,6
+  select * from detail order by addTime desc limit 4,6
  </select>
 </mapper>
