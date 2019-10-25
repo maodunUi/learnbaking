@@ -5,47 +5,47 @@
 <sql id="Simple_Column">
  select
  img.id as img_id,
- img.img_url as img_img_url,
+ img.imgUrl as img_imgUrl,
  img.memo as img_memo,
  img.type as img_type,
- img.work_id as img_work_id
+ img.workId as img_workId
  from img as img 
 </sql>
 
 <sql id="Base_Column">
  select
  img.id as img_id,
- img.img_url as img_img_url,
+ img.imgUrl as img_imgUrl,
  img.memo as img_memo,
  img.type as img_type,
- img.work_id as img_work_id
+ img.workId as img_workId
  from img as img 
 </sql>
 
 <sql id="Detail_Column">
  select
  img.id as img_id,
- img.img_url as img_img_url,
+ img.imgUrl as img_imgUrl,
  img.memo as img_memo,
  img.type as img_type,
- img.work_id as img_work_id
+ img.workId as img_workId
  from img as img 
 </sql>
 
 <resultMap id="SimpleResultMap" type="cn.ymt.view.simple.ImgSimpleView">
 <id column="img_id" jdbcType="INTEGER" property="id" />
- <result column="img_img_url" jdbcType="VARCHAR" property="img_url" />
+ <result column="img_imgUrl" jdbcType="VARCHAR" property="imgUrl" />
  <result column="img_memo" jdbcType="VARCHAR" property="memo" />
  <result column="img_type" jdbcType="TINYINT" property="type" />
- <result column="img_work_id" jdbcType="INTEGER" property="work_id" />
+ <result column="img_workId" jdbcType="INTEGER" property="workId" />
 </resultMap>
 
 <resultMap id="BaseResultMap" type="cn.ymt.view.ImgView">
 <id column="img_id" jdbcType="INTEGER" property="id" />
- <result column="img_img_url" jdbcType="VARCHAR" property="img_url" />
+ <result column="img_imgUrl" jdbcType="VARCHAR" property="imgUrl" />
  <result column="img_memo" jdbcType="VARCHAR" property="memo" />
  <result column="img_type" jdbcType="TINYINT" property="type" />
- <result column="img_work_id" jdbcType="INTEGER" property="work_id" />
+ <result column="img_workId" jdbcType="INTEGER" property="workId" />
 </resultMap>
 
 <resultMap id="DetailResultMap" type="cn.ymt.view.ImgView" extends="BaseResultMap">
@@ -71,15 +71,15 @@ delete from img
 </delete>
 
 <insert id="save" parameterType="cn.ymt.view.ImgView" useGeneratedKeys="true" keyProperty="id">
-insert into img (img_url,memo,type,work_id) 
- values(#{img_url,jdbcType=VARCHAR},#{memo,jdbcType=VARCHAR},#{type,jdbcType=TINYINT},#{work_id,jdbcType=INTEGER})
+insert into img (imgUrl,memo,type,workId) 
+ values(#{imgUrl,jdbcType=VARCHAR},#{memo,jdbcType=VARCHAR},#{type,jdbcType=TINYINT},#{workId,jdbcType=INTEGER})
 </insert>
 
 <insert id="saveNoNull" parameterType="cn.ymt.view.ImgView" useGeneratedKeys="true" keyProperty="id">
 insert into img
 <trim prefix="(" suffix=")" suffixOverrides=",">
- <if test="img_url != null">
-img_url,
+ <if test="imgUrl != null">
+imgUrl,
 </if>
  <if test="memo != null">
 memo,
@@ -87,14 +87,14 @@ memo,
  <if test="type != null">
 type,
 </if>
- <if test="work_id != null">
-work_id,
+ <if test="workId != null">
+workId,
 </if>
 </trim>
 
 <trim prefix="values(" suffix=")" suffixOverrides=",">
-<if test="img_url != null">
-#{img_url,jdbcType=VARCHAR},
+<if test="imgUrl != null">
+#{imgUrl,jdbcType=VARCHAR},
 </if>
 <if test="memo != null">
 #{memo,jdbcType=VARCHAR},
@@ -102,27 +102,27 @@ work_id,
 <if test="type != null">
 #{type,jdbcType=TINYINT},
 </if>
-<if test="work_id != null">
-#{work_id,jdbcType=INTEGER},
+<if test="workId != null">
+#{workId,jdbcType=INTEGER},
 </if>
 </trim>
 </insert>
 
 <insert id="saves" >
-insert into img (img_url,memo,type,work_id) 
- values <foreach collection="list" item="obj" separator=",">(#{obj.img_url,jdbcType=VARCHAR},#{obj.memo,jdbcType=VARCHAR},#{obj.type,jdbcType=TINYINT},#{obj.work_id,jdbcType=INTEGER})</foreach>
+insert into img (imgUrl,memo,type,workId) 
+ values <foreach collection="list" item="obj" separator=",">(#{obj.imgUrl,jdbcType=VARCHAR},#{obj.memo,jdbcType=VARCHAR},#{obj.type,jdbcType=TINYINT},#{obj.workId,jdbcType=INTEGER})</foreach>
 </insert>
 <update id="updateAll" parameterType="cn.ymt.view.ImgView">
 update img 
-set  img_url = #{img_url,jdbcType=VARCHAR}, memo = #{memo,jdbcType=VARCHAR}, type = #{type,jdbcType=TINYINT}, work_id = #{work_id,jdbcType=INTEGER} where id = #{id,jdbcType=INTEGER}
+set  imgUrl = #{imgUrl,jdbcType=VARCHAR}, memo = #{memo,jdbcType=VARCHAR}, type = #{type,jdbcType=TINYINT}, workId = #{workId,jdbcType=INTEGER} where id = #{id,jdbcType=INTEGER}
 </update>
  <update id="updateNoNull" parameterType="cn.ymt.view.ImgView">
 update img 
 <set>
-<if test="img_url != null"> img_url = #{img_url,jdbcType=VARCHAR},</if>
+<if test="imgUrl != null"> imgUrl = #{imgUrl,jdbcType=VARCHAR},</if>
 <if test="memo != null"> memo = #{memo,jdbcType=VARCHAR},</if>
 <if test="type != null"> type = #{type,jdbcType=TINYINT},</if>
-<if test="work_id != null"> work_id = #{work_id,jdbcType=INTEGER},</if></set>
+<if test="workId != null"> workId = #{workId,jdbcType=INTEGER},</if></set>
  where id = #{id,jdbcType=INTEGER}
 </update>
 

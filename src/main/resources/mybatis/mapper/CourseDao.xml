@@ -5,21 +5,21 @@
 <sql id="Simple_Column">
  select
  course.id as course_id,
- course.video_url as course_video_url,
+ course.videoUrl as course_videoUrl,
  course.title as course_title,
- course.img_url as course_img_url,
+ course.imgUrl as course_imgUrl,
  course.memo as course_memo,
- course.memo_two as course_memo_two,
- course.how_learn as course_how_learn,
- course.baker_name as course_baker_name,
- course.backer_img_url as course_backer_img_url,
- course.bakers_introduce as course_bakers_introduce,
+ course.memoTwo as course_memoTwo,
+ course.howLearn as course_howLearn,
+ course.bakerName as course_bakerName,
+ course.backerImgUrl as course_backerImgUrl,
+ course.bakerIntroduce as course_bakerIntroduce,
  course.price as course_price,
- course.people_count as course_people_count,
- course.add_time as course_add_time,
- course.order_index as course_order_index,
+ course.peopleCount as course_peopleCount,
+ course.addTime as course_addTime,
+ course.orderIndex as course_orderIndex,
  course.state as course_state,
- course.category_id as course_category_id,
+ course.categoryId as course_categoryId,
  course.isindex as course_isindex
  from course as course 
 </sql>
@@ -27,21 +27,21 @@
 <sql id="Base_Column">
  select
  course.id as course_id,
- course.video_url as course_video_url,
+ course.videoUrl as course_videoUrl,
  course.title as course_title,
- course.img_url as course_img_url,
+ course.imgUrl as course_imgUrl,
  course.memo as course_memo,
- course.memo_two as course_memo_two,
- course.how_learn as course_how_learn,
- course.baker_name as course_baker_name,
- course.backer_img_url as course_backer_img_url,
- course.bakers_introduce as course_bakers_introduce,
+ course.memoTwo as course_memoTwo,
+ course.howLearn as course_howLearn,
+ course.bakerName as course_bakerName,
+ course.backerImgUrl as course_backerImgUrl,
+ course.bakerIntroduce as course_bakerIntroduce,
  course.price as course_price,
- course.people_count as course_people_count,
- course.add_time as course_add_time,
- course.order_index as course_order_index,
+ course.peopleCount as course_peopleCount,
+ course.addTime as course_addTime,
+ course.orderIndex as course_orderIndex,
  course.state as course_state,
- course.category_id as course_category_id,
+ course.categoryId as course_categoryId,
  course.isindex as course_isindex
  from course as course 
 </sql>
@@ -49,62 +49,62 @@
 <sql id="Detail_Column">
  select
  course.id as course_id,
- course.video_url as course_video_url,
+ course.videoUrl as course_videoUrl,
  course.title as course_title,
- course.img_url as course_img_url,
+ course.imgUrl as course_imgUrl,
  course.memo as course_memo,
- course.memo_two as course_memo_two,
- course.how_learn as course_how_learn,
- course.baker_name as course_baker_name,
- course.backer_img_url as course_backer_img_url,
- course.bakers_introduce as course_bakers_introduce,
+ course.memoTwo as course_memoTwo,
+ course.howLearn as course_howLearn,
+ course.bakerName as course_bakerName,
+ course.backerImgUrl as course_backerImgUrl,
+ course.bakerIntroduce as course_bakerIntroduce,
  course.price as course_price,
- course.people_count as course_people_count,
- course.add_time as course_add_time,
- course.order_index as course_order_index,
+ course.peopleCount as course_peopleCount,
+ course.addTime as course_addTime,
+ course.orderIndex as course_orderIndex,
  course.state as course_state,
- course.category_id as course_category_id,
+ course.categoryId as course_categoryId,
  course.isindex as course_isindex
  from course as course 
 </sql>
 
 <resultMap id="SimpleResultMap" type="cn.ymt.view.simple.CourseSimpleView">
 <id column="course_id" jdbcType="INTEGER" property="id" />
- <result column="course_video_url" jdbcType="VARCHAR" property="video_url" />
+ <result column="course_videoUrl" jdbcType="VARCHAR" property="videoUrl" />
  <result column="course_title" jdbcType="VARCHAR" property="title" />
- <result column="course_img_url" jdbcType="VARCHAR" property="img_url" />
+ <result column="course_imgUrl" jdbcType="VARCHAR" property="imgUrl" />
  <result column="course_memo" jdbcType="LONGVARCHAR" property="memo" />
- <result column="course_memo_two" jdbcType="LONGVARCHAR" property="memo_two" />
- <result column="course_how_learn" jdbcType="VARCHAR" property="how_learn" />
- <result column="course_baker_name" jdbcType="VARCHAR" property="baker_name" />
- <result column="course_backer_img_url" jdbcType="VARCHAR" property="backer_img_url" />
- <result column="course_bakers_introduce" jdbcType="VARCHAR" property="bakers_introduce" />
+ <result column="course_memoTwo" jdbcType="LONGVARCHAR" property="memoTwo" />
+ <result column="course_howLearn" jdbcType="VARCHAR" property="howLearn" />
+ <result column="course_bakerName" jdbcType="VARCHAR" property="bakerName" />
+ <result column="course_backerImgUrl" jdbcType="VARCHAR" property="backerImgUrl" />
+ <result column="course_bakerIntroduce" jdbcType="VARCHAR" property="bakerIntroduce" />
  <result column="course_price" jdbcType="DOUBLE" property="price" />
- <result column="course_people_count" jdbcType="INTEGER" property="people_count" />
- <result column="course_add_time" jdbcType="DATE" property="add_time" />
- <result column="course_order_index" jdbcType="TINYINT" property="order_index" />
+ <result column="course_peopleCount" jdbcType="INTEGER" property="peopleCount" />
+ <result column="course_addTime" jdbcType="DATE" property="addTime" />
+ <result column="course_orderIndex" jdbcType="TINYINT" property="orderIndex" />
  <result column="course_state" jdbcType="TINYINT" property="state" />
- <result column="course_category_id" jdbcType="INTEGER" property="category_id" />
+ <result column="course_categoryId" jdbcType="INTEGER" property="categoryId" />
  <result column="course_isindex" jdbcType="TINYINT" property="isindex" />
 </resultMap>
 
 <resultMap id="BaseResultMap" type="cn.ymt.view.CourseView">
 <id column="course_id" jdbcType="INTEGER" property="id" />
- <result column="course_video_url" jdbcType="VARCHAR" property="video_url" />
+ <result column="course_videoUrl" jdbcType="VARCHAR" property="videoUrl" />
  <result column="course_title" jdbcType="VARCHAR" property="title" />
- <result column="course_img_url" jdbcType="VARCHAR" property="img_url" />
+ <result column="course_imgUrl" jdbcType="VARCHAR" property="imgUrl" />
  <result column="course_memo" jdbcType="LONGVARCHAR" property="memo" />
- <result column="course_memo_two" jdbcType="LONGVARCHAR" property="memo_two" />
- <result column="course_how_learn" jdbcType="VARCHAR" property="how_learn" />
- <result column="course_baker_name" jdbcType="VARCHAR" property="baker_name" />
- <result column="course_backer_img_url" jdbcType="VARCHAR" property="backer_img_url" />
- <result column="course_bakers_introduce" jdbcType="VARCHAR" property="bakers_introduce" />
+ <result column="course_memoTwo" jdbcType="LONGVARCHAR" property="memoTwo" />
+ <result column="course_howLearn" jdbcType="VARCHAR" property="howLearn" />
+ <result column="course_bakerName" jdbcType="VARCHAR" property="bakerName" />
+ <result column="course_backerImgUrl" jdbcType="VARCHAR" property="backerImgUrl" />
+ <result column="course_bakerIntroduce" jdbcType="VARCHAR" property="bakerIntroduce" />
  <result column="course_price" jdbcType="DOUBLE" property="price" />
- <result column="course_people_count" jdbcType="INTEGER" property="people_count" />
- <result column="course_add_time" jdbcType="DATE" property="add_time" />
- <result column="course_order_index" jdbcType="TINYINT" property="order_index" />
+ <result column="course_peopleCount" jdbcType="INTEGER" property="peopleCount" />
+ <result column="course_addTime" jdbcType="DATE" property="addTime" />
+ <result column="course_orderIndex" jdbcType="TINYINT" property="orderIndex" />
  <result column="course_state" jdbcType="TINYINT" property="state" />
- <result column="course_category_id" jdbcType="INTEGER" property="category_id" />
+ <result column="course_categoryId" jdbcType="INTEGER" property="categoryId" />
  <result column="course_isindex" jdbcType="TINYINT" property="isindex" />
 </resultMap>
 
@@ -131,57 +131,57 @@ delete from course
 </delete>
 
 <insert id="save" parameterType="cn.ymt.view.CourseView" useGeneratedKeys="true" keyProperty="id">
-insert into course (video_url,title,img_url,memo,memo_two,how_learn,baker_name,backer_img_url,bakers_introduce,price,people_count,add_time,order_index,state,category_id,isindex) 
- values(#{video_url,jdbcType=VARCHAR},#{title,jdbcType=VARCHAR},#{img_url,jdbcType=VARCHAR},#{memo,jdbcType=LONGVARCHAR},#{memo_two,jdbcType=LONGVARCHAR},#{how_learn,jdbcType=VARCHAR},#{baker_name,jdbcType=VARCHAR},#{backer_img_url,jdbcType=VARCHAR},#{bakers_introduce,jdbcType=VARCHAR},#{price,jdbcType=DOUBLE},#{people_count,jdbcType=INTEGER},#{add_time,jdbcType=DATE},#{order_index,jdbcType=TINYINT},#{state,jdbcType=TINYINT},#{category_id,jdbcType=INTEGER},#{isindex,jdbcType=TINYINT})
+insert into course (videoUrl,title,imgUrl,memo,memoTwo,howLearn,bakerName,backerImgUrl,bakerIntroduce,price,peopleCount,addTime,orderIndex,state,categoryId,isindex) 
+ values(#{videoUrl,jdbcType=VARCHAR},#{title,jdbcType=VARCHAR},#{imgUrl,jdbcType=VARCHAR},#{memo,jdbcType=LONGVARCHAR},#{memoTwo,jdbcType=LONGVARCHAR},#{howLearn,jdbcType=VARCHAR},#{bakerName,jdbcType=VARCHAR},#{backerImgUrl,jdbcType=VARCHAR},#{bakerIntroduce,jdbcType=VARCHAR},#{price,jdbcType=DOUBLE},#{peopleCount,jdbcType=INTEGER},#{addTime,jdbcType=DATE},#{orderIndex,jdbcType=TINYINT},#{state,jdbcType=TINYINT},#{categoryId,jdbcType=INTEGER},#{isindex,jdbcType=TINYINT})
 </insert>
 
 <insert id="saveNoNull" parameterType="cn.ymt.view.CourseView" useGeneratedKeys="true" keyProperty="id">
 insert into course
 <trim prefix="(" suffix=")" suffixOverrides=",">
- <if test="video_url != null">
-video_url,
+ <if test="videoUrl != null">
+videoUrl,
 </if>
  <if test="title != null">
 title,
 </if>
- <if test="img_url != null">
-img_url,
+ <if test="imgUrl != null">
+imgUrl,
 </if>
  <if test="memo != null">
 memo,
 </if>
- <if test="memo_two != null">
-memo_two,
+ <if test="memoTwo != null">
+memoTwo,
 </if>
- <if test="how_learn != null">
-how_learn,
+ <if test="howLearn != null">
+howLearn,
 </if>
- <if test="baker_name != null">
-baker_name,
+ <if test="bakerName != null">
+bakerName,
 </if>
- <if test="backer_img_url != null">
-backer_img_url,
+ <if test="backerImgUrl != null">
+backerImgUrl,
 </if>
- <if test="bakers_introduce != null">
-bakers_introduce,
+ <if test="bakerIntroduce != null">
+bakerIntroduce,
 </if>
  <if test="price != null">
 price,
 </if>
- <if test="people_count != null">
-people_count,
+ <if test="peopleCount != null">
+peopleCount,
 </if>
- <if test="add_time != null">
-add_time,
+ <if test="addTime != null">
+addTime,
 </if>
- <if test="order_index != null">
-order_index,
+ <if test="orderIndex != null">
+orderIndex,
 </if>
  <if test="state != null">
 state,
 </if>
- <if test="category_id != null">
-category_id,
+ <if test="categoryId != null">
+categoryId,
 </if>
  <if test="isindex != null">
 isindex,
@@ -189,50 +189,50 @@ isindex,
 </trim>
 
 <trim prefix="values(" suffix=")" suffixOverrides=",">
-<if test="video_url != null">
-#{video_url,jdbcType=VARCHAR},
+<if test="videoUrl != null">
+#{videoUrl,jdbcType=VARCHAR},
 </if>
 <if test="title != null">
 #{title,jdbcType=VARCHAR},
 </if>
-<if test="img_url != null">
-#{img_url,jdbcType=VARCHAR},
+<if test="imgUrl != null">
+#{imgUrl,jdbcType=VARCHAR},
 </if>
 <if test="memo != null">
 #{memo,jdbcType=LONGVARCHAR},
 </if>
-<if test="memo_two != null">
-#{memo_two,jdbcType=LONGVARCHAR},
+<if test="memoTwo != null">
+#{memoTwo,jdbcType=LONGVARCHAR},
 </if>
-<if test="how_learn != null">
-#{how_learn,jdbcType=VARCHAR},
+<if test="howLearn != null">
+#{howLearn,jdbcType=VARCHAR},
 </if>
-<if test="baker_name != null">
-#{baker_name,jdbcType=VARCHAR},
+<if test="bakerName != null">
+#{bakerName,jdbcType=VARCHAR},
 </if>
-<if test="backer_img_url != null">
-#{backer_img_url,jdbcType=VARCHAR},
+<if test="backerImgUrl != null">
+#{backerImgUrl,jdbcType=VARCHAR},
 </if>
-<if test="bakers_introduce != null">
-#{bakers_introduce,jdbcType=VARCHAR},
+<if test="bakerIntroduce != null">
+#{bakerIntroduce,jdbcType=VARCHAR},
 </if>
 <if test="price != null">
 #{price,jdbcType=DOUBLE},
 </if>
-<if test="people_count != null">
-#{people_count,jdbcType=INTEGER},
+<if test="peopleCount != null">
+#{peopleCount,jdbcType=INTEGER},
 </if>
-<if test="add_time != null">
-#{add_time,jdbcType=DATE},
+<if test="addTime != null">
+#{addTime,jdbcType=DATE},
 </if>
-<if test="order_index != null">
-#{order_index,jdbcType=TINYINT},
+<if test="orderIndex != null">
+#{orderIndex,jdbcType=TINYINT},
 </if>
 <if test="state != null">
 #{state,jdbcType=TINYINT},
 </if>
-<if test="category_id != null">
-#{category_id,jdbcType=INTEGER},
+<if test="categoryId != null">
+#{categoryId,jdbcType=INTEGER},
 </if>
 <if test="isindex != null">
 #{isindex,jdbcType=TINYINT},
@@ -241,33 +241,32 @@ isindex,
 </insert>
 
 <insert id="saves" >
-insert into course (video_url,title,img_url,memo,memo_two,how_learn,baker_name,backer_img_url,bakers_introduce,price,people_count,add_time,order_index,state,category_id,isindex) 
- values <foreach collection="list" item="obj" separator=",">(#{obj.video_url,jdbcType=VARCHAR},#{obj.title,jdbcType=VARCHAR},#{obj.img_url,jdbcType=VARCHAR},#{obj.memo,jdbcType=LONGVARCHAR},#{obj.memo_two,jdbcType=LONGVARCHAR},#{obj.how_learn,jdbcType=VARCHAR},#{obj.baker_name,jdbcType=VARCHAR},#{obj.backer_img_url,jdbcType=VARCHAR},#{obj.bakers_introduce,jdbcType=VARCHAR},#{obj.price,jdbcType=DOUBLE},#{obj.people_count,jdbcType=INTEGER},#{obj.add_time,jdbcType=DATE},#{obj.order_index,jdbcType=TINYINT},#{obj.state,jdbcType=TINYINT},#{obj.category_id,jdbcType=INTEGER},#{obj.isindex,jdbcType=TINYINT})</foreach>
+insert into course (videoUrl,title,imgUrl,memo,memoTwo,howLearn,bakerName,backerImgUrl,bakerIntroduce,price,peopleCount,addTime,orderIndex,state,categoryId,isindex) 
+ values <foreach collection="list" item="obj" separator=",">(#{obj.videoUrl,jdbcType=VARCHAR},#{obj.title,jdbcType=VARCHAR},#{obj.imgUrl,jdbcType=VARCHAR},#{obj.memo,jdbcType=LONGVARCHAR},#{obj.memoTwo,jdbcType=LONGVARCHAR},#{obj.howLearn,jdbcType=VARCHAR},#{obj.bakerName,jdbcType=VARCHAR},#{obj.backerImgUrl,jdbcType=VARCHAR},#{obj.bakerIntroduce,jdbcType=VARCHAR},#{obj.price,jdbcType=DOUBLE},#{obj.peopleCount,jdbcType=INTEGER},#{obj.addTime,jdbcType=DATE},#{obj.orderIndex,jdbcType=TINYINT},#{obj.state,jdbcType=TINYINT},#{obj.categoryId,jdbcType=INTEGER},#{obj.isindex,jdbcType=TINYINT})</foreach>
 </insert>
 <update id="updateAll" parameterType="cn.ymt.view.CourseView">
 update course 
-set  video_url = #{video_url,jdbcType=VARCHAR}, title = #{title,jdbcType=VARCHAR}, img_url = #{img_url,jdbcType=VARCHAR}, memo = #{memo,jdbcType=LONGVARCHAR}, memo_two = #{memo_two,jdbcType=LONGVARCHAR}, how_learn = #{how_learn,jdbcType=VARCHAR}, baker_name = #{baker_name,jdbcType=VARCHAR}, backer_img_url = #{backer_img_url,jdbcType=VARCHAR}, bakers_introduce = #{bakers_introduce,jdbcType=VARCHAR}, price = #{price,jdbcType=DOUBLE}, people_count = #{people_count,jdbcType=INTEGER}, add_time = #{add_time,jdbcType=DATE}, order_index = #{order_index,jdbcType=TINYINT}, state = #{state,jdbcType=TINYINT}, category_id = #{category_id,jdbcType=INTEGER}, isindex = #{isindex,jdbcType=TINYINT} where id = #{id,jdbcType=INTEGER}
+set  videoUrl = #{videoUrl,jdbcType=VARCHAR}, title = #{title,jdbcType=VARCHAR}, imgUrl = #{imgUrl,jdbcType=VARCHAR}, memo = #{memo,jdbcType=LONGVARCHAR}, memoTwo = #{memoTwo,jdbcType=LONGVARCHAR}, howLearn = #{howLearn,jdbcType=VARCHAR}, bakerName = #{bakerName,jdbcType=VARCHAR}, backerImgUrl = #{backerImgUrl,jdbcType=VARCHAR}, bakerIntroduce = #{bakerIntroduce,jdbcType=VARCHAR}, price = #{price,jdbcType=DOUBLE}, peopleCount = #{peopleCount,jdbcType=INTEGER}, addTime = #{addTime,jdbcType=DATE}, orderIndex = #{orderIndex,jdbcType=TINYINT}, state = #{state,jdbcType=TINYINT}, categoryId = #{categoryId,jdbcType=INTEGER}, isindex = #{isindex,jdbcType=TINYINT} where id = #{id,jdbcType=INTEGER}
 </update>
  <update id="updateNoNull" parameterType="cn.ymt.view.CourseView">
 update course 
 <set>
-<if test="video_url != null"> video_url = #{video_url,jdbcType=VARCHAR},</if>
+<if test="videoUrl != null"> videoUrl = #{videoUrl,jdbcType=VARCHAR},</if>
 <if test="title != null"> title = #{title,jdbcType=VARCHAR},</if>
-<if test="img_url != null"> img_url = #{img_url,jdbcType=VARCHAR},</if>
+<if test="imgUrl != null"> imgUrl = #{imgUrl,jdbcType=VARCHAR},</if>
 <if test="memo != null"> memo = #{memo,jdbcType=LONGVARCHAR},</if>
-<if test="memo_two != null"> memo_two = #{memo_two,jdbcType=LONGVARCHAR},</if>
-<if test="how_learn != null"> how_learn = #{how_learn,jdbcType=VARCHAR},</if>
-<if test="baker_name != null"> baker_name = #{baker_name,jdbcType=VARCHAR},</if>
-<if test="backer_img_url != null"> backer_img_url = #{backer_img_url,jdbcType=VARCHAR},</if>
-<if test="bakers_introduce != null"> bakers_introduce = #{bakers_introduce,jdbcType=VARCHAR},</if>
+<if test="memoTwo != null"> memoTwo = #{memoTwo,jdbcType=LONGVARCHAR},</if>
+<if test="howLearn != null"> howLearn = #{howLearn,jdbcType=VARCHAR},</if>
+<if test="bakerName != null"> bakerName = #{bakerName,jdbcType=VARCHAR},</if>
+<if test="backerImgUrl != null"> backerImgUrl = #{backerImgUrl,jdbcType=VARCHAR},</if>
+<if test="bakerIntroduce != null"> bakerIntroduce = #{bakerIntroduce,jdbcType=VARCHAR},</if>
 <if test="price != null"> price = #{price,jdbcType=DOUBLE},</if>
-<if test="people_count != null"> people_count = #{people_count,jdbcType=INTEGER},</if>
-<if test="add_time != null"> add_time = #{add_time,jdbcType=DATE},</if>
-<if test="order_index != null"> order_index = #{order_index,jdbcType=TINYINT},</if>
+<if test="peopleCount != null"> peopleCount = #{peopleCount,jdbcType=INTEGER},</if>
+<if test="addTime != null"> addTime = #{addTime,jdbcType=DATE},</if>
+<if test="orderIndex != null"> orderIndex = #{orderIndex,jdbcType=TINYINT},</if>
 <if test="state != null"> state = #{state,jdbcType=TINYINT},</if>
-<if test="category_id != null"> category_id = #{category_id,jdbcType=INTEGER},</if>
-<if test="isindex != null"> isindex = #{isindex,jdbcType=TINYINT},</if>
-</set>
+<if test="categoryId != null"> categoryId = #{categoryId,jdbcType=INTEGER},</if>
+<if test="isindex != null"> isindex = #{isindex,jdbcType=TINYINT},</if></set>
  where id = #{id,jdbcType=INTEGER}
 </update>
 
@@ -340,12 +339,12 @@ select distinct course.id from course as course
 <!--得到首页的六个课程-->
  <select id="getSix" resultMap="SimpleResultMap" parameterType="cn.ymt.query.CourseQueryParams">
   select * from course where
-  <if test="category_id != null"> category_id = #{category_id,jdbcType=INTEGER} and </if>
+  <if test="categoryId != null"> category_id = #{categoryId,jdbcType=INTEGER} and </if>
   isindex = 1 limit 4,6
  </select>
  <select id="getFour" resultMap="SimpleResultMap" parameterType="cn.ymt.query.CourseQueryParams">
   select * from course where
-  <if test="category_id != null"> category_id = #{category_id,jdbcType=INTEGER} and </if>
+  <if test="categoryId != null"> category_id = #{categoryId,jdbcType=INTEGER} and </if>
    isindex = 1 limit 0,4
  </select>
 </mapper>

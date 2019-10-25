@@ -2,17 +2,17 @@ package cn.ymt.view.simple;
 import cn.ymt.pojo.BasicModel;
 import java.util.Date;
 public class CollectSimpleView extends BasicModel {
-protected Integer user_id;//
+protected Integer userId;//
 protected Byte type;//
-protected Integer course_id;//
-protected Integer detail_id;//
-protected java.util.Date collect_time=new Date();//
-public Integer getUser_id() {
-return user_id;
+protected Integer courseId;//
+protected Integer detailId;//
+protected Date collectTime=new Date();//
+public Integer getUserId() {
+return userId;
 }
 
-public void setUser_id(Integer user_id) {
-this.user_id = user_id;
+public void setUserId(Integer userId) {
+this.userId = userId;
 }
 public Byte getType() {
 return type;
@@ -21,26 +21,26 @@ return type;
 public void setType(Byte type) {
 this.type = type;
 }
-public Integer getCourse_id() {
-return course_id;
+public Integer getCourseId() {
+return courseId;
 }
 
-public void setCourse_id(Integer course_id) {
-this.course_id = course_id;
+public void setCourseId(Integer courseId) {
+this.courseId = courseId;
 }
-public Integer getDetail_id() {
-return detail_id;
-}
-
-public void setDetail_id(Integer detail_id) {
-this.detail_id = detail_id;
-}
-public java.util.Date getCollect_time() {
-return collect_time;
+public Integer getDetailId() {
+return detailId;
 }
 
-public void setCollect_time(java.util.Date collect_time) {
-this.collect_time = collect_time;
+public void setDetailId(Integer detailId) {
+this.detailId = detailId;
+}
+public Date getCollectTime() {
+return collectTime;
+}
+
+public void setCollectTime(Date collectTime) {
+this.collectTime = collectTime;
 }
 
 }

@@ -2,15 +2,15 @@ package cn.ymt.pojo;
 public class User extends BasicModel {
 protected String name;//
 protected String password;//
-protected String img_url;//
-protected String nick_name;//
+protected String imgUrl;//
+protected String nickName;//
 protected Byte sex;//0代表男 1代表女
 protected String email;//
 protected String address;//
 protected Integer age;//
 protected Byte state;//0不正常 1正常
 protected String memo;//
-protected Byte order_index;//
+protected Byte orderIndex;//
 protected String telphone;//
 public String getName() {
 return name;
@@ -26,19 +26,19 @@ return password;
 public void setPassword(String password) {
 this.password = password == null ? null : password.trim();
 }
-public String getImg_url() {
-return img_url;
+public String getImgUrl() {
+return imgUrl;
 }
 
-public void setImg_url(String img_url) {
-this.img_url = img_url == null ? null : img_url.trim();
+public void setImgUrl(String imgUrl) {
+this.imgUrl = imgUrl == null ? null : imgUrl.trim();
 }
-public String getNick_name() {
-return nick_name;
+public String getNickName() {
+return nickName;
 }
 
-public void setNick_name(String nick_name) {
-this.nick_name = nick_name == null ? null : nick_name.trim();
+public void setNickName(String nickName) {
+this.nickName = nickName == null ? null : nickName.trim();
 }
 public Byte getSex() {
 return sex;
@@ -82,12 +82,12 @@ return memo;
 public void setMemo(String memo) {
 this.memo = memo == null ? null : memo.trim();
 }
-public Byte getOrder_index() {
-return order_index;
+public Byte getOrderIndex() {
+return orderIndex;
 }
 
-public void setOrder_index(Byte order_index) {
-this.order_index = order_index;
+public void setOrderIndex(Byte orderIndex) {
+this.orderIndex = orderIndex;
 }
 public String getTelphone() {
 return telphone;

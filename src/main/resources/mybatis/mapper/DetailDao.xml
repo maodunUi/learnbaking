@@ -5,14 +5,14 @@
 <sql id="Simple_Column">
  select
  detail.id as detail_id,
- detail.img_url as detail_img_url,
+ detail.imgUrl as detail_imgUrl,
  detail.title as detail_title,
  detail.memo as detail_memo,
  detail.tips as detail_tips,
- detail.add_time as detail_add_time,
+ detail.addTime as detail_addTime,
  detail.state as detail_state,
- detail.order_index as detail_order_index,
- detail.userid as detail_userid,
+ detail.orderIndex as detail_orderIndex,
+ detail.userId as detail_userId,
  detail.introduce as detail_introduce,
  detail.materials as detail_materials,
  detail.step as detail_step
@@ -22,14 +22,14 @@
 <sql id="Base_Column">
  select
  detail.id as detail_id,
- detail.img_url as detail_img_url,
+ detail.imgUrl as detail_imgUrl,
  detail.title as detail_title,
  detail.memo as detail_memo,
  detail.tips as detail_tips,
- detail.add_time as detail_add_time,
+ detail.addTime as detail_addTime,
  detail.state as detail_state,
- detail.order_index as detail_order_index,
- detail.userid as detail_userid,
+ detail.orderIndex as detail_orderIndex,
+ detail.userId as detail_userId,
  detail.introduce as detail_introduce,
  detail.materials as detail_materials,
  detail.step as detail_step
@@ -39,14 +39,14 @@
 <sql id="Detail_Column">
  select
  detail.id as detail_id,
- detail.img_url as detail_img_url,
+ detail.imgUrl as detail_imgUrl,
  detail.title as detail_title,
  detail.memo as detail_memo,
  detail.tips as detail_tips,
- detail.add_time as detail_add_time,
+ detail.addTime as detail_addTime,
  detail.state as detail_state,
- detail.order_index as detail_order_index,
- detail.userid as detail_userid,
+ detail.orderIndex as detail_orderIndex,
+ detail.userId as detail_userId,
  detail.introduce as detail_introduce,
  detail.materials as detail_materials,
  detail.step as detail_step
@@ -55,14 +55,14 @@
 
 <resultMap id="SimpleResultMap" type="cn.ymt.view.simple.DetailSimpleView">
 <id column="detail_id" jdbcType="INTEGER" property="id" />
- <result column="detail_img_url" jdbcType="VARCHAR" property="img_url" />
+ <result column="detail_imgUrl" jdbcType="VARCHAR" property="imgUrl" />
  <result column="detail_title" jdbcType="VARCHAR" property="title" />
  <result column="detail_memo" jdbcType="LONGVARCHAR" property="memo" />
  <result column="detail_tips" jdbcType="VARCHAR" property="tips" />
- <result column="detail_add_time" jdbcType="DATE" property="add_time" />
+ <result column="detail_addTime" jdbcType="DATE" property="addTime" />
  <result column="detail_state" jdbcType="TINYINT" property="state" />
- <result column="detail_order_index" jdbcType="TINYINT" property="order_index" />
- <result column="detail_userid" jdbcType="INTEGER" property="userid" />
+ <result column="detail_orderIndex" jdbcType="TINYINT" property="orderIndex" />
+ <result column="detail_userId" jdbcType="INTEGER" property="userId" />
  <result column="detail_introduce" jdbcType="VARCHAR" property="introduce" />
  <result column="detail_materials" jdbcType="VARCHAR" property="materials" />
  <result column="detail_step" jdbcType="LONGVARCHAR" property="step" />
@@ -70,14 +70,14 @@
 
 <resultMap id="BaseResultMap" type="cn.ymt.view.DetailView">
 <id column="detail_id" jdbcType="INTEGER" property="id" />
- <result column="detail_img_url" jdbcType="VARCHAR" property="img_url" />
+ <result column="detail_imgUrl" jdbcType="VARCHAR" property="imgUrl" />
  <result column="detail_title" jdbcType="VARCHAR" property="title" />
  <result column="detail_memo" jdbcType="LONGVARCHAR" property="memo" />
  <result column="detail_tips" jdbcType="VARCHAR" property="tips" />
- <result column="detail_add_time" jdbcType="DATE" property="add_time" />
+ <result column="detail_addTime" jdbcType="DATE" property="addTime" />
  <result column="detail_state" jdbcType="TINYINT" property="state" />
- <result column="detail_order_index" jdbcType="TINYINT" property="order_index" />
- <result column="detail_userid" jdbcType="INTEGER" property="userid" />
+ <result column="detail_orderIndex" jdbcType="TINYINT" property="orderIndex" />
+ <result column="detail_userId" jdbcType="INTEGER" property="userId" />
  <result column="detail_introduce" jdbcType="VARCHAR" property="introduce" />
  <result column="detail_materials" jdbcType="VARCHAR" property="materials" />
  <result column="detail_step" jdbcType="LONGVARCHAR" property="step" />
@@ -106,15 +106,15 @@ delete from detail
 </delete>
 
 <insert id="save" parameterType="cn.ymt.view.DetailView" useGeneratedKeys="true" keyProperty="id">
-insert into detail (img_url,title,memo,tips,add_time,state,order_index,userid,introduce,materials,step) 
- values(#{img_url,jdbcType=VARCHAR},#{title,jdbcType=VARCHAR},#{memo,jdbcType=LONGVARCHAR},#{tips,jdbcType=VARCHAR},#{add_time,jdbcType=DATE},#{state,jdbcType=TINYINT},#{order_index,jdbcType=TINYINT},#{userid,jdbcType=INTEGER},#{introduce,jdbcType=VARCHAR},#{materials,jdbcType=VARCHAR},#{step,jdbcType=LONGVARCHAR})
+insert into detail (imgUrl,title,memo,tips,addTime,state,orderIndex,userId,introduce,materials,step) 
+ values(#{imgUrl,jdbcType=VARCHAR},#{title,jdbcType=VARCHAR},#{memo,jdbcType=LONGVARCHAR},#{tips,jdbcType=VARCHAR},#{addTime,jdbcType=DATE},#{state,jdbcType=TINYINT},#{orderIndex,jdbcType=TINYINT},#{userId,jdbcType=INTEGER},#{introduce,jdbcType=VARCHAR},#{materials,jdbcType=VARCHAR},#{step,jdbcType=LONGVARCHAR})
 </insert>
 
 <insert id="saveNoNull" parameterType="cn.ymt.view.DetailView" useGeneratedKeys="true" keyProperty="id">
 insert into detail
 <trim prefix="(" suffix=")" suffixOverrides=",">
- <if test="img_url != null">
-img_url,
+ <if test="imgUrl != null">
+imgUrl,
 </if>
  <if test="title != null">
 title,
@@ -125,17 +125,17 @@ memo,
  <if test="tips != null">
 tips,
 </if>
- <if test="add_time != null">
-add_time,
+ <if test="addTime != null">
+addTime,
 </if>
  <if test="state != null">
 state,
 </if>
- <if test="order_index != null">
-order_index,
+ <if test="orderIndex != null">
+orderIndex,
 </if>
- <if test="userid != null">
-userid,
+ <if test="userId != null">
+userId,
 </if>
  <if test="introduce != null">
 introduce,
@@ -149,8 +149,8 @@ step,
 </trim>
 
 <trim prefix="values(" suffix=")" suffixOverrides=",">
-<if test="img_url != null">
-#{img_url,jdbcType=VARCHAR},
+<if test="imgUrl != null">
+#{imgUrl,jdbcType=VARCHAR},
 </if>
 <if test="title != null">
 #{title,jdbcType=VARCHAR},
@@ -161,17 +161,17 @@ step,
 <if test="tips != null">
 #{tips,jdbcType=VARCHAR},
 </if>
-<if test="add_time != null">
-#{add_time,jdbcType=DATE},
+<if test="addTime != null">
+#{addTime,jdbcType=DATE},
 </if>
 <if test="state != null">
 #{state,jdbcType=TINYINT},
 </if>
-<if test="order_index != null">
-#{order_index,jdbcType=TINYINT},
+<if test="orderIndex != null">
+#{orderIndex,jdbcType=TINYINT},
 </if>
-<if test="userid != null">
-#{userid,jdbcType=INTEGER},
+<if test="userId != null">
+#{userId,jdbcType=INTEGER},
 </if>
 <if test="introduce != null">
 #{introduce,jdbcType=VARCHAR},
@@ -186,28 +186,27 @@ step,
 </insert>
 
 <insert id="saves" >
-insert into detail (img_url,title,memo,tips,add_time,state,order_index,userid,introduce,materials,step) 
- values <foreach collection="list" item="obj" separator=",">(#{obj.img_url,jdbcType=VARCHAR},#{obj.title,jdbcType=VARCHAR},#{obj.memo,jdbcType=LONGVARCHAR},#{obj.tips,jdbcType=VARCHAR},#{obj.add_time,jdbcType=DATE},#{obj.state,jdbcType=TINYINT},#{obj.order_index,jdbcType=TINYINT},#{obj.userid,jdbcType=INTEGER},#{obj.introduce,jdbcType=VARCHAR},#{obj.materials,jdbcType=VARCHAR},#{obj.step,jdbcType=LONGVARCHAR})</foreach>
+insert into detail (imgUrl,title,memo,tips,addTime,state,orderIndex,userId,introduce,materials,step) 
+ values <foreach collection="list" item="obj" separator=",">(#{obj.imgUrl,jdbcType=VARCHAR},#{obj.title,jdbcType=VARCHAR},#{obj.memo,jdbcType=LONGVARCHAR},#{obj.tips,jdbcType=VARCHAR},#{obj.addTime,jdbcType=DATE},#{obj.state,jdbcType=TINYINT},#{obj.orderIndex,jdbcType=TINYINT},#{obj.userId,jdbcType=INTEGER},#{obj.introduce,jdbcType=VARCHAR},#{obj.materials,jdbcType=VARCHAR},#{obj.step,jdbcType=LONGVARCHAR})</foreach>
 </insert>
 <update id="updateAll" parameterType="cn.ymt.view.DetailView">
 update detail 
-set  img_url = #{img_url,jdbcType=VARCHAR}, title = #{title,jdbcType=VARCHAR}, memo = #{memo,jdbcType=LONGVARCHAR}, tips = #{tips,jdbcType=VARCHAR}, add_time = #{add_time,jdbcType=DATE}, state = #{state,jdbcType=TINYINT}, order_index = #{order_index,jdbcType=TINYINT}, userid = #{userid,jdbcType=INTEGER}, introduce = #{introduce,jdbcType=VARCHAR}, materials = #{materials,jdbcType=VARCHAR}, step = #{step,jdbcType=LONGVARCHAR} where id = #{id,jdbcType=INTEGER}
+set  imgUrl = #{imgUrl,jdbcType=VARCHAR}, title = #{title,jdbcType=VARCHAR}, memo = #{memo,jdbcType=LONGVARCHAR}, tips = #{tips,jdbcType=VARCHAR}, addTime = #{addTime,jdbcType=DATE}, state = #{state,jdbcType=TINYINT}, orderIndex = #{orderIndex,jdbcType=TINYINT}, userId = #{userId,jdbcType=INTEGER}, introduce = #{introduce,jdbcType=VARCHAR}, materials = #{materials,jdbcType=VARCHAR}, step = #{step,jdbcType=LONGVARCHAR} where id = #{id,jdbcType=INTEGER}
 </update>
  <update id="updateNoNull" parameterType="cn.ymt.view.DetailView">
 update detail 
 <set>
-<if test="img_url != null"> img_url = #{img_url,jdbcType=VARCHAR},</if>
+<if test="imgUrl != null"> imgUrl = #{imgUrl,jdbcType=VARCHAR},</if>
 <if test="title != null"> title = #{title,jdbcType=VARCHAR},</if>
 <if test="memo != null"> memo = #{memo,jdbcType=LONGVARCHAR},</if>
 <if test="tips != null"> tips = #{tips,jdbcType=VARCHAR},</if>
-<if test="add_time != null"> add_time = #{add_time,jdbcType=DATE},</if>
+<if test="addTime != null"> addTime = #{addTime,jdbcType=DATE},</if>
 <if test="state != null"> state = #{state,jdbcType=TINYINT},</if>
-<if test="order_index != null"> order_index = #{order_index,jdbcType=TINYINT},</if>
-<if test="userid != null"> userid = #{userid,jdbcType=INTEGER},</if>
+<if test="orderIndex != null"> orderIndex = #{orderIndex,jdbcType=TINYINT},</if>
+<if test="userId != null"> userId = #{userId,jdbcType=INTEGER},</if>
 <if test="introduce != null"> introduce = #{introduce,jdbcType=VARCHAR},</if>
 <if test="materials != null"> materials = #{materials,jdbcType=VARCHAR},</if>
-<if test="step != null"> step = #{step,jdbcType=LONGVARCHAR},</if>
-</set>
+<if test="step != null"> step = #{step,jdbcType=LONGVARCHAR},</if></set>
  where id = #{id,jdbcType=INTEGER}
 </update>
 

@@ -1,58 +1,58 @@
 package cn.ymt.pojo;
 import java.util.Date;
 public class Order extends BasicModel {
-protected Integer course_id;//
-protected java.util.Date order_time=new Date();//
-protected Byte pay_type;//
-protected Integer user_id;//
-protected Integer publisher_id;//对应用户表user的id(发布者)
-protected Byte order_index;//
+protected Integer courseId;//
+protected Date orderTime=new Date();//
+protected Byte payType;//
+protected Integer userId;//
+protected Integer publisherId;//对应用户表user的id(发布者)
+protected Byte orderIndex;//
 protected Byte state;//
 protected Double price;//
 protected String number;//订单号
 protected String subject;//订单详情
 protected String name;//订单名称
-public Integer getCourse_id() {
-return course_id;
+public Integer getCourseId() {
+return courseId;
 }
 
-public void setCourse_id(Integer course_id) {
-this.course_id = course_id;
+public void setCourseId(Integer courseId) {
+this.courseId = courseId;
 }
-public java.util.Date getOrder_time() {
-return order_time;
-}
-
-public void setOrder_time(java.util.Date order_time) {
-this.order_time = order_time;
-}
-public Byte getPay_type() {
-return pay_type;
+public Date getOrderTime() {
+return orderTime;
 }
 
-public void setPay_type(Byte pay_type) {
-this.pay_type = pay_type;
+public void setOrderTime(Date orderTime) {
+this.orderTime = orderTime;
 }
-public Integer getUser_id() {
-return user_id;
-}
-
-public void setUser_id(Integer user_id) {
-this.user_id = user_id;
-}
-public Integer getPublisher_id() {
-return publisher_id;
+public Byte getPayType() {
+return payType;
 }
 
-public void setPublisher_id(Integer publisher_id) {
-this.publisher_id = publisher_id;
+public void setPayType(Byte payType) {
+this.payType = payType;
 }
-public Byte getOrder_index() {
-return order_index;
+public Integer getUserId() {
+return userId;
 }
 
-public void setOrder_index(Byte order_index) {
-this.order_index = order_index;
+public void setUserId(Integer userId) {
+this.userId = userId;
+}
+public Integer getPublisherId() {
+return publisherId;
+}
+
+public void setPublisherId(Integer publisherId) {
+this.publisherId = publisherId;
+}
+public Byte getOrderIndex() {
+return orderIndex;
+}
+
+public void setOrderIndex(Byte orderIndex) {
+this.orderIndex = orderIndex;
 }
 public Byte getState() {
 return state;

@@ -5,52 +5,52 @@
 <sql id="Simple_Column">
  select
  collect.id as collect_id,
- collect.user_id as collect_user_id,
+ collect.userId as collect_userId,
  collect.type as collect_type,
- collect.course_id as collect_course_id,
- collect.detail_id as collect_detail_id,
- collect.collect_time as collect_collect_time
+ collect.courseId as collect_courseId,
+ collect.detailId as collect_detailId,
+ collect.collectTime as collect_collectTime
  from collect as collect 
 </sql>
 
 <sql id="Base_Column">
  select
  collect.id as collect_id,
- collect.user_id as collect_user_id,
+ collect.userId as collect_userId,
  collect.type as collect_type,
- collect.course_id as collect_course_id,
- collect.detail_id as collect_detail_id,
- collect.collect_time as collect_collect_time
+ collect.courseId as collect_courseId,
+ collect.detailId as collect_detailId,
+ collect.collectTime as collect_collectTime
  from collect as collect 
 </sql>
 
 <sql id="Detail_Column">
  select
  collect.id as collect_id,
- collect.user_id as collect_user_id,
+ collect.userId as collect_userId,
  collect.type as collect_type,
- collect.course_id as collect_course_id,
- collect.detail_id as collect_detail_id,
- collect.collect_time as collect_collect_time
+ collect.courseId as collect_courseId,
+ collect.detailId as collect_detailId,
+ collect.collectTime as collect_collectTime
  from collect as collect 
 </sql>
 
 <resultMap id="SimpleResultMap" type="cn.ymt.view.simple.CollectSimpleView">
 <id column="collect_id" jdbcType="INTEGER" property="id" />
- <result column="collect_user_id" jdbcType="INTEGER" property="user_id" />
+ <result column="collect_userId" jdbcType="INTEGER" property="userId" />
  <result column="collect_type" jdbcType="TINYINT" property="type" />
- <result column="collect_course_id" jdbcType="INTEGER" property="course_id" />
- <result column="collect_detail_id" jdbcType="INTEGER" property="detail_id" />
- <result column="collect_collect_time" jdbcType="TIMESTAMP" property="collect_time" />
+ <result column="collect_courseId" jdbcType="INTEGER" property="courseId" />
+ <result column="collect_detailId" jdbcType="INTEGER" property="detailId" />
+ <result column="collect_collectTime" jdbcType="TIMESTAMP" property="collectTime" />
 </resultMap>
 
 <resultMap id="BaseResultMap" type="cn.ymt.view.CollectView">
 <id column="collect_id" jdbcType="INTEGER" property="id" />
- <result column="collect_user_id" jdbcType="INTEGER" property="user_id" />
+ <result column="collect_userId" jdbcType="INTEGER" property="userId" />
  <result column="collect_type" jdbcType="TINYINT" property="type" />
- <result column="collect_course_id" jdbcType="INTEGER" property="course_id" />
- <result column="collect_detail_id" jdbcType="INTEGER" property="detail_id" />
- <result column="collect_collect_time" jdbcType="TIMESTAMP" property="collect_time" />
+ <result column="collect_courseId" jdbcType="INTEGER" property="courseId" />
+ <result column="collect_detailId" jdbcType="INTEGER" property="detailId" />
+ <result column="collect_collectTime" jdbcType="TIMESTAMP" property="collectTime" />
 </resultMap>
 
 <resultMap id="DetailResultMap" type="cn.ymt.view.CollectView" extends="BaseResultMap">
@@ -76,65 +76,65 @@ delete from collect
 </delete>
 
 <insert id="save" parameterType="cn.ymt.view.CollectView" useGeneratedKeys="true" keyProperty="id">
-insert into collect (user_id,type,course_id,detail_id,collect_time) 
- values(#{user_id,jdbcType=INTEGER},#{type,jdbcType=TINYINT},#{course_id,jdbcType=INTEGER},#{detail_id,jdbcType=INTEGER},#{collect_time,jdbcType=TIMESTAMP})
+insert into collect (userId,type,courseId,detailId,collectTime) 
+ values(#{userId,jdbcType=INTEGER},#{type,jdbcType=TINYINT},#{courseId,jdbcType=INTEGER},#{detailId,jdbcType=INTEGER},#{collectTime,jdbcType=TIMESTAMP})
 </insert>
 
 <insert id="saveNoNull" parameterType="cn.ymt.view.CollectView" useGeneratedKeys="true" keyProperty="id">
 insert into collect
 <trim prefix="(" suffix=")" suffixOverrides=",">
- <if test="user_id != null">
-user_id,
+ <if test="userId != null">
+userId,
 </if>
  <if test="type != null">
 type,
 </if>
- <if test="course_id != null">
-course_id,
+ <if test="courseId != null">
+courseId,
 </if>
- <if test="detail_id != null">
-detail_id,
+ <if test="detailId != null">
+detailId,
 </if>
- <if test="collect_time != null">
-collect_time,
+ <if test="collectTime != null">
+collectTime,
 </if>
 </trim>
 
 <trim prefix="values(" suffix=")" suffixOverrides=",">
-<if test="user_id != null">
-#{user_id,jdbcType=INTEGER},
+<if test="userId != null">
+#{userId,jdbcType=INTEGER},
 </if>
 <if test="type != null">
 #{type,jdbcType=TINYINT},
 </if>
-<if test="course_id != null">
-#{course_id,jdbcType=INTEGER},
+<if test="courseId != null">
+#{courseId,jdbcType=INTEGER},
 </if>
-<if test="detail_id != null">
-#{detail_id,jdbcType=INTEGER},
+<if test="detailId != null">
+#{detailId,jdbcType=INTEGER},
 </if>
-<if test="collect_time != null">
-#{collect_time,jdbcType=TIMESTAMP},
+<if test="collectTime != null">
+#{collectTime,jdbcType=TIMESTAMP},
 </if>
 </trim>
 </insert>
 
 <insert id="saves" >
-insert into collect (user_id,type,course_id,detail_id,collect_time) 
- values <foreach collection="list" item="obj" separator=",">(#{obj.user_id,jdbcType=INTEGER},#{obj.type,jdbcType=TINYINT},#{obj.course_id,jdbcType=INTEGER},#{obj.detail_id,jdbcType=INTEGER},#{obj.collect_time,jdbcType=TIMESTAMP})</foreach>
+insert into collect (userId,type,courseId,detailId,collectTime) 
+ values <foreach collection="list" item="obj" separator=",">(#{obj.userId,jdbcType=INTEGER},#{obj.type,jdbcType=TINYINT},#{obj.courseId,jdbcType=INTEGER},#{obj.detailId,jdbcType=INTEGER},#{obj.collectTime,jdbcType=TIMESTAMP})</foreach>
 </insert>
 <update id="updateAll" parameterType="cn.ymt.view.CollectView">
 update collect 
-set  user_id = #{user_id,jdbcType=INTEGER}, type = #{type,jdbcType=TINYINT}, course_id = #{course_id,jdbcType=INTEGER}, detail_id = #{detail_id,jdbcType=INTEGER}, collect_time = #{collect_time,jdbcType=TIMESTAMP} where id = #{id,jdbcType=INTEGER}
+set  userId = #{userId,jdbcType=INTEGER}, type = #{type,jdbcType=TINYINT}, courseId = #{courseId,jdbcType=INTEGER}, detailId = #{detailId,jdbcType=INTEGER}, collectTime = #{collectTime,jdbcType=TIMESTAMP} where id = #{id,jdbcType=INTEGER}
 </update>
  <update id="updateNoNull" parameterType="cn.ymt.view.CollectView">
 update collect 
 <set>
-<if test="user_id != null"> user_id = #{user_id,jdbcType=INTEGER},</if>
+<if test="userId != null"> userId = #{userId,jdbcType=INTEGER},</if>
 <if test="type != null"> type = #{type,jdbcType=TINYINT},</if>
-<if test="course_id != null"> course_id = #{course_id,jdbcType=INTEGER},</if>
-<if test="detail_id != null"> detail_id = #{detail_id,jdbcType=INTEGER},</if>
-<if test="collect_time != null"> collect_time = #{collect_time,jdbcType=TIMESTAMP},</if></set>
+<if test="courseId != null"> courseId = #{courseId,jdbcType=INTEGER},</if>
+<if test="detailId != null"> detailId = #{detailId,jdbcType=INTEGER},</if>
+<if test="collectTime != null"> collectTime = #{collectTime,jdbcType=TIMESTAMP},</if></set>
  where id = #{id,jdbcType=INTEGER}
 </update>
 

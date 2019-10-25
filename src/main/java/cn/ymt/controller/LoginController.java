@@ -49,10 +49,11 @@ public class LoginController {
 	@GetMapping("/loginOrRegister")
 	public jsonResult loginOrRegister(String telphone, String code, HttpServletResponse response, HttpServletRequest request) throws Exception{
 		HttpSession session = request.getSession();
-		if (!session.getAttribute("code").equals(code)) { //判断短信验证码是否相同
+		String a =session.getAttribute("code").toString();
+		if (!a.equals(code)) { //判断短信验证码是否相同
 			return new jsonResult(false, "短信验证码错误");
 		}
-		List<User> user = userService.findUserByTelphone(telphone);
+		List<UserView> user = userService.findUserByTelphone(telphone);
 		if (user != null && user.size() > 0) { //登录
 			session.setAttribute("user", user.get(0));
 			session.setMaxInactiveInterval(-1);
@@ -60,7 +61,7 @@ public class LoginController {
 		} else { //注册
 			UserView u = new UserView();
 			u.setTelphone(telphone);
-			u.setImg_url("http://www.javacoffee.club/noPicture.svg");
+			u.setImgUrl("http://www.javacoffee.club/noPicture.svg");
 			try {
 				userService.insert(u);
 			} catch (Exception e) {
@@ -71,6 +72,12 @@ public class LoginController {
 			return new jsonResult(true, "注册成功");
 		}
 	//	return new jsonResult(true, "登录成功");
+	}
+
+	@RequestMapping("/getuser")
+	public void getUser() throws Exception{
+		List<UserView> userByTelphone = userService.findUserByTelphone("15270054550");
+		System.out.println(userByTelphone.toString());
 	}
 
 	@RequestMapping("/sendSms")

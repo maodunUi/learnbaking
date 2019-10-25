@@ -2,27 +2,28 @@ package cn.ymt.view.simple;
 import cn.ymt.pojo.BasicModel;
 import java.util.Date;
 public class CourseSimpleView extends BasicModel {
-protected String video_url;//介绍视频
+protected String videoUrl;//介绍视频
 protected String title;//
-protected String img_url;//
+protected String imgUrl;//
 protected String memo;//
-protected String memo_two;//
-protected String how_learn;//
-protected String baker_name;//
-protected String backer_img_url;//
-protected String bakers_introduce;//
+protected String memoTwo;//
+protected String howLearn;//
+protected String bakerName;//
+protected String backerImgUrl;//
+protected String bakerIntroduce;//
 protected Double price;//
-protected Integer people_count;//
-protected java.util.Date add_time=new Date();//
-protected Byte order_index;//
+protected Integer peopleCount;//
+protected Date addTime=new Date();//
+protected Byte orderIndex;//
 protected Byte state;//
-protected Integer category_id;//分类id对应的category表
-public String getVideo_url() {
-return video_url;
+protected Integer categoryId;//分类id对应的category表
+protected Byte isindex;//是否首页展示 0 否 1是
+public String getVideoUrl() {
+return videoUrl;
 }
 
-public void setVideo_url(String video_url) {
-this.video_url = video_url == null ? null : video_url.trim();
+public void setVideoUrl(String videoUrl) {
+this.videoUrl = videoUrl == null ? null : videoUrl.trim();
 }
 public String getTitle() {
 return title;
@@ -31,12 +32,12 @@ return title;
 public void setTitle(String title) {
 this.title = title == null ? null : title.trim();
 }
-public String getImg_url() {
-return img_url;
+public String getImgUrl() {
+return imgUrl;
 }
 
-public void setImg_url(String img_url) {
-this.img_url = img_url == null ? null : img_url.trim();
+public void setImgUrl(String imgUrl) {
+this.imgUrl = imgUrl == null ? null : imgUrl.trim();
 }
 public String getMemo() {
 return memo;
@@ -45,40 +46,40 @@ return memo;
 public void setMemo(String memo) {
 this.memo = memo == null ? null : memo.trim();
 }
-public String getMemo_two() {
-return memo_two;
+public String getMemoTwo() {
+return memoTwo;
 }
 
-public void setMemo_two(String memo_two) {
-this.memo_two = memo_two == null ? null : memo_two.trim();
+public void setMemoTwo(String memoTwo) {
+this.memoTwo = memoTwo == null ? null : memoTwo.trim();
 }
-public String getHow_learn() {
-return how_learn;
-}
-
-public void setHow_learn(String how_learn) {
-this.how_learn = how_learn == null ? null : how_learn.trim();
-}
-public String getBaker_name() {
-return baker_name;
+public String getHowLearn() {
+return howLearn;
 }
 
-public void setBaker_name(String baker_name) {
-this.baker_name = baker_name == null ? null : baker_name.trim();
+public void setHowLearn(String howLearn) {
+this.howLearn = howLearn == null ? null : howLearn.trim();
 }
-public String getBacker_img_url() {
-return backer_img_url;
-}
-
-public void setBacker_img_url(String backer_img_url) {
-this.backer_img_url = backer_img_url == null ? null : backer_img_url.trim();
-}
-public String getBakers_introduce() {
-return bakers_introduce;
+public String getBakerName() {
+return bakerName;
 }
 
-public void setBakers_introduce(String bakers_introduce) {
-this.bakers_introduce = bakers_introduce == null ? null : bakers_introduce.trim();
+public void setBakerName(String bakerName) {
+this.bakerName = bakerName == null ? null : bakerName.trim();
+}
+public String getBackerImgUrl() {
+return backerImgUrl;
+}
+
+public void setBackerImgUrl(String backerImgUrl) {
+this.backerImgUrl = backerImgUrl == null ? null : backerImgUrl.trim();
+}
+public String getBakerIntroduce() {
+return bakerIntroduce;
+}
+
+public void setBakerIntroduce(String bakerIntroduce) {
+this.bakerIntroduce = bakerIntroduce == null ? null : bakerIntroduce.trim();
 }
 public Double getPrice() {
 return price;
@@ -87,26 +88,26 @@ return price;
 public void setPrice(Double price) {
 this.price = price;
 }
-public Integer getPeople_count() {
-return people_count;
+public Integer getPeopleCount() {
+return peopleCount;
 }
 
-public void setPeople_count(Integer people_count) {
-this.people_count = people_count;
+public void setPeopleCount(Integer peopleCount) {
+this.peopleCount = peopleCount;
 }
-public java.util.Date getAdd_time() {
-return add_time;
-}
-
-public void setAdd_time(java.util.Date add_time) {
-this.add_time = add_time;
-}
-public Byte getOrder_index() {
-return order_index;
+public Date getAddTime() {
+return addTime;
 }
 
-public void setOrder_index(Byte order_index) {
-this.order_index = order_index;
+public void setAddTime(Date addTime) {
+this.addTime = addTime;
+}
+public Byte getOrderIndex() {
+return orderIndex;
+}
+
+public void setOrderIndex(Byte orderIndex) {
+this.orderIndex = orderIndex;
 }
 public Byte getState() {
 return state;
@@ -115,12 +116,19 @@ return state;
 public void setState(Byte state) {
 this.state = state;
 }
-public Integer getCategory_id() {
-return category_id;
+public Integer getCategoryId() {
+return categoryId;
 }
 
-public void setCategory_id(Integer category_id) {
-this.category_id = category_id;
+public void setCategoryId(Integer categoryId) {
+this.categoryId = categoryId;
+}
+public Byte getIsindex() {
+return isindex;
+}
+
+public void setIsindex(Byte isindex) {
+this.isindex = isindex;
 }
 
 }

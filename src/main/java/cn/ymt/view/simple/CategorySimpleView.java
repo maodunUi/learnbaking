@@ -2,7 +2,7 @@ package cn.ymt.view.simple;
 import cn.ymt.pojo.BasicModel;
 public class CategorySimpleView extends BasicModel {
 protected String title;//
-protected Byte order_index;//
+protected Byte orderIndex;//
 protected String memo;//
 public String getTitle() {
 return title;
@@ -11,12 +11,12 @@ return title;
 public void setTitle(String title) {
 this.title = title == null ? null : title.trim();
 }
-public Byte getOrder_index() {
-return order_index;
+public Byte getOrderIndex() {
+return orderIndex;
 }
 
-public void setOrder_index(Byte order_index) {
-this.order_index = order_index;
+public void setOrderIndex(Byte orderIndex) {
+this.orderIndex = orderIndex;
 }
 public String getMemo() {
 return memo;

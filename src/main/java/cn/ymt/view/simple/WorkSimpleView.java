@@ -2,19 +2,19 @@ package cn.ymt.view.simple;
 import cn.ymt.pojo.BasicModel;
 import java.util.Date;
 public class WorkSimpleView extends BasicModel {
-protected Integer user_id;//
+protected Integer userId;//
 protected String title;//
-protected java.util.Date add_time=new Date();//
+protected Date addTime=new Date();//
 protected Byte state;//
 protected Integer count;//点赞数
-protected Integer comment_id;//
-protected Integer category_id;//
-public Integer getUser_id() {
-return user_id;
+protected Integer commentId;//
+protected Integer categoryId;//
+public Integer getUserId() {
+return userId;
 }
 
-public void setUser_id(Integer user_id) {
-this.user_id = user_id;
+public void setUserId(Integer userId) {
+this.userId = userId;
 }
 public String getTitle() {
 return title;
@@ -23,12 +23,12 @@ return title;
 public void setTitle(String title) {
 this.title = title == null ? null : title.trim();
 }
-public java.util.Date getAdd_time() {
-return add_time;
+public Date getAddTime() {
+return addTime;
 }
 
-public void setAdd_time(java.util.Date add_time) {
-this.add_time = add_time;
+public void setAddTime(Date addTime) {
+this.addTime = addTime;
 }
 public Byte getState() {
 return state;
@@ -44,19 +44,19 @@ return count;
 public void setCount(Integer count) {
 this.count = count;
 }
-public Integer getComment_id() {
-return comment_id;
+public Integer getCommentId() {
+return commentId;
 }
 
-public void setComment_id(Integer comment_id) {
-this.comment_id = comment_id;
+public void setCommentId(Integer commentId) {
+this.commentId = commentId;
 }
-public Integer getCategory_id() {
-return category_id;
+public Integer getCategoryId() {
+return categoryId;
 }
 
-public void setCategory_id(Integer category_id) {
-this.category_id = category_id;
+public void setCategoryId(Integer categoryId) {
+this.categoryId = categoryId;
 }
 
 }

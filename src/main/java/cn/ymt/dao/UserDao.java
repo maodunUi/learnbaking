@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface UserDao extends DaoTemplate<UserView,UserQueryParams>{
 
-    List<User> findUserByTelphone(String telphone) throws Exception;
+    List<UserView> findUserByTelphone(String telphone) throws Exception;
 }

@@ -5,12 +5,12 @@
 <sql id="Simple_Column">
  select
  order.id as order_id,
- order.course_id as order_course_id,
- order.order_time as order_order_time,
- order.pay_type as order_pay_type,
- order.user_id as order_user_id,
- order.publisher_id as order_publisher_id,
- order.order_index as order_order_index,
+ order.courseId as order_courseId,
+ order.orderTime as order_orderTime,
+ order.payType as order_payType,
+ order.userId as order_userId,
+ order.publisherId as order_publisherId,
+ order.orderIndex as order_orderIndex,
  order.state as order_state,
  order.price as order_price,
  order.number as order_number,
@@ -22,12 +22,12 @@
 <sql id="Base_Column">
  select
  order.id as order_id,
- order.course_id as order_course_id,
- order.order_time as order_order_time,
- order.pay_type as order_pay_type,
- order.user_id as order_user_id,
- order.publisher_id as order_publisher_id,
- order.order_index as order_order_index,
+ order.courseId as order_courseId,
+ order.orderTime as order_orderTime,
+ order.payType as order_payType,
+ order.userId as order_userId,
+ order.publisherId as order_publisherId,
+ order.orderIndex as order_orderIndex,
  order.state as order_state,
  order.price as order_price,
  order.number as order_number,
@@ -39,12 +39,12 @@
 <sql id="Detail_Column">
  select
  order.id as order_id,
- order.course_id as order_course_id,
- order.order_time as order_order_time,
- order.pay_type as order_pay_type,
- order.user_id as order_user_id,
- order.publisher_id as order_publisher_id,
- order.order_index as order_order_index,
+ order.courseId as order_courseId,
+ order.orderTime as order_orderTime,
+ order.payType as order_payType,
+ order.userId as order_userId,
+ order.publisherId as order_publisherId,
+ order.orderIndex as order_orderIndex,
  order.state as order_state,
  order.price as order_price,
  order.number as order_number,
@@ -55,12 +55,12 @@
 
 <resultMap id="SimpleResultMap" type="cn.ymt.view.simple.OrderSimpleView">
 <id column="order_id" jdbcType="INTEGER" property="id" />
- <result column="order_course_id" jdbcType="INTEGER" property="course_id" />
- <result column="order_order_time" jdbcType="TIMESTAMP" property="order_time" />
- <result column="order_pay_type" jdbcType="TINYINT" property="pay_type" />
- <result column="order_user_id" jdbcType="INTEGER" property="user_id" />
- <result column="order_publisher_id" jdbcType="INTEGER" property="publisher_id" />
- <result column="order_order_index" jdbcType="TINYINT" property="order_index" />
+ <result column="order_courseId" jdbcType="INTEGER" property="courseId" />
+ <result column="order_orderTime" jdbcType="TIMESTAMP" property="orderTime" />
+ <result column="order_payType" jdbcType="TINYINT" property="payType" />
+ <result column="order_userId" jdbcType="INTEGER" property="userId" />
+ <result column="order_publisherId" jdbcType="INTEGER" property="publisherId" />
+ <result column="order_orderIndex" jdbcType="TINYINT" property="orderIndex" />
  <result column="order_state" jdbcType="TINYINT" property="state" />
  <result column="order_price" jdbcType="DOUBLE" property="price" />
  <result column="order_number" jdbcType="VARCHAR" property="number" />
@@ -70,12 +70,12 @@
 
 <resultMap id="BaseResultMap" type="cn.ymt.view.OrderView">
 <id column="order_id" jdbcType="INTEGER" property="id" />
- <result column="order_course_id" jdbcType="INTEGER" property="course_id" />
- <result column="order_order_time" jdbcType="TIMESTAMP" property="order_time" />
- <result column="order_pay_type" jdbcType="TINYINT" property="pay_type" />
- <result column="order_user_id" jdbcType="INTEGER" property="user_id" />
- <result column="order_publisher_id" jdbcType="INTEGER" property="publisher_id" />
- <result column="order_order_index" jdbcType="TINYINT" property="order_index" />
+ <result column="order_courseId" jdbcType="INTEGER" property="courseId" />
+ <result column="order_orderTime" jdbcType="TIMESTAMP" property="orderTime" />
+ <result column="order_payType" jdbcType="TINYINT" property="payType" />
+ <result column="order_userId" jdbcType="INTEGER" property="userId" />
+ <result column="order_publisherId" jdbcType="INTEGER" property="publisherId" />
+ <result column="order_orderIndex" jdbcType="TINYINT" property="orderIndex" />
  <result column="order_state" jdbcType="TINYINT" property="state" />
  <result column="order_price" jdbcType="DOUBLE" property="price" />
  <result column="order_number" jdbcType="VARCHAR" property="number" />
@@ -106,30 +106,30 @@ delete from order
 </delete>
 
 <insert id="save" parameterType="cn.ymt.view.OrderView" useGeneratedKeys="true" keyProperty="id">
-insert into order (course_id,order_time,pay_type,user_id,publisher_id,order_index,state,price,number,subject,name) 
- values(#{course_id,jdbcType=INTEGER},#{order_time,jdbcType=TIMESTAMP},#{pay_type,jdbcType=TINYINT},#{user_id,jdbcType=INTEGER},#{publisher_id,jdbcType=INTEGER},#{order_index,jdbcType=TINYINT},#{state,jdbcType=TINYINT},#{price,jdbcType=DOUBLE},#{number,jdbcType=VARCHAR},#{subject,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR})
+insert into order (courseId,orderTime,payType,userId,publisherId,orderIndex,state,price,number,subject,name) 
+ values(#{courseId,jdbcType=INTEGER},#{orderTime,jdbcType=TIMESTAMP},#{payType,jdbcType=TINYINT},#{userId,jdbcType=INTEGER},#{publisherId,jdbcType=INTEGER},#{orderIndex,jdbcType=TINYINT},#{state,jdbcType=TINYINT},#{price,jdbcType=DOUBLE},#{number,jdbcType=VARCHAR},#{subject,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR})
 </insert>
 
 <insert id="saveNoNull" parameterType="cn.ymt.view.OrderView" useGeneratedKeys="true" keyProperty="id">
 insert into order
 <trim prefix="(" suffix=")" suffixOverrides=",">
- <if test="course_id != null">
-course_id,
+ <if test="courseId != null">
+courseId,
 </if>
- <if test="order_time != null">
-order_time,
+ <if test="orderTime != null">
+orderTime,
 </if>
- <if test="pay_type != null">
-pay_type,
+ <if test="payType != null">
+payType,
 </if>
- <if test="user_id != null">
-user_id,
+ <if test="userId != null">
+userId,
 </if>
- <if test="publisher_id != null">
-publisher_id,
+ <if test="publisherId != null">
+publisherId,
 </if>
- <if test="order_index != null">
-order_index,
+ <if test="orderIndex != null">
+orderIndex,
 </if>
  <if test="state != null">
 state,
@@ -149,23 +149,23 @@ name,
 </trim>
 
 <trim prefix="values(" suffix=")" suffixOverrides=",">
-<if test="course_id != null">
-#{course_id,jdbcType=INTEGER},
+<if test="courseId != null">
+#{courseId,jdbcType=INTEGER},
 </if>
-<if test="order_time != null">
-#{order_time,jdbcType=TIMESTAMP},
+<if test="orderTime != null">
+#{orderTime,jdbcType=TIMESTAMP},
 </if>
-<if test="pay_type != null">
-#{pay_type,jdbcType=TINYINT},
+<if test="payType != null">
+#{payType,jdbcType=TINYINT},
 </if>
-<if test="user_id != null">
-#{user_id,jdbcType=INTEGER},
+<if test="userId != null">
+#{userId,jdbcType=INTEGER},
 </if>
-<if test="publisher_id != null">
-#{publisher_id,jdbcType=INTEGER},
+<if test="publisherId != null">
+#{publisherId,jdbcType=INTEGER},
 </if>
-<if test="order_index != null">
-#{order_index,jdbcType=TINYINT},
+<if test="orderIndex != null">
+#{orderIndex,jdbcType=TINYINT},
 </if>
 <if test="state != null">
 #{state,jdbcType=TINYINT},
@@ -186,22 +186,22 @@ name,
 </insert>
 
 <insert id="saves" >
-insert into order (course_id,order_time,pay_type,user_id,publisher_id,order_index,state,price,number,subject,name) 
- values <foreach collection="list" item="obj" separator=",">(#{obj.course_id,jdbcType=INTEGER},#{obj.order_time,jdbcType=TIMESTAMP},#{obj.pay_type,jdbcType=TINYINT},#{obj.user_id,jdbcType=INTEGER},#{obj.publisher_id,jdbcType=INTEGER},#{obj.order_index,jdbcType=TINYINT},#{obj.state,jdbcType=TINYINT},#{obj.price,jdbcType=DOUBLE},#{obj.number,jdbcType=VARCHAR},#{obj.subject,jdbcType=VARCHAR},#{obj.name,jdbcType=VARCHAR})</foreach>
+insert into order (courseId,orderTime,payType,userId,publisherId,orderIndex,state,price,number,subject,name) 
+ values <foreach collection="list" item="obj" separator=",">(#{obj.courseId,jdbcType=INTEGER},#{obj.orderTime,jdbcType=TIMESTAMP},#{obj.payType,jdbcType=TINYINT},#{obj.userId,jdbcType=INTEGER},#{obj.publisherId,jdbcType=INTEGER},#{obj.orderIndex,jdbcType=TINYINT},#{obj.state,jdbcType=TINYINT},#{obj.price,jdbcType=DOUBLE},#{obj.number,jdbcType=VARCHAR},#{obj.subject,jdbcType=VARCHAR},#{obj.name,jdbcType=VARCHAR})</foreach>
 </insert>
 <update id="updateAll" parameterType="cn.ymt.view.OrderView">
 update order 
-set  course_id = #{course_id,jdbcType=INTEGER}, order_time = #{order_time,jdbcType=TIMESTAMP}, pay_type = #{pay_type,jdbcType=TINYINT}, user_id = #{user_id,jdbcType=INTEGER}, publisher_id = #{publisher_id,jdbcType=INTEGER}, order_index = #{order_index,jdbcType=TINYINT}, state = #{state,jdbcType=TINYINT}, price = #{price,jdbcType=DOUBLE}, number = #{number,jdbcType=VARCHAR}, subject = #{subject,jdbcType=VARCHAR}, name = #{name,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER}
+set  courseId = #{courseId,jdbcType=INTEGER}, orderTime = #{orderTime,jdbcType=TIMESTAMP}, payType = #{payType,jdbcType=TINYINT}, userId = #{userId,jdbcType=INTEGER}, publisherId = #{publisherId,jdbcType=INTEGER}, orderIndex = #{orderIndex,jdbcType=TINYINT}, state = #{state,jdbcType=TINYINT}, price = #{price,jdbcType=DOUBLE}, number = #{number,jdbcType=VARCHAR}, subject = #{subject,jdbcType=VARCHAR}, name = #{name,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER}
 </update>
  <update id="updateNoNull" parameterType="cn.ymt.view.OrderView">
 update order 
 <set>
-<if test="course_id != null"> course_id = #{course_id,jdbcType=INTEGER},</if>
-<if test="order_time != null"> order_time = #{order_time,jdbcType=TIMESTAMP},</if>
-<if test="pay_type != null"> pay_type = #{pay_type,jdbcType=TINYINT},</if>
-<if test="user_id != null"> user_id = #{user_id,jdbcType=INTEGER},</if>
-<if test="publisher_id != null"> publisher_id = #{publisher_id,jdbcType=INTEGER},</if>
-<if test="order_index != null"> order_index = #{order_index,jdbcType=TINYINT},</if>
+<if test="courseId != null"> courseId = #{courseId,jdbcType=INTEGER},</if>
+<if test="orderTime != null"> orderTime = #{orderTime,jdbcType=TIMESTAMP},</if>
+<if test="payType != null"> payType = #{payType,jdbcType=TINYINT},</if>
+<if test="userId != null"> userId = #{userId,jdbcType=INTEGER},</if>
+<if test="publisherId != null"> publisherId = #{publisherId,jdbcType=INTEGER},</if>
+<if test="orderIndex != null"> orderIndex = #{orderIndex,jdbcType=TINYINT},</if>
 <if test="state != null"> state = #{state,jdbcType=TINYINT},</if>
 <if test="price != null"> price = #{price,jdbcType=DOUBLE},</if>
 <if test="number != null"> number = #{number,jdbcType=VARCHAR},</if>

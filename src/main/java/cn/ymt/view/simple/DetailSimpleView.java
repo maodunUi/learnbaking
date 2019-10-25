@@ -2,23 +2,23 @@ package cn.ymt.view.simple;
 import cn.ymt.pojo.BasicModel;
 import java.util.Date;
 public class DetailSimpleView extends BasicModel {
-protected String img_url;//
+protected String imgUrl;//
 protected String title;//
 protected String memo;//
 protected String tips;//
-protected java.util.Date add_time=new Date();//
+protected Date addTime=new Date();//
 protected Byte state;//0不正常 1正常
-protected Byte order_index;//
-protected Integer userid;//
+protected Byte orderIndex;//
+protected Integer userId;//
 protected String introduce;//介绍
 protected String materials;//用料 用-分隔
 protected String step;//步骤
-public String getImg_url() {
-return img_url;
+public String getImgUrl() {
+return imgUrl;
 }
 
-public void setImg_url(String img_url) {
-this.img_url = img_url == null ? null : img_url.trim();
+public void setImgUrl(String imgUrl) {
+this.imgUrl = imgUrl == null ? null : imgUrl.trim();
 }
 public String getTitle() {
 return title;
@@ -41,12 +41,12 @@ return tips;
 public void setTips(String tips) {
 this.tips = tips == null ? null : tips.trim();
 }
-public java.util.Date getAdd_time() {
-return add_time;
+public Date getAddTime() {
+return addTime;
 }
 
-public void setAdd_time(java.util.Date add_time) {
-this.add_time = add_time;
+public void setAddTime(Date addTime) {
+this.addTime = addTime;
 }
 public Byte getState() {
 return state;
@@ -55,19 +55,19 @@ return state;
 public void setState(Byte state) {
 this.state = state;
 }
-public Byte getOrder_index() {
-return order_index;
+public Byte getOrderIndex() {
+return orderIndex;
 }
 
-public void setOrder_index(Byte order_index) {
-this.order_index = order_index;
+public void setOrderIndex(Byte orderIndex) {
+this.orderIndex = orderIndex;
 }
-public Integer getUserid() {
-return userid;
+public Integer getUserId() {
+return userId;
 }
 
-public void setUserid(Integer userid) {
-this.userid = userid;
+public void setUserId(Integer userId) {
+this.userId = userId;
 }
 public String getIntroduce() {
 return introduce;

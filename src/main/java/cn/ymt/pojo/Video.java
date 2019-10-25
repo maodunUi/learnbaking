@@ -1,19 +1,19 @@
 package cn.ymt.pojo;
 import java.util.Date;
 public class Video extends BasicModel {
-protected String video_url;//
+protected String videoUrl;//
 protected String memo;//
 protected Byte state;//
-protected Integer user_id;//
-protected java.util.Date create_time=new Date();//
-protected Integer order_index;//
-protected Integer course_id;//
-public String getVideo_url() {
-return video_url;
+protected Integer userId;//
+protected Date createTime=new Date();//
+protected Integer orderIndex;//
+protected Integer courseId;//
+public String getVideoUrl() {
+return videoUrl;
 }
 
-public void setVideo_url(String video_url) {
-this.video_url = video_url == null ? null : video_url.trim();
+public void setVideoUrl(String videoUrl) {
+this.videoUrl = videoUrl == null ? null : videoUrl.trim();
 }
 public String getMemo() {
 return memo;
@@ -29,33 +29,33 @@ return state;
 public void setState(Byte state) {
 this.state = state;
 }
-public Integer getUser_id() {
-return user_id;
+public Integer getUserId() {
+return userId;
 }
 
-public void setUser_id(Integer user_id) {
-this.user_id = user_id;
+public void setUserId(Integer userId) {
+this.userId = userId;
 }
-public java.util.Date getCreate_time() {
-return create_time;
-}
-
-public void setCreate_time(java.util.Date create_time) {
-this.create_time = create_time;
-}
-public Integer getOrder_index() {
-return order_index;
+public Date getCreateTime() {
+return createTime;
 }
 
-public void setOrder_index(Integer order_index) {
-this.order_index = order_index;
+public void setCreateTime(Date createTime) {
+this.createTime = createTime;
 }
-public Integer getCourse_id() {
-return course_id;
+public Integer getOrderIndex() {
+return orderIndex;
 }
 
-public void setCourse_id(Integer course_id) {
-this.course_id = course_id;
+public void setOrderIndex(Integer orderIndex) {
+this.orderIndex = orderIndex;
+}
+public Integer getCourseId() {
+return courseId;
+}
+
+public void setCourseId(Integer courseId) {
+this.courseId = courseId;
 }
 
 }

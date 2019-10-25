@@ -1,15 +1,15 @@
 package cn.ymt.pojo;
 public class Img extends BasicModel {
-protected String img_url;//
+protected String imgUrl;//
 protected String memo;//
 protected Byte type;//
-protected Integer work_id;//
-public String getImg_url() {
-return img_url;
+protected Integer workId;//
+public String getImgUrl() {
+return imgUrl;
 }
 
-public void setImg_url(String img_url) {
-this.img_url = img_url == null ? null : img_url.trim();
+public void setImgUrl(String imgUrl) {
+this.imgUrl = imgUrl == null ? null : imgUrl.trim();
 }
 public String getMemo() {
 return memo;
@@ -25,12 +25,12 @@ return type;
 public void setType(Byte type) {
 this.type = type;
 }
-public Integer getWork_id() {
-return work_id;
+public Integer getWorkId() {
+return workId;
 }
 
-public void setWork_id(Integer work_id) {
-this.work_id = work_id;
+public void setWorkId(Integer workId) {
+this.workId = workId;
 }
 
 }

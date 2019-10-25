@@ -6,7 +6,7 @@
  select
  category.id as category_id,
  category.title as category_title,
- category.order_index as category_order_index,
+ category.orderIndex as category_orderIndex,
  category.memo as category_memo
  from category as category 
 </sql>
@@ -15,7 +15,7 @@
  select
  category.id as category_id,
  category.title as category_title,
- category.order_index as category_order_index,
+ category.orderIndex as category_orderIndex,
  category.memo as category_memo
  from category as category 
 </sql>
@@ -24,7 +24,7 @@
  select
  category.id as category_id,
  category.title as category_title,
- category.order_index as category_order_index,
+ category.orderIndex as category_orderIndex,
  category.memo as category_memo
  from category as category 
 </sql>
@@ -32,14 +32,14 @@
 <resultMap id="SimpleResultMap" type="cn.ymt.view.simple.CategorySimpleView">
 <id column="category_id" jdbcType="INTEGER" property="id" />
  <result column="category_title" jdbcType="VARCHAR" property="title" />
- <result column="category_order_index" jdbcType="TINYINT" property="order_index" />
+ <result column="category_orderIndex" jdbcType="TINYINT" property="orderIndex" />
  <result column="category_memo" jdbcType="VARCHAR" property="memo" />
 </resultMap>
 
 <resultMap id="BaseResultMap" type="cn.ymt.view.CategoryView">
 <id column="category_id" jdbcType="INTEGER" property="id" />
  <result column="category_title" jdbcType="VARCHAR" property="title" />
- <result column="category_order_index" jdbcType="TINYINT" property="order_index" />
+ <result column="category_orderIndex" jdbcType="TINYINT" property="orderIndex" />
  <result column="category_memo" jdbcType="VARCHAR" property="memo" />
 </resultMap>
 
@@ -66,8 +66,8 @@ delete from category
 </delete>
 
 <insert id="save" parameterType="cn.ymt.view.CategoryView" useGeneratedKeys="true" keyProperty="id">
-insert into category (title,order_index,memo) 
- values(#{title,jdbcType=VARCHAR},#{order_index,jdbcType=TINYINT},#{memo,jdbcType=VARCHAR})
+insert into category (title,orderIndex,memo) 
+ values(#{title,jdbcType=VARCHAR},#{orderIndex,jdbcType=TINYINT},#{memo,jdbcType=VARCHAR})
 </insert>
 
 <insert id="saveNoNull" parameterType="cn.ymt.view.CategoryView" useGeneratedKeys="true" keyProperty="id">
@@ -76,8 +76,8 @@ insert into category
  <if test="title != null">
 title,
 </if>
- <if test="order_index != null">
-order_index,
+ <if test="orderIndex != null">
+orderIndex,
 </if>
  <if test="memo != null">
 memo,
@@ -88,8 +88,8 @@ memo,
 <if test="title != null">
 #{title,jdbcType=VARCHAR},
 </if>
-<if test="order_index != null">
-#{order_index,jdbcType=TINYINT},
+<if test="orderIndex != null">
+#{orderIndex,jdbcType=TINYINT},
 </if>
 <if test="memo != null">
 #{memo,jdbcType=VARCHAR},
@@ -98,18 +98,18 @@ memo,
 </insert>
 
 <insert id="saves" >
-insert into category (title,order_index,memo) 
- values <foreach collection="list" item="obj" separator=",">(#{obj.title,jdbcType=VARCHAR},#{obj.order_index,jdbcType=TINYINT},#{obj.memo,jdbcType=VARCHAR})</foreach>
+insert into category (title,orderIndex,memo) 
+ values <foreach collection="list" item="obj" separator=",">(#{obj.title,jdbcType=VARCHAR},#{obj.orderIndex,jdbcType=TINYINT},#{obj.memo,jdbcType=VARCHAR})</foreach>
 </insert>
 <update id="updateAll" parameterType="cn.ymt.view.CategoryView">
 update category 
-set  title = #{title,jdbcType=VARCHAR}, order_index = #{order_index,jdbcType=TINYINT}, memo = #{memo,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER}
+set  title = #{title,jdbcType=VARCHAR}, orderIndex = #{orderIndex,jdbcType=TINYINT}, memo = #{memo,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER}
 </update>
  <update id="updateNoNull" parameterType="cn.ymt.view.CategoryView">
 update category 
 <set>
 <if test="title != null"> title = #{title,jdbcType=VARCHAR},</if>
-<if test="order_index != null"> order_index = #{order_index,jdbcType=TINYINT},</if>
+<if test="orderIndex != null"> orderIndex = #{orderIndex,jdbcType=TINYINT},</if>
 <if test="memo != null"> memo = #{memo,jdbcType=VARCHAR},</if></set>
  where id = #{id,jdbcType=INTEGER}
 </update>

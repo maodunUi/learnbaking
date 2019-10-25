@@ -28,4 +28,17 @@ public class CourseController {
         }
 
     }
+    //课程搜索详细页
+    @RequestMapping("/getById")
+    public jsonResult getById(Integer id){
+        try {
+            CourseView courseview = courseServiceDao.getBasicById(id);
+            jsonResult jsonResult = new jsonResult(true,"查询成功") ;
+            jsonResult.add(courseview);
+            return jsonResult ;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new jsonResult(false,"查询失败") ;
+        }
+    }
 }

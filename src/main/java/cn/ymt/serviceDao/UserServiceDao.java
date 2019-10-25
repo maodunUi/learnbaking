@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public class UserServiceDao extends serviceDaoTemplate<UserView,UserDao> {
-    public  List<User> findUserByTelphone(String telphone) throws Exception{
+    public  List<UserView> findUserByTelphone(String telphone) throws Exception{
        return dao.findUserByTelphone(telphone) ;
     };
 }

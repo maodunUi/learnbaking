@@ -2,206 +2,225 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.ymt.dao.ShopcartDao">
 
-<sql id="Simple_Column">
+ <sql id="Simple_Column">
  select
  shopcart.id as shopcart_id,
- shopcart.course_id as shopcart_course_id,
- shopcart.user_id as shopcart_user_id,
- shopcart.order_index as shopcart_order_index,
+ shopcart.courseId as shopcart_courseId,
+ shopcart.userId as shopcart_userId,
+ shopcart.orderIndex as shopcart_orderIndex,
  shopcart.memo as shopcart_memo,
  shopcart.state as shopcart_state
- from shopcart as shopcart 
+ from shopcart as shopcart
 </sql>
 
-<sql id="Base_Column">
+ <sql id="Base_Column">
  select
  shopcart.id as shopcart_id,
- shopcart.course_id as shopcart_course_id,
- shopcart.user_id as shopcart_user_id,
- shopcart.order_index as shopcart_order_index,
+ shopcart.courseId as shopcart_courseId,
+ shopcart.userId as shopcart_userId,
+ shopcart.orderIndex as shopcart_orderIndex,
  shopcart.memo as shopcart_memo,
  shopcart.state as shopcart_state
- from shopcart as shopcart 
+ from shopcart as shopcart
 </sql>
 
-<sql id="Detail_Column">
+ <sql id="Detail_Column">
  select
  shopcart.id as shopcart_id,
- shopcart.course_id as shopcart_course_id,
- shopcart.user_id as shopcart_user_id,
- shopcart.order_index as shopcart_order_index,
+ shopcart.courseId as shopcart_courseId,
+ shopcart.userId as shopcart_userId,
+ shopcart.orderIndex as shopcart_orderIndex,
  shopcart.memo as shopcart_memo,
  shopcart.state as shopcart_state
- from shopcart as shopcart 
+ from shopcart as shopcart
 </sql>
 
-<resultMap id="SimpleResultMap" type="cn.ymt.view.simple.ShopcartSimpleView">
-<id column="shopcart_id" jdbcType="INTEGER" property="id" />
- <result column="shopcart_course_id" jdbcType="INTEGER" property="course_id" />
- <result column="shopcart_user_id" jdbcType="INTEGER" property="user_id" />
- <result column="shopcart_order_index" jdbcType="TINYINT" property="order_index" />
- <result column="shopcart_memo" jdbcType="VARCHAR" property="memo" />
- <result column="shopcart_state" jdbcType="TINYINT" property="state" />
-</resultMap>
+ <resultMap id="SimpleResultMap" type="cn.ymt.view.simple.ShopcartSimpleView">
+  <id column="shopcart_id" jdbcType="INTEGER" property="id" />
+  <result column="shopcart_courseId" jdbcType="INTEGER" property="courseId" />
+  <result column="shopcart_userId" jdbcType="INTEGER" property="userId" />
+  <result column="shopcart_orderIndex" jdbcType="TINYINT" property="orderIndex" />
+  <result column="shopcart_memo" jdbcType="VARCHAR" property="memo" />
+  <result column="shopcart_state" jdbcType="TINYINT" property="state" />
+ </resultMap>
 
-<resultMap id="BaseResultMap" type="cn.ymt.view.ShopcartView">
-<id column="shopcart_id" jdbcType="INTEGER" property="id" />
- <result column="shopcart_course_id" jdbcType="INTEGER" property="course_id" />
- <result column="shopcart_user_id" jdbcType="INTEGER" property="user_id" />
- <result column="shopcart_order_index" jdbcType="TINYINT" property="order_index" />
- <result column="shopcart_memo" jdbcType="VARCHAR" property="memo" />
- <result column="shopcart_state" jdbcType="TINYINT" property="state" />
-</resultMap>
+ <resultMap id="BaseResultMap" type="cn.ymt.view.ShopcartView">
+  <id column="shopcart_id" jdbcType="INTEGER" property="id" />
+  <result column="shopcart_courseId" jdbcType="INTEGER" property="courseId" />
+  <result column="shopcart_userId" jdbcType="INTEGER" property="userId" />
+  <result column="shopcart_orderIndex" jdbcType="TINYINT" property="orderIndex" />
+  <result column="shopcart_memo" jdbcType="VARCHAR" property="memo" />
+  <result column="shopcart_state" jdbcType="TINYINT" property="state" />
+ </resultMap>
 
-<resultMap id="DetailResultMap" type="cn.ymt.view.ShopcartView" extends="BaseResultMap">
-</resultMap>
+ <resultMap id="DetailResultMap" type="cn.ymt.view.ShopcartView" extends="BaseResultMap">
+ </resultMap>
 
-<delete id="deleteById" parameterType="java.lang.Integer">
+ <delete id="deleteById" parameterType="java.lang.Integer">
 delete from shopcart where id = #{id,jdbcType=INTEGER}
 </delete>
 
-<delete id="deleteByIds">
-delete from shopcart
-where <foreach collection="list" item="i" open="(" close=")" separator=" or "> id=#{i,jdbcType=INTEGER} </foreach>
-  </delete>
+ <delete id="deleteByIds">
+  delete from shopcart
+  where <foreach collection="list" item="i" open="(" close=")" separator=" or "> id=#{i,jdbcType=INTEGER} </foreach>
+ </delete>
 
-<delete id="deleteObjects">
-delete from shopcart
-where <foreach collection="list" item="i" open="(" close=")" separator=" or "> id=#{i.id,jdbcType=INTEGER} </foreach>
-  </delete>
+ <delete id="deleteObjects">
+  delete from shopcart
+  where <foreach collection="list" item="i" open="(" close=")" separator=" or "> id=#{i.id,jdbcType=INTEGER} </foreach>
+ </delete>
 
-<delete id="deleteByParams" parameterType="cn.ymt.query.ShopcartQueryParams">
-delete from shopcart 
-<where><if test="condition != null">${condition}</if></where>
-</delete>
+ <delete id="deleteByParams" parameterType="cn.ymt.query.ShopcartQueryParams">
+  delete from shopcart
+  <where><if test="condition != null">${condition}</if></where>
+ </delete>
 
-<insert id="save" parameterType="cn.ymt.view.ShopcartView" useGeneratedKeys="true" keyProperty="id">
-insert into shopcart (course_id,user_id,order_index,memo,state) 
- values(#{course_id,jdbcType=INTEGER},#{user_id,jdbcType=INTEGER},#{order_index,jdbcType=TINYINT},#{memo,jdbcType=VARCHAR},#{state,jdbcType=TINYINT})
+ <insert id="save" parameterType="cn.ymt.view.ShopcartView" useGeneratedKeys="true" keyProperty="id">
+insert into shopcart (courseId,userId,orderIndex,memo,state)
+ values(#{courseId,jdbcType=INTEGER},#{userId,jdbcType=INTEGER},#{orderIndex,jdbcType=TINYINT},#{memo,jdbcType=VARCHAR},#{state,jdbcType=TINYINT})
 </insert>
 
-<insert id="saveNoNull" parameterType="cn.ymt.view.ShopcartView" useGeneratedKeys="true" keyProperty="id">
-insert into shopcart
-<trim prefix="(" suffix=")" suffixOverrides=",">
- <if test="course_id != null">
-course_id,
-</if>
- <if test="user_id != null">
-user_id,
-</if>
- <if test="order_index != null">
-order_index,
-</if>
- <if test="memo != null">
-memo,
-</if>
- <if test="state != null">
-state,
-</if>
-</trim>
+ <insert id="saveNoNull" parameterType="cn.ymt.view.ShopcartView" useGeneratedKeys="true" keyProperty="id">
+  insert into shopcart
+  <trim prefix="(" suffix=")" suffixOverrides=",">
+   <if test="courseId != null">
+    courseId,
+   </if>
+   <if test="userId != null">
+    userId,
+   </if>
+   <if test="orderIndex != null">
+    orderIndex,
+   </if>
+   <if test="memo != null">
+    memo,
+   </if>
+   <if test="state != null">
+    state,
+   </if>
+  </trim>
 
-<trim prefix="values(" suffix=")" suffixOverrides=",">
-<if test="course_id != null">
-#{course_id,jdbcType=INTEGER},
-</if>
-<if test="user_id != null">
-#{user_id,jdbcType=INTEGER},
-</if>
-<if test="order_index != null">
-#{order_index,jdbcType=TINYINT},
-</if>
-<if test="memo != null">
-#{memo,jdbcType=VARCHAR},
-</if>
-<if test="state != null">
-#{state,jdbcType=TINYINT},
-</if>
-</trim>
-</insert>
+  <trim prefix="values(" suffix=")" suffixOverrides=",">
+   <if test="courseId != null">
+    #{courseId,jdbcType=INTEGER},
+   </if>
+   <if test="userId != null">
+    #{userId,jdbcType=INTEGER},
+   </if>
+   <if test="orderIndex != null">
+    #{orderIndex,jdbcType=TINYINT},
+   </if>
+   <if test="memo != null">
+    #{memo,jdbcType=VARCHAR},
+   </if>
+   <if test="state != null">
+    #{state,jdbcType=TINYINT},
+   </if>
+  </trim>
+ </insert>
 
-<insert id="saves" >
-insert into shopcart (course_id,user_id,order_index,memo,state) 
- values <foreach collection="list" item="obj" separator=",">(#{obj.course_id,jdbcType=INTEGER},#{obj.user_id,jdbcType=INTEGER},#{obj.order_index,jdbcType=TINYINT},#{obj.memo,jdbcType=VARCHAR},#{obj.state,jdbcType=TINYINT})</foreach>
-</insert>
-<update id="updateAll" parameterType="cn.ymt.view.ShopcartView">
-update shopcart 
-set  course_id = #{course_id,jdbcType=INTEGER}, user_id = #{user_id,jdbcType=INTEGER}, order_index = #{order_index,jdbcType=TINYINT}, memo = #{memo,jdbcType=VARCHAR}, state = #{state,jdbcType=TINYINT} where id = #{id,jdbcType=INTEGER}
+ <insert id="saves" >
+  insert into shopcart (courseId,userId,orderIndex,memo,state)
+  values <foreach collection="list" item="obj" separator=",">(#{obj.courseId,jdbcType=INTEGER},#{obj.userId,jdbcType=INTEGER},#{obj.orderIndex,jdbcType=TINYINT},#{obj.memo,jdbcType=VARCHAR},#{obj.state,jdbcType=TINYINT})</foreach>
+ </insert>
+ <update id="updateAll" parameterType="cn.ymt.view.ShopcartView">
+update shopcart
+set  courseId = #{courseId,jdbcType=INTEGER}, userId = #{userId,jdbcType=INTEGER}, orderIndex = #{orderIndex,jdbcType=TINYINT}, memo = #{memo,jdbcType=VARCHAR}, state = #{state,jdbcType=TINYINT} where id = #{id,jdbcType=INTEGER}
 </update>
  <update id="updateNoNull" parameterType="cn.ymt.view.ShopcartView">
-update shopcart 
-<set>
-<if test="course_id != null"> course_id = #{course_id,jdbcType=INTEGER},</if>
-<if test="user_id != null"> user_id = #{user_id,jdbcType=INTEGER},</if>
-<if test="order_index != null"> order_index = #{order_index,jdbcType=TINYINT},</if>
-<if test="memo != null"> memo = #{memo,jdbcType=VARCHAR},</if>
-<if test="state != null"> state = #{state,jdbcType=TINYINT},</if></set>
- where id = #{id,jdbcType=INTEGER}
-</update>
+  update shopcart
+  <set>
+   <if test="courseId != null"> courseId = #{courseId,jdbcType=INTEGER},</if>
+   <if test="userId != null"> userId = #{userId,jdbcType=INTEGER},</if>
+   <if test="orderIndex != null"> orderIndex = #{orderIndex,jdbcType=TINYINT},</if>
+   <if test="memo != null"> memo = #{memo,jdbcType=VARCHAR},</if>
+   <if test="state != null"> state = #{state,jdbcType=TINYINT},</if>
+  </set>
+  where id = #{id,jdbcType=INTEGER}
+ </update>
 
-<select id="getBasicById"  resultMap="BaseResultMap" parameterType="java.lang.Integer">
-<include refid="Base_Column" />
-where shopcart.id = #{id,jdbcType=INTEGER}
-</select>
+ <select id="getBasicById"  resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  <include refid="Base_Column" />
+  where shopcart.id = #{id,jdbcType=INTEGER}
+ </select>
 
-<select id="getDetailById"  resultMap="DetailResultMap" parameterType="java.lang.Integer">
-<include refid="Detail_Column" />
-where shopcart.id = #{id,jdbcType=INTEGER}
-</select>
+ <select id="getDetailById"  resultMap="DetailResultMap" parameterType="java.lang.Integer">
+  <include refid="Detail_Column" />
+  where shopcart.id = #{id,jdbcType=INTEGER}
+ </select>
 
-<select id="count" parameterType="cn.ymt.query.ShopcartQueryParams" resultType="long">
-select count(distinct shopcart.id) from shopcart as shopcart
-<where>
-<if test="condition != null">(${condition})</if>
-</where>
-</select>
+ <select id="count" parameterType="cn.ymt.query.ShopcartQueryParams" resultType="long">
+  select count(distinct shopcart.id) from shopcart as shopcart
+  <where>
+   <if test="condition != null">(${condition})</if>
+  </where>
+ </select>
 
-<select id="getDistinctIds" parameterType="cn.ymt.query.ShopcartQueryParams" resultType="java.lang.Integer">
-select distinct shopcart.id from shopcart as shopcart
-<where>
-<if test="condition != null">(${condition})</if>
-</where>
-<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
-</select>
+ <select id="getDistinctIds" parameterType="cn.ymt.query.ShopcartQueryParams" resultType="java.lang.Integer">
+  select distinct shopcart.id from shopcart as shopcart
+  <where>
+   <if test="condition != null">(${condition})</if>
+  </where>
+  <if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+ </select>
 
-<select id="getSimple" parameterType="cn.ymt.query.ShopcartQueryParams" resultMap="SimpleResultMap">
-<include refid="Simple_Column" />
-<where>
-<if test="condition != null">(${condition})</if>
-<if test="pojos != null">
- and <foreach collection="pojos" open="(" close=")" separator=" or " item="pojo">shopcart.id=#{pojo.id,jdbcType=INTEGER}</foreach>
-</if>
-<if test="ids != null">
- and <foreach collection="ids" open="(" close=")" separator=" or " item="idTemp">shopcart.id=#{idTemp,jdbcType=INTEGER}</foreach>
-</if>
-</where>
-<if test="orderBy != null"> order by ${orderBy}</if>
-<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
-</select>
+ <select id="getSimple" parameterType="cn.ymt.query.ShopcartQueryParams" resultMap="SimpleResultMap">
+  <include refid="Simple_Column" />
+  <where>
+   <if test="condition != null">(${condition})</if>
+   <if test="pojos != null">
+    and <foreach collection="pojos" open="(" close=")" separator=" or " item="pojo">shopcart.id=#{pojo.id,jdbcType=INTEGER}</foreach>
+   </if>
+   <if test="ids != null">
+    and <foreach collection="ids" open="(" close=")" separator=" or " item="idTemp">shopcart.id=#{idTemp,jdbcType=INTEGER}</foreach>
+   </if>
+  </where>
+  <if test="orderBy != null"> order by ${orderBy}</if>
+  <if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+ </select>
 
-<select id="getBasic" parameterType="cn.ymt.query.ShopcartQueryParams" resultMap="BaseResultMap">
-<include refid="Base_Column" />
-<where>
-<if test="condition != null">(${condition})</if>
-<if test="pojos != null">
- and <foreach collection="pojos" open="(" close=")" separator=" or " item="pojo">shopcart.id=#{pojo.id,jdbcType=INTEGER}</foreach>
-</if>
-<if test="ids != null">
- and <foreach collection="ids" open="(" close=")" separator=" or " item="idTemp">shopcart.id=#{idTemp,jdbcType=INTEGER}</foreach>
-</if>
-</where>
-<if test="orderBy != null"> order by ${orderBy}</if>
-<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
-</select>
+ <select id="getBasic" parameterType="cn.ymt.query.ShopcartQueryParams" resultMap="BaseResultMap">
+  <include refid="Base_Column" />
+  <where>
+   <if test="condition != null">(${condition})</if>
+   <if test="pojos != null">
+    and <foreach collection="pojos" open="(" close=")" separator=" or " item="pojo">shopcart.id=#{pojo.id,jdbcType=INTEGER}</foreach>
+   </if>
+   <if test="ids != null">
+    and <foreach collection="ids" open="(" close=")" separator=" or " item="idTemp">shopcart.id=#{idTemp,jdbcType=INTEGER}</foreach>
+   </if>
+  </where>
+  <if test="orderBy != null"> order by ${orderBy}</if>
+  <if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+ </select>
 
-<select id="getDetail" parameterType="cn.ymt.query.ShopcartQueryParams" resultMap="DetailResultMap">
-<include refid="Detail_Column" />
- where shopcart.id in 
-(select * from(select distinct shopcart.id from shopcart as shopcart 
-<where>
-<if test="condition != null">(${condition})</if>
-</where>
-<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
-) as shopcarttempTable)
-</select>
-
+ <select id="getDetail" parameterType="cn.ymt.query.ShopcartQueryParams" resultMap="DetailResultMap">
+  <include refid="Detail_Column" />
+  where shopcart.id in
+  (select * from(select distinct shopcart.id from shopcart as shopcart
+  <where>
+   <if test="condition != null">(${condition})</if>
+  </where>
+  <if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+  ) as shopcarttempTable)
+ </select>
+ <!--%%%%%%%%%%%%%%%%%%%%%%-->
+ <!--得到购物车-->
+ <select id="getCart" parameterType="cn.ymt.query.ShopcartQueryParams" resultMap="BaseResultMap">
+  select
+ shopcart.id as shopcart_id,
+ shopcart.courseId as shopcart_courseId,
+ shopcart.userId as shopcart_userId,
+ shopcart.orderIndex as shopcart_orderIndex,
+ shopcart.memo as shopcart_memo,
+ shopcart.state as shopcart_state
+  ,course.id as course_id,
+  course.title as course_title,
+  course.imgUrl as course_img_url,
+  course.price as course_price
+  from shopcart as shopcart
+LEFT JOIN course as course
+on course.id = shopcart.courseId
+WHERE userId = #{userId,jdbcType=INTEGER}
+ </select>
 </mapper>

@@ -7,15 +7,15 @@
  user.id as user_id,
  user.name as user_name,
  user.password as user_password,
- user.img_url as user_img_url,
- user.nick_name as user_nick_name,
+ user.imgUrl as user_imgUrl,
+ user.nickName as user_nickName,
  user.sex as user_sex,
  user.email as user_email,
  user.address as user_address,
  user.age as user_age,
  user.state as user_state,
  user.memo as user_memo,
- user.order_index as user_order_index,
+ user.orderIndex as user_orderIndex,
  user.telphone as user_telphone
  from user as user 
 </sql>
@@ -25,15 +25,15 @@
  user.id as user_id,
  user.name as user_name,
  user.password as user_password,
- user.img_url as user_img_url,
- user.nick_name as user_nick_name,
+ user.imgUrl as user_imgUrl,
+ user.nickName as user_nickName,
  user.sex as user_sex,
  user.email as user_email,
  user.address as user_address,
  user.age as user_age,
  user.state as user_state,
  user.memo as user_memo,
- user.order_index as user_order_index,
+ user.orderIndex as user_orderIndex,
  user.telphone as user_telphone
  from user as user 
 </sql>
@@ -43,15 +43,15 @@
  user.id as user_id,
  user.name as user_name,
  user.password as user_password,
- user.img_url as user_img_url,
- user.nick_name as user_nick_name,
+ user.imgUrl as user_imgUrl,
+ user.nickName as user_nickName,
  user.sex as user_sex,
  user.email as user_email,
  user.address as user_address,
  user.age as user_age,
  user.state as user_state,
  user.memo as user_memo,
- user.order_index as user_order_index,
+ user.orderIndex as user_orderIndex,
  user.telphone as user_telphone
  from user as user 
 </sql>
@@ -60,15 +60,15 @@
 <id column="user_id" jdbcType="INTEGER" property="id" />
  <result column="user_name" jdbcType="VARCHAR" property="name" />
  <result column="user_password" jdbcType="VARCHAR" property="password" />
- <result column="user_img_url" jdbcType="VARCHAR" property="img_url" />
- <result column="user_nick_name" jdbcType="VARCHAR" property="nick_name" />
+ <result column="user_imgUrl" jdbcType="VARCHAR" property="imgUrl" />
+ <result column="user_nickName" jdbcType="VARCHAR" property="nickName" />
  <result column="user_sex" jdbcType="TINYINT" property="sex" />
  <result column="user_email" jdbcType="VARCHAR" property="email" />
  <result column="user_address" jdbcType="VARCHAR" property="address" />
  <result column="user_age" jdbcType="INTEGER" property="age" />
  <result column="user_state" jdbcType="TINYINT" property="state" />
  <result column="user_memo" jdbcType="VARCHAR" property="memo" />
- <result column="user_order_index" jdbcType="TINYINT" property="order_index" />
+ <result column="user_orderIndex" jdbcType="TINYINT" property="orderIndex" />
  <result column="user_telphone" jdbcType="VARCHAR" property="telphone" />
 </resultMap>
 
@@ -76,15 +76,15 @@
 <id column="user_id" jdbcType="INTEGER" property="id" />
  <result column="user_name" jdbcType="VARCHAR" property="name" />
  <result column="user_password" jdbcType="VARCHAR" property="password" />
- <result column="user_img_url" jdbcType="VARCHAR" property="img_url" />
- <result column="user_nick_name" jdbcType="VARCHAR" property="nick_name" />
+ <result column="user_imgUrl" jdbcType="VARCHAR" property="imgUrl" />
+ <result column="user_nickName" jdbcType="VARCHAR" property="nickName" />
  <result column="user_sex" jdbcType="TINYINT" property="sex" />
  <result column="user_email" jdbcType="VARCHAR" property="email" />
  <result column="user_address" jdbcType="VARCHAR" property="address" />
  <result column="user_age" jdbcType="INTEGER" property="age" />
  <result column="user_state" jdbcType="TINYINT" property="state" />
  <result column="user_memo" jdbcType="VARCHAR" property="memo" />
- <result column="user_order_index" jdbcType="TINYINT" property="order_index" />
+ <result column="user_orderIndex" jdbcType="TINYINT" property="orderIndex" />
  <result column="user_telphone" jdbcType="VARCHAR" property="telphone" />
 </resultMap>
 
@@ -111,8 +111,8 @@ delete from user
 </delete>
 
 <insert id="save" parameterType="cn.ymt.view.UserView" useGeneratedKeys="true" keyProperty="id">
-insert into user (name,password,img_url,nick_name,sex,email,address,age,state,memo,order_index,telphone) 
- values(#{name,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{img_url,jdbcType=VARCHAR},#{nick_name,jdbcType=VARCHAR},#{sex,jdbcType=TINYINT},#{email,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},#{age,jdbcType=INTEGER},#{state,jdbcType=TINYINT},#{memo,jdbcType=VARCHAR},#{order_index,jdbcType=TINYINT},#{telphone,jdbcType=VARCHAR})
+insert into user (name,password,imgUrl,nickName,sex,email,address,age,state,memo,orderIndex,telphone) 
+ values(#{name,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{imgUrl,jdbcType=VARCHAR},#{nickName,jdbcType=VARCHAR},#{sex,jdbcType=TINYINT},#{email,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},#{age,jdbcType=INTEGER},#{state,jdbcType=TINYINT},#{memo,jdbcType=VARCHAR},#{orderIndex,jdbcType=TINYINT},#{telphone,jdbcType=VARCHAR})
 </insert>
 
 <insert id="saveNoNull" parameterType="cn.ymt.view.UserView" useGeneratedKeys="true" keyProperty="id">
@@ -124,11 +124,11 @@ name,
  <if test="password != null">
 password,
 </if>
- <if test="img_url != null">
-img_url,
+ <if test="imgUrl != null">
+imgUrl,
 </if>
- <if test="nick_name != null">
-nick_name,
+ <if test="nickName != null">
+nickName,
 </if>
  <if test="sex != null">
 sex,
@@ -148,8 +148,8 @@ state,
  <if test="memo != null">
 memo,
 </if>
- <if test="order_index != null">
-order_index,
+ <if test="orderIndex != null">
+orderIndex,
 </if>
  <if test="telphone != null">
 telphone,
@@ -163,11 +163,11 @@ telphone,
 <if test="password != null">
 #{password,jdbcType=VARCHAR},
 </if>
-<if test="img_url != null">
-#{img_url,jdbcType=VARCHAR},
+<if test="imgUrl != null">
+#{imgUrl,jdbcType=VARCHAR},
 </if>
-<if test="nick_name != null">
-#{nick_name,jdbcType=VARCHAR},
+<if test="nickName != null">
+#{nickName,jdbcType=VARCHAR},
 </if>
 <if test="sex != null">
 #{sex,jdbcType=TINYINT},
@@ -187,8 +187,8 @@ telphone,
 <if test="memo != null">
 #{memo,jdbcType=VARCHAR},
 </if>
-<if test="order_index != null">
-#{order_index,jdbcType=TINYINT},
+<if test="orderIndex != null">
+#{orderIndex,jdbcType=TINYINT},
 </if>
 <if test="telphone != null">
 #{telphone,jdbcType=VARCHAR},
@@ -197,27 +197,27 @@ telphone,
 </insert>
 
 <insert id="saves" >
-insert into user (name,password,img_url,nick_name,sex,email,address,age,state,memo,order_index,telphone) 
- values <foreach collection="list" item="obj" separator=",">(#{obj.name,jdbcType=VARCHAR},#{obj.password,jdbcType=VARCHAR},#{obj.img_url,jdbcType=VARCHAR},#{obj.nick_name,jdbcType=VARCHAR},#{obj.sex,jdbcType=TINYINT},#{obj.email,jdbcType=VARCHAR},#{obj.address,jdbcType=VARCHAR},#{obj.age,jdbcType=INTEGER},#{obj.state,jdbcType=TINYINT},#{obj.memo,jdbcType=VARCHAR},#{obj.order_index,jdbcType=TINYINT},#{obj.telphone,jdbcType=VARCHAR})</foreach>
+insert into user (name,password,imgUrl,nickName,sex,email,address,age,state,memo,orderIndex,telphone) 
+ values <foreach collection="list" item="obj" separator=",">(#{obj.name,jdbcType=VARCHAR},#{obj.password,jdbcType=VARCHAR},#{obj.imgUrl,jdbcType=VARCHAR},#{obj.nickName,jdbcType=VARCHAR},#{obj.sex,jdbcType=TINYINT},#{obj.email,jdbcType=VARCHAR},#{obj.address,jdbcType=VARCHAR},#{obj.age,jdbcType=INTEGER},#{obj.state,jdbcType=TINYINT},#{obj.memo,jdbcType=VARCHAR},#{obj.orderIndex,jdbcType=TINYINT},#{obj.telphone,jdbcType=VARCHAR})</foreach>
 </insert>
 <update id="updateAll" parameterType="cn.ymt.view.UserView">
 update user 
-set  name = #{name,jdbcType=VARCHAR}, password = #{password,jdbcType=VARCHAR}, img_url = #{img_url,jdbcType=VARCHAR}, nick_name = #{nick_name,jdbcType=VARCHAR}, sex = #{sex,jdbcType=TINYINT}, email = #{email,jdbcType=VARCHAR}, address = #{address,jdbcType=VARCHAR}, age = #{age,jdbcType=INTEGER}, state = #{state,jdbcType=TINYINT}, memo = #{memo,jdbcType=VARCHAR}, order_index = #{order_index,jdbcType=TINYINT}, telphone = #{telphone,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER}
+set  name = #{name,jdbcType=VARCHAR}, password = #{password,jdbcType=VARCHAR}, imgUrl = #{imgUrl,jdbcType=VARCHAR}, nickName = #{nickName,jdbcType=VARCHAR}, sex = #{sex,jdbcType=TINYINT}, email = #{email,jdbcType=VARCHAR}, address = #{address,jdbcType=VARCHAR}, age = #{age,jdbcType=INTEGER}, state = #{state,jdbcType=TINYINT}, memo = #{memo,jdbcType=VARCHAR}, orderIndex = #{orderIndex,jdbcType=TINYINT}, telphone = #{telphone,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER}
 </update>
  <update id="updateNoNull" parameterType="cn.ymt.view.UserView">
 update user 
 <set>
 <if test="name != null"> name = #{name,jdbcType=VARCHAR},</if>
 <if test="password != null"> password = #{password,jdbcType=VARCHAR},</if>
-<if test="img_url != null"> img_url = #{img_url,jdbcType=VARCHAR},</if>
-<if test="nick_name != null"> nick_name = #{nick_name,jdbcType=VARCHAR},</if>
+<if test="imgUrl != null"> imgUrl = #{imgUrl,jdbcType=VARCHAR},</if>
+<if test="nickName != null"> nickName = #{nickName,jdbcType=VARCHAR},</if>
 <if test="sex != null"> sex = #{sex,jdbcType=TINYINT},</if>
 <if test="email != null"> email = #{email,jdbcType=VARCHAR},</if>
 <if test="address != null"> address = #{address,jdbcType=VARCHAR},</if>
 <if test="age != null"> age = #{age,jdbcType=INTEGER},</if>
 <if test="state != null"> state = #{state,jdbcType=TINYINT},</if>
 <if test="memo != null"> memo = #{memo,jdbcType=VARCHAR},</if>
-<if test="order_index != null"> order_index = #{order_index,jdbcType=TINYINT},</if>
+<if test="orderIndex != null"> orderIndex = #{orderIndex,jdbcType=TINYINT},</if>
 <if test="telphone != null"> telphone = #{telphone,jdbcType=VARCHAR},</if>
 </set>
  where id = #{id,jdbcType=INTEGER}
@@ -290,7 +290,8 @@ select distinct user.id from user as user
 </select>
 <!--&&&&&&&&&&&&&&&&&&&-->
 
- <select id="findUserByTelphone" parameterType="cn.ymt.query.UserQueryParams" resultMap="SimpleResultMap">
- select * from user where telphone = #{telphone,jdbcType=VARCHAR}
+ <select id="findUserByTelphone" parameterType="cn.ymt.query.UserQueryParams" resultMap="BaseResultMap">
+  <include refid="Base_Column" />
+  where telphone = #{telphone,jdbcType=VARCHAR}
  </select>
 </mapper>

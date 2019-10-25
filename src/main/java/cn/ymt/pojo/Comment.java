@@ -1,16 +1,16 @@
 package cn.ymt.pojo;
 import java.util.Date;
 public class Comment extends BasicModel {
-protected Integer user_id;//
+protected Integer userId;//
 protected String message;//
-protected java.util.Date comment_time=new Date();//
-protected Integer parent_id;//
-public Integer getUser_id() {
-return user_id;
+protected Date commentTime=new Date();//
+protected Integer parentId;//
+public Integer getUserId() {
+return userId;
 }
 
-public void setUser_id(Integer user_id) {
-this.user_id = user_id;
+public void setUserId(Integer userId) {
+this.userId = userId;
 }
 public String getMessage() {
 return message;
@@ -19,19 +19,19 @@ return message;
 public void setMessage(String message) {
 this.message = message == null ? null : message.trim();
 }
-public java.util.Date getComment_time() {
-return comment_time;
+public Date getCommentTime() {
+return commentTime;
 }
 
-public void setComment_time(java.util.Date comment_time) {
-this.comment_time = comment_time;
+public void setCommentTime(Date commentTime) {
+this.commentTime = commentTime;
 }
-public Integer getParent_id() {
-return parent_id;
+public Integer getParentId() {
+return parentId;
 }
 
-public void setParent_id(Integer parent_id) {
-this.parent_id = parent_id;
+public void setParentId(Integer parentId) {
+this.parentId = parentId;
 }
 
 }
