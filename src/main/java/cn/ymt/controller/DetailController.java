@@ -5,11 +5,12 @@ import cn.ymt.serviceDao.DetailServiceDao;
 import cn.ymt.util.jsonResult;
 import cn.ymt.view.DetailView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/DetailAction")
 public class DetailController {
