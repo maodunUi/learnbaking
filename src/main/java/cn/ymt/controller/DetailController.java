@@ -33,4 +33,12 @@ public class DetailController {
             return new jsonResult(false, "异常：" + e.getMessage());
         }
     }
+
+    @RequestMapping("getById")
+    public jsonResult getById(Integer id)throws Exception{
+        DetailView detailView = detailServiceDao.getBasicById(id);
+        jsonResult jsonResult = new jsonResult(true,"查询成功") ;
+        jsonResult.add(detailView);
+        return jsonResult ;
+    }
 }
