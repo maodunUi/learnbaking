@@ -8,7 +8,8 @@
  comment.userId as comment_userId,
  comment.message as comment_message,
  comment.commentTime as comment_commentTime,
- comment.parentId as comment_parentId
+ comment.parentId as comment_parentId,
+ comment.workId as comment_workId
  from comment as comment 
 </sql>
 
@@ -18,7 +19,8 @@
  comment.userId as comment_userId,
  comment.message as comment_message,
  comment.commentTime as comment_commentTime,
- comment.parentId as comment_parentId
+ comment.parentId as comment_parentId,
+ comment.workId as comment_workId
  from comment as comment 
 </sql>
 
@@ -28,7 +30,8 @@
  comment.userId as comment_userId,
  comment.message as comment_message,
  comment.commentTime as comment_commentTime,
- comment.parentId as comment_parentId
+ comment.parentId as comment_parentId,
+ comment.workId as comment_workId
  from comment as comment 
 </sql>
 
@@ -38,6 +41,7 @@
  <result column="comment_message" jdbcType="VARCHAR" property="message" />
  <result column="comment_commentTime" jdbcType="TIMESTAMP" property="commentTime" />
  <result column="comment_parentId" jdbcType="INTEGER" property="parentId" />
+ <result column="comment_workId" jdbcType="INTEGER" property="workId" />
 </resultMap>
 
 <resultMap id="BaseResultMap" type="cn.ymt.view.CommentView">
@@ -46,6 +50,7 @@
  <result column="comment_message" jdbcType="VARCHAR" property="message" />
  <result column="comment_commentTime" jdbcType="TIMESTAMP" property="commentTime" />
  <result column="comment_parentId" jdbcType="INTEGER" property="parentId" />
+ <result column="comment_workId" jdbcType="INTEGER" property="workId" />
 </resultMap>
 
 <resultMap id="DetailResultMap" type="cn.ymt.view.CommentView" extends="BaseResultMap">
@@ -71,8 +76,8 @@ delete from comment
 </delete>
 
 <insert id="save" parameterType="cn.ymt.view.CommentView" useGeneratedKeys="true" keyProperty="id">
-insert into comment (userId,message,commentTime,parentId) 
- values(#{userId,jdbcType=INTEGER},#{message,jdbcType=VARCHAR},#{commentTime,jdbcType=TIMESTAMP},#{parentId,jdbcType=INTEGER})
+insert into comment (userId,message,commentTime,parentId,workId) 
+ values(#{userId,jdbcType=INTEGER},#{message,jdbcType=VARCHAR},#{commentTime,jdbcType=TIMESTAMP},#{parentId,jdbcType=INTEGER},#{workId,jdbcType=INTEGER})
 </insert>
 
 <insert id="saveNoNull" parameterType="cn.ymt.view.CommentView" useGeneratedKeys="true" keyProperty="id">
@@ -90,6 +95,9 @@ commentTime,
  <if test="parentId != null">
 parentId,
 </if>
+ <if test="workId != null">
+workId,
+</if>
 </trim>
 
 <trim prefix="values(" suffix=")" suffixOverrides=",">
@@ -105,16 +113,19 @@ parentId,
 <if test="parentId != null">
 #{parentId,jdbcType=INTEGER},
 </if>
+<if test="workId != null">
+#{workId,jdbcType=INTEGER},
+</if>
 </trim>
 </insert>
 
 <insert id="saves" >
-insert into comment (userId,message,commentTime,parentId) 
- values <foreach collection="list" item="obj" separator=",">(#{obj.userId,jdbcType=INTEGER},#{obj.message,jdbcType=VARCHAR},#{obj.commentTime,jdbcType=TIMESTAMP},#{obj.parentId,jdbcType=INTEGER})</foreach>
+insert into comment (userId,message,commentTime,parentId,workId) 
+ values <foreach collection="list" item="obj" separator=",">(#{obj.userId,jdbcType=INTEGER},#{obj.message,jdbcType=VARCHAR},#{obj.commentTime,jdbcType=TIMESTAMP},#{obj.parentId,jdbcType=INTEGER},#{obj.workId,jdbcType=INTEGER})</foreach>
 </insert>
 <update id="updateAll" parameterType="cn.ymt.view.CommentView">
 update comment 
-set  userId = #{userId,jdbcType=INTEGER}, message = #{message,jdbcType=VARCHAR}, commentTime = #{commentTime,jdbcType=TIMESTAMP}, parentId = #{parentId,jdbcType=INTEGER} where id = #{id,jdbcType=INTEGER}
+set  userId = #{userId,jdbcType=INTEGER}, message = #{message,jdbcType=VARCHAR}, commentTime = #{commentTime,jdbcType=TIMESTAMP}, parentId = #{parentId,jdbcType=INTEGER}, workId = #{workId,jdbcType=INTEGER} where id = #{id,jdbcType=INTEGER}
 </update>
  <update id="updateNoNull" parameterType="cn.ymt.view.CommentView">
 update comment 
@@ -122,7 +133,8 @@ update comment
 <if test="userId != null"> userId = #{userId,jdbcType=INTEGER},</if>
 <if test="message != null"> message = #{message,jdbcType=VARCHAR},</if>
 <if test="commentTime != null"> commentTime = #{commentTime,jdbcType=TIMESTAMP},</if>
-<if test="parentId != null"> parentId = #{parentId,jdbcType=INTEGER},</if></set>
+<if test="parentId != null"> parentId = #{parentId,jdbcType=INTEGER},</if>
+<if test="workId != null"> workId = #{workId,jdbcType=INTEGER},</if></set>
  where id = #{id,jdbcType=INTEGER}
 </update>
 

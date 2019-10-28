@@ -10,8 +10,8 @@
  work.addTime as work_addTime,
  work.state as work_state,
  work.count as work_count,
- work.commentId as work_commentId,
- work.categoryId as work_categoryId
+ work.categoryId as work_categoryId,
+ work.commentCount as work_commentCount
  from work as work 
 </sql>
 
@@ -23,8 +23,8 @@
  work.addTime as work_addTime,
  work.state as work_state,
  work.count as work_count,
- work.commentId as work_commentId,
- work.categoryId as work_categoryId
+ work.categoryId as work_categoryId,
+ work.commentCount as work_commentCount
  from work as work 
 </sql>
 
@@ -36,8 +36,8 @@
  work.addTime as work_addTime,
  work.state as work_state,
  work.count as work_count,
- work.commentId as work_commentId,
- work.categoryId as work_categoryId
+ work.categoryId as work_categoryId,
+ work.commentCount as work_commentCount
  from work as work 
 </sql>
 
@@ -48,8 +48,8 @@
  <result column="work_addTime" jdbcType="DATE" property="addTime" />
  <result column="work_state" jdbcType="TINYINT" property="state" />
  <result column="work_count" jdbcType="INTEGER" property="count" />
- <result column="work_commentId" jdbcType="INTEGER" property="commentId" />
  <result column="work_categoryId" jdbcType="INTEGER" property="categoryId" />
+ <result column="work_commentCount" jdbcType="INTEGER" property="commentCount" />
 </resultMap>
 
 <resultMap id="BaseResultMap" type="cn.ymt.view.WorkView">
@@ -59,11 +59,20 @@
  <result column="work_addTime" jdbcType="DATE" property="addTime" />
  <result column="work_state" jdbcType="TINYINT" property="state" />
  <result column="work_count" jdbcType="INTEGER" property="count" />
- <result column="work_commentId" jdbcType="INTEGER" property="commentId" />
  <result column="work_categoryId" jdbcType="INTEGER" property="categoryId" />
+ <result column="work_commentCount" jdbcType="INTEGER" property="commentCount" />
 </resultMap>
 
 <resultMap id="DetailResultMap" type="cn.ymt.view.WorkView" extends="BaseResultMap">
+ <result column="mylike" jdbcType="INTEGER" property="mylike" />
+ <association property="user" javaType="cn.ymt.pojo.User">
+  <id column="user_id" jdbcType="INTEGER" property="id" />
+  <result column="user_imgUrl" jdbcType="VARCHAR" property="imgUrl" />
+  <result column="user_nickName" jdbcType="VARCHAR" property="nickName" />
+ </association>
+ <collection property="imgs" ofType="cn.ymt.pojo.Img">
+  <result column="img_imgUrl" jdbcType="VARCHAR" property="imgUrl" />
+ </collection>
 </resultMap>
 
 <delete id="deleteById" parameterType="java.lang.Integer">
@@ -86,8 +95,8 @@ delete from work
 </delete>
 
 <insert id="save" parameterType="cn.ymt.view.WorkView" useGeneratedKeys="true" keyProperty="id">
-insert into work (userId,title,addTime,state,count,commentId,categoryId) 
- values(#{userId,jdbcType=INTEGER},#{title,jdbcType=VARCHAR},#{addTime,jdbcType=DATE},#{state,jdbcType=TINYINT},#{count,jdbcType=INTEGER},#{commentId,jdbcType=INTEGER},#{categoryId,jdbcType=INTEGER})
+insert into work (userId,title,addTime,state,count,categoryId,commentCount) 
+ values(#{userId,jdbcType=INTEGER},#{title,jdbcType=VARCHAR},#{addTime,jdbcType=DATE},#{state,jdbcType=TINYINT},#{count,jdbcType=INTEGER},#{categoryId,jdbcType=INTEGER},#{commentCount,jdbcType=INTEGER})
 </insert>
 
 <insert id="saveNoNull" parameterType="cn.ymt.view.WorkView" useGeneratedKeys="true" keyProperty="id">
@@ -108,11 +117,11 @@ state,
  <if test="count != null">
 count,
 </if>
- <if test="commentId != null">
-commentId,
-</if>
  <if test="categoryId != null">
 categoryId,
+</if>
+ <if test="commentCount != null">
+commentCount,
 </if>
 </trim>
 
@@ -132,22 +141,22 @@ categoryId,
 <if test="count != null">
 #{count,jdbcType=INTEGER},
 </if>
-<if test="commentId != null">
-#{commentId,jdbcType=INTEGER},
-</if>
 <if test="categoryId != null">
 #{categoryId,jdbcType=INTEGER},
+</if>
+<if test="commentCount != null">
+#{commentCount,jdbcType=INTEGER},
 </if>
 </trim>
 </insert>
 
 <insert id="saves" >
-insert into work (userId,title,addTime,state,count,commentId,categoryId) 
- values <foreach collection="list" item="obj" separator=",">(#{obj.userId,jdbcType=INTEGER},#{obj.title,jdbcType=VARCHAR},#{obj.addTime,jdbcType=DATE},#{obj.state,jdbcType=TINYINT},#{obj.count,jdbcType=INTEGER},#{obj.commentId,jdbcType=INTEGER},#{obj.categoryId,jdbcType=INTEGER})</foreach>
+insert into work (userId,title,addTime,state,count,categoryId,commentCount) 
+ values <foreach collection="list" item="obj" separator=",">(#{obj.userId,jdbcType=INTEGER},#{obj.title,jdbcType=VARCHAR},#{obj.addTime,jdbcType=DATE},#{obj.state,jdbcType=TINYINT},#{obj.count,jdbcType=INTEGER},#{obj.categoryId,jdbcType=INTEGER},#{obj.commentCount,jdbcType=INTEGER})</foreach>
 </insert>
 <update id="updateAll" parameterType="cn.ymt.view.WorkView">
 update work 
-set  userId = #{userId,jdbcType=INTEGER}, title = #{title,jdbcType=VARCHAR}, addTime = #{addTime,jdbcType=DATE}, state = #{state,jdbcType=TINYINT}, count = #{count,jdbcType=INTEGER}, commentId = #{commentId,jdbcType=INTEGER}, categoryId = #{categoryId,jdbcType=INTEGER} where id = #{id,jdbcType=INTEGER}
+set  userId = #{userId,jdbcType=INTEGER}, title = #{title,jdbcType=VARCHAR}, addTime = #{addTime,jdbcType=DATE}, state = #{state,jdbcType=TINYINT}, count = #{count,jdbcType=INTEGER}, categoryId = #{categoryId,jdbcType=INTEGER}, commentCount = #{commentCount,jdbcType=INTEGER} where id = #{id,jdbcType=INTEGER}
 </update>
  <update id="updateNoNull" parameterType="cn.ymt.view.WorkView">
 update work 
@@ -157,8 +166,9 @@ update work
 <if test="addTime != null"> addTime = #{addTime,jdbcType=DATE},</if>
 <if test="state != null"> state = #{state,jdbcType=TINYINT},</if>
 <if test="count != null"> count = #{count,jdbcType=INTEGER},</if>
-<if test="commentId != null"> commentId = #{commentId,jdbcType=INTEGER},</if>
-<if test="categoryId != null"> categoryId = #{categoryId,jdbcType=INTEGER},</if></set>
+<if test="categoryId != null"> categoryId = #{categoryId,jdbcType=INTEGER},</if>
+<if test="commentCount != null"> commentCount = #{commentCount,jdbcType=INTEGER},</if>
+</set>
  where id = #{id,jdbcType=INTEGER}
 </update>
 
@@ -227,5 +237,31 @@ select distinct work.id from work as work
 <if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
 ) as worktempTable)
 </select>
-
+<!--%%%%%%%%%%%%%%%%%%%%%%%%%-->
+ <select id="get" parameterType="cn.ymt.query.WorkQueryParams" resultMap="DetailResultMap">
+  select
+  work.id as work_id,
+  work.title as work_title,
+  work.addTime as work_addTime,
+  work.count as work_count,
+  work.commentCount as work_commentCount,
+  user.id as user_id,
+  user.imgUrl as user_imgUrl,
+  user.nickName as user_nickName,
+  img.imgUrl as img_imgUrl,
+  1-ISNULL(userlike.id) as mylike
+  from work as work
+  LEFT JOIN user as `user`
+  on `work`.userId = `user`.id
+  LEFT JOIN userLike as userLike
+  on userlike.workId = `work`.id and `user`.id = #{id,jdbcType=INTEGER}
+  LEFT JOIN img as img
+  on img.workId = `work`.id
+  order by `work`.addTime desc
+  <where>
+   <if test="condition != null">(${condition})</if>
+  </where>
+  <if test="orderBy != null"> order by ${orderBy}</if>
+  <if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+ </select>
 </mapper>

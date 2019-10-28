@@ -6,6 +6,7 @@ protected Integer userId;//
 protected String message;//
 protected Date commentTime=new Date();//
 protected Integer parentId;//
+protected Integer workId;//
 public Integer getUserId() {
 return userId;
 }
@@ -33,6 +34,13 @@ return parentId;
 
 public void setParentId(Integer parentId) {
 this.parentId = parentId;
+}
+public Integer getWorkId() {
+return workId;
+}
+
+public void setWorkId(Integer workId) {
+this.workId = workId;
 }
 
 }

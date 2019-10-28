@@ -4,6 +4,7 @@ import cn.ymt.pojo.User;
 import cn.ymt.query.ShopcartQueryParams;
 import cn.ymt.serviceDao.ShopcartServiceDao;
 import cn.ymt.util.jsonResult;
+import cn.ymt.view.ShopcartView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +26,13 @@ public class ShopcartController {
         queryParams.setUserId(user.getId());
         List<Shopcart> shopcartList = shopcartServiceDao.getCart(queryParams) ;
         return new jsonResult(true,"查询成功",shopcartList.size(),shopcartList) ;
+    }
+//添加到购物车 id课程id
+    @RequestMapping("/addToCart")
+    public jsonResult addToCart(ShopcartView shopcartView, HttpServletRequest request)throws Exception{
+        User user = (User) request.getSession().getAttribute("user");
+        shopcartView.setUserId(user.getId());
+        shopcartServiceDao.insert(shopcartView) ;
+        return new jsonResult(true,"添加成功") ;
     }
 }
