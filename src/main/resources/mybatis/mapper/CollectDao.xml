@@ -54,6 +54,39 @@
 </resultMap>
 
 <resultMap id="DetailResultMap" type="cn.ymt.view.CollectView" extends="BaseResultMap">
+ <association property="detail" javaType="cn.ymt.pojo.Detail">
+  <id column="detail_id" jdbcType="INTEGER" property="id" />
+  <result column="detail_imgUrl" jdbcType="VARCHAR" property="imgUrl" />
+  <result column="detail_title" jdbcType="VARCHAR" property="title" />
+  <result column="detail_memo" jdbcType="LONGVARCHAR" property="memo" />
+  <result column="detail_tips" jdbcType="VARCHAR" property="tips" />
+  <result column="detail_addTime" jdbcType="DATE" property="addTime" />
+  <result column="detail_state" jdbcType="TINYINT" property="state" />
+  <result column="detail_orderIndex" jdbcType="TINYINT" property="orderIndex" />
+  <result column="detail_userId" jdbcType="INTEGER" property="userId" />
+  <result column="detail_introduce" jdbcType="VARCHAR" property="introduce" />
+  <result column="detail_materials" jdbcType="VARCHAR" property="materials" />
+  <result column="detail_step" jdbcType="LONGVARCHAR" property="step" />
+ </association>
+ <association property="course" javaType="cn.ymt.pojo.Course">
+  <id column="course_id" jdbcType="INTEGER" property="id" />
+  <result column="course_videoUrl" jdbcType="VARCHAR" property="videoUrl" />
+  <result column="course_title" jdbcType="VARCHAR" property="title" />
+  <result column="course_imgUrl" jdbcType="VARCHAR" property="imgUrl" />
+  <result column="course_memo" jdbcType="LONGVARCHAR" property="memo" />
+  <result column="course_memoTwo" jdbcType="LONGVARCHAR" property="memoTwo" />
+  <result column="course_howLearn" jdbcType="VARCHAR" property="howLearn" />
+  <result column="course_bakerName" jdbcType="VARCHAR" property="bakerName" />
+  <result column="course_backerImgUrl" jdbcType="VARCHAR" property="backerImgUrl" />
+  <result column="course_bakerIntroduce" jdbcType="VARCHAR" property="bakerIntroduce" />
+  <result column="course_price" jdbcType="DOUBLE" property="price" />
+  <result column="course_peopleCount" jdbcType="INTEGER" property="peopleCount" />
+  <result column="course_addTime" jdbcType="DATE" property="addTime" />
+  <result column="course_orderIndex" jdbcType="TINYINT" property="orderIndex" />
+  <result column="course_state" jdbcType="TINYINT" property="state" />
+  <result column="course_categoryId" jdbcType="INTEGER" property="categoryId" />
+  <result column="course_isindex" jdbcType="TINYINT" property="isindex" />
+ </association>
 </resultMap>
 
 <delete id="deleteById" parameterType="java.lang.Integer">
@@ -134,7 +167,8 @@ update collect
 <if test="type != null"> type = #{type,jdbcType=TINYINT},</if>
 <if test="courseId != null"> courseId = #{courseId,jdbcType=INTEGER},</if>
 <if test="detailId != null"> detailId = #{detailId,jdbcType=INTEGER},</if>
-<if test="collectTime != null"> collectTime = #{collectTime,jdbcType=TIMESTAMP},</if></set>
+<if test="collectTime != null"> collectTime = #{collectTime,jdbcType=TIMESTAMP},</if>
+</set>
  where id = #{id,jdbcType=INTEGER}
 </update>
 
@@ -203,5 +237,62 @@ select distinct collect.id from collect as collect
 <if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
 ) as collecttempTable)
 </select>
-
+<!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+ <select id="getMyCollectDetail"  resultMap="DetailResultMap">
+  select
+ collect.id as collect_id,
+ collect.userId as collect_userId,
+ collect.type as collect_type,
+ collect.courseId as collect_courseId,
+ collect.detailId as collect_detailId,
+ collect.collectTime as collect_collectTime,
+ detail.id as detail_id,
+ detail.imgUrl as detail_imgUrl,
+ detail.title as detail_title,
+ detail.memo as detail_memo,
+ detail.tips as detail_tips,
+ detail.addTime as detail_addTime,
+ detail.state as detail_state,
+ detail.orderIndex as detail_orderIndex,
+ detail.userId as detail_userId,
+ detail.introduce as detail_introduce,
+ detail.materials as detail_materials,
+ detail.step as detail_step
+ from collect as collect
+ inner JOIN detail as detail
+ on collect.detailId = detail.id
+ where collect.userId =  #{id,jdbcType=INTEGER}
+ ORDER BY addTime desc
+</select>
+ <select id="getMyCollectCourse"  resultMap="DetailResultMap">
+select
+ collect.id as collect_id,
+ collect.userId as collect_userId,
+ collect.type as collect_type,
+ collect.courseId as collect_courseId,
+ collect.detailId as collect_detailId,
+ collect.collectTime as collect_collectTime,
+ course.id as course_id,
+ course.videoUrl as course_videoUrl,
+ course.title as course_title,
+ course.imgUrl as course_imgUrl,
+ course.memo as course_memo,
+ course.memoTwo as course_memoTwo,
+ course.howLearn as course_howLearn,
+ course.bakerName as course_bakerName,
+ course.backerImgUrl as course_backerImgUrl,
+ course.bakerIntroduce as course_bakerIntroduce,
+ course.price as course_price,
+ course.peopleCount as course_peopleCount,
+ course.addTime as course_addTime,
+ course.orderIndex as course_orderIndex,
+ course.state as course_state,
+ course.categoryId as course_categoryId,
+ course.isindex as course_isindex
+ from collect as collect
+inner JOIN course as course
+on collect.courseId = course.id
+where collect.userId = #{id,jdbcType=INTEGER}
+ORDER BY addTime desc
+</select>
 </mapper>
