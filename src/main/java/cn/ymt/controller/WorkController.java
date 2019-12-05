@@ -51,4 +51,16 @@ public class WorkController  {
         long l = workServiceDao.count(queryParams) ;
         return new jsonResult(true,"查询成功",l,lists) ;
     }
+    //得到自己的作品
+    @RequestMapping("/getMyself")
+    public jsonResult getMyself(HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("user");
+        try {
+            List<WorkView> list = workServiceDao.getMyself(user.getId()) ;
+            return new jsonResult(true,"查询成功",list.size(),list) ;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new jsonResult(true,"查询失败") ;
+        }
+    }
 }

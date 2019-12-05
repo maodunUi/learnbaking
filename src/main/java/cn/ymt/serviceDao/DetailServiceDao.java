@@ -15,4 +15,8 @@ public class DetailServiceDao extends serviceDaoTemplate<DetailView,DetailDao> {
     public List<DetailView> getSix() throws Exception{
         return dao.getSix() ;
     }
+
+    public List<DetailView> getMySelf(Integer id) throws Exception{
+        return dao.getMySelf(id) ;
+    }
 }

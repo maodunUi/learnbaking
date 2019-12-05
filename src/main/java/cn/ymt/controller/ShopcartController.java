@@ -27,7 +27,7 @@ public class ShopcartController {
         List<Shopcart> shopcartList = shopcartServiceDao.getCart(queryParams) ;
         return new jsonResult(true,"查询成功",shopcartList.size(),shopcartList) ;
     }
-//添加到购物车 id课程id
+    //添加到购物车 id课程id
     @RequestMapping("/addToCart")
     public jsonResult addToCart(ShopcartView shopcartView, HttpServletRequest request)throws Exception{
         User user = (User) request.getSession().getAttribute("user");
