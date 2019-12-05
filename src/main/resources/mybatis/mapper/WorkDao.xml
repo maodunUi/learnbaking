@@ -254,7 +254,7 @@ select distinct work.id from work as work
   LEFT JOIN user as `user`
   on `work`.userId = `user`.id
   LEFT JOIN userLike as userLike
-  on userlike.workId = `work`.id and `user`.id = #{id,jdbcType=INTEGER}
+  on userlike.workId = `work`.id
   LEFT JOIN img as img
   on img.workId = `work`.id
   order by `work`.addTime desc
