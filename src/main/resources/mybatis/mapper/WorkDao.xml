@@ -264,4 +264,20 @@ select distinct work.id from work as work
   <if test="orderBy != null"> order by ${orderBy}</if>
   <if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
  </select>
+
+ <select id="getMyself" resultMap="DetailResultMap">
+  select
+  work.id as work_id,
+  work.title as work_title,
+  work.addTime as work_addTime,
+  work.count as work_count,
+  work.commentCount as work_commentCount,
+  img.imgUrl as img_imgUrl
+  from work as work
+  LEFT JOIN img as img
+  on img.workId = `work`.id
+  WHERE userId = #{id,jdbcType=INTEGER}
+  ORDER BY addTime desc
+ </select>
+
 </mapper>

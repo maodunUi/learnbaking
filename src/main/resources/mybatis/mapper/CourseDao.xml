@@ -339,13 +339,20 @@ select distinct course.id from course as course
 <!--%%%%%%%%%%%%%%-->
 <!--得到首页的六个课程-->
  <select id="getSix" resultMap="SimpleResultMap" parameterType="cn.ymt.query.CourseQueryParams">
-  <include refid="Base_Column" />where
-  <if test="categoryId != null"> category_id = #{categoryId,jdbcType=INTEGER} and </if>
-  isindex = 1 limit 4,6
+  <include refid="Base_Column" />
+  <where>
+  <if test="categoryId != null"> category_id = #{categoryId,jdbcType=INTEGER} </if>
+  </where>
+  order by addTime desc
+  limit 4,6
+
  </select>
  <select id="getFour" resultMap="SimpleResultMap" parameterType="cn.ymt.query.CourseQueryParams">
-  <include refid="Base_Column" /> where
+  <include refid="Base_Column" />
+  <where>
   <if test="categoryId != null"> category_id = #{categoryId,jdbcType=INTEGER} and </if>
-   isindex = 1 limit 0,4
+  </where>
+  order by addTime desc
+    limit 0,4
  </select>
 </mapper>

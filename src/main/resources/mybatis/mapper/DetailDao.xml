@@ -284,4 +284,8 @@ select distinct detail.id from detail as detail
  <select id="getSix" resultMap="BaseResultMap">
   <include refid="Base_Column" /> order by addTime desc limit 4,6
  </select>
+
+ <select id="getMySelf" resultMap="BaseResultMap">
+  <include refid="Base_Column" /> where userId = #{id,jdbcType=INTEGER} order by addTime desc
+ </select>
 </mapper>
