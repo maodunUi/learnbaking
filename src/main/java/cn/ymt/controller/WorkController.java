@@ -45,8 +45,8 @@ public class WorkController  {
     //查询所有烘培
     @RequestMapping("/get")
     public jsonResult get(WorkQueryParams queryParams,HttpServletRequest request) throws Exception{
-        User user = (User) request.getSession().getAttribute("user");
-        queryParams.setId(user.getId());
+      /*  User user = (User) request.getSession().getAttribute("user");
+        queryParams.setId(user.getId());*/
         List<WorkView> lists = workServiceDao.get(queryParams) ;
         long l = workServiceDao.count(queryParams) ;
         return new jsonResult(true,"查询成功",l,lists) ;
