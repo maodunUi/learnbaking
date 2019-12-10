@@ -237,6 +237,8 @@ where user.id = #{id,jdbcType=INTEGER}
 select count(distinct user.id) from user as user
 <where>
 <if test="condition != null">(${condition})</if>
+ <if test="name != null">and name = #{name,jdbcType=VARCHAR}</if>
+ <if test="telphone != null">and telphone = #{telphone,jdbcType=VARCHAR} </if>
 </where>
 </select>
 
@@ -273,6 +275,8 @@ select distinct user.id from user as user
 <if test="ids != null">
  and <foreach collection="ids" open="(" close=")" separator=" or " item="idTemp">user.id=#{idTemp,jdbcType=INTEGER}</foreach>
 </if>
+ <if test="name != null">and name = #{name,jdbcType=VARCHAR}</if>
+ <if test="telphone != null">and telphone = #{telphone,jdbcType=VARCHAR} </if>
 </where>
 <if test="orderBy != null"> order by ${orderBy}</if>
 <if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>

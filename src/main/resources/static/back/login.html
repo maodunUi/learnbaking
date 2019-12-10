@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>登录页面</title>
+    <link rel="stylesheet" href="/lib/layui/css/layui.css">
+    <script src="/js/comm/jquery.min.js"></script>
+    <style>
+        /* 改变输入框大小 */
+        .layui-input,
+        .layui-textarea {
+            display: block;
+            width: 240px;
+            padding-left: 10px;
+        }
+        /* 登录注册按钮 */
+        .btn {
+            width: 350px;
+            margin-left: 110px;
+        }
+        .toInlineBlock {
+            display: inline-block;
+        }
+        #cus {
+            width: 380px;
+        }
+    </style>
+</head>
+
+<body id="login">
+<div class="layui-form">
+        <br>
+        <div class="layui-form-item">
+            <label class="layui-form-label">手机号:</label>
+            <div class="layui-input-inline">
+                <input type="text" name="telphone" lay-verify="required|phone" placeholder="请输入手机号" autocomplete="off"
+                    class="layui-input" id="telphone">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">验证码:</label>
+            <div class="layui-input-inline" id="cus">
+                <input type="text" name="code" lay-verify="required" placeholder="请输入验证码" autocomplete="off"
+                    class="layui-input toInlineBlock" id="code">
+                <!-- <a class="layui-btn layui-btn-disabled" href="javascript:void(0);" id="getCode">获取验证码</a> -->
+                <a class="layui-btn" href="javascript:void(0);" id="getCode">获取验证码</a>
+
+            </div>
+        </div>
+    <div class="layui-form-item">
+                <button class="layui-btn btn"  lay-submit  lay-filter="formDemo">登录/注册</button>
+    </div>
+</div>
+    <script src="/lib/layui/layui.js"></script>
+<!--<script src="/js/login.js"></script>-->
+    <script>
+        var layer ;
+        layui.use(['form','layer'], function () {
+            var form = layui.form;
+            layer = layui.layer ;
+            form.on('submit(formDemo)', function(data){
+                var telphone = $("#telphone").val()
+                var code = $("#code").val()
+                $.ajax({
+                    url: "/login/loginOrRegister",
+                    method:'POST',
+                    data: {
+                        telphone:telphone,
+                        code:code
+                    },
+                    async:false,
+                    success: function (data) {
+                        if (data.success==true){
+                          //  layer.alert(data.msg)
+                              window.parent.location.href = '/back/back.html' ;
+                        } else{
+                            layer.msg(data.msg);
+                        }
+                        console.log(data) ;
+                    }
+                });
+                return false;  //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            });
+        });
+
+       /* 点击获取验证码 */
+       $("#getCode").click(function(){
+           if($("input[name='telphone']").val()==""|| $("input name[telphone]").val()==""){
+               layer.alert('电话号码不能为空')
+           }else{
+               var telphoneVal = $("input[name='telphone']").val()
+               $.ajax({
+                   //url: "/login/sendSms?telphone=" + telphoneVal ,
+                   url: "/login/sendSms2?telphone=" + telphoneVal ,
+                   success: function (data) {
+                       if(data.success==true){
+                           $("#getCode").addClass('layui-btn-disabled')
+                       }else {
+                           layer.msg('验证码发送失败');
+                       }
+
+                   }
+               });
+           }
+       })
+    </script>
+</body>
+
+</html>

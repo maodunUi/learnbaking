@@ -15,7 +15,8 @@ public class MyServerConfig {
     public FilterRegistrationBean myFilter(){
         FilterRegistrationBean bean = new FilterRegistrationBean();
         bean.setFilter(new MyFilter());
-        bean.setUrlPatterns(Arrays.asList("/test","/CollectAction/auth","/CollectAction/getCollect","/WorkAction/getMyself","/ShopcartAction/addToCart","/UserAction/get","/DetailAction/update"));
+       // bean.setUrlPatterns(Arrays.asList("/test","/CollectAction/auth","/CollectAction/getCollect","/WorkAction/getMyself","/ShopcartAction/addToCart","/UserAction/get","/DetailAction/update"));
+        bean.setUrlPatterns(FilterUrl.getFilterUrl());
         return  bean ;
     }
 

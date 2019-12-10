@@ -43,7 +43,7 @@ public class LoginController {
 	 * @param response
 	 * @throws IOException
 	 */
-	@GetMapping("/loginOrRegister")
+	@RequestMapping(value = "/loginOrRegister",method = {RequestMethod.GET,RequestMethod.POST})
 	public jsonResult loginOrRegister(String telphone, String code, HttpServletResponse response, HttpServletRequest request) throws Exception{
 		HttpSession session = request.getSession();
 		String a =session.getAttribute("code").toString();

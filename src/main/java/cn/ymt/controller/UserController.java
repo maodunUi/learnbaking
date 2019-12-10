@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -20,6 +21,7 @@ import java.util.Date;
 public class UserController {
     @Autowired
     private UserServiceDao userServiceDao ;
+    //得到当前的用户
     @RequestMapping("/get")
     public jsonResult get(HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");
@@ -38,6 +40,19 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
             return new jsonResult(true,"更新失败") ;
+        }
+    }
+
+    //得到所有的用户列表
+    @RequestMapping("/list")
+    public jsonResult list(UserQueryParams queryParams){
+        try {
+            List<UserView> basic = userServiceDao.getBasic(queryParams);
+            long count = userServiceDao.count(queryParams);
+            return new jsonResult(true,"查询成功",count,basic) ;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new jsonResult(false,"查询失败") ;
         }
     }
 
