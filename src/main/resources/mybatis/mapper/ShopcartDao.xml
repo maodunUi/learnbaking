@@ -51,6 +51,25 @@
   <result column="shopcart_orderIndex" jdbcType="TINYINT" property="orderIndex" />
   <result column="shopcart_memo" jdbcType="VARCHAR" property="memo" />
   <result column="shopcart_state" jdbcType="TINYINT" property="state" />
+  <association property="course" javaType="cn.ymt.pojo.Course">
+   <id column="course_id" jdbcType="INTEGER" property="id" />
+   <result column="course_videoUrl" jdbcType="VARCHAR" property="videoUrl" />
+   <result column="course_title" jdbcType="VARCHAR" property="title" />
+   <result column="course_imgUrl" jdbcType="VARCHAR" property="imgUrl" />
+   <result column="course_memo" jdbcType="LONGVARCHAR" property="memo" />
+   <result column="course_memoTwo" jdbcType="LONGVARCHAR" property="memoTwo" />
+   <result column="course_howLearn" jdbcType="VARCHAR" property="howLearn" />
+   <result column="course_bakerName" jdbcType="VARCHAR" property="bakerName" />
+   <result column="course_backerImgUrl" jdbcType="VARCHAR" property="backerImgUrl" />
+   <result column="course_bakerIntroduce" jdbcType="VARCHAR" property="bakerIntroduce" />
+   <result column="course_price" jdbcType="DOUBLE" property="price" />
+   <result column="course_peopleCount" jdbcType="INTEGER" property="peopleCount" />
+   <result column="course_addTime" jdbcType="DATE" property="addTime" />
+   <result column="course_orderIndex" jdbcType="TINYINT" property="orderIndex" />
+   <result column="course_state" jdbcType="TINYINT" property="state" />
+   <result column="course_categoryId" jdbcType="INTEGER" property="categoryId" />
+   <result column="course_isindex" jdbcType="TINYINT" property="isindex" />
+  </association>
  </resultMap>
 
  <resultMap id="DetailResultMap" type="cn.ymt.view.ShopcartView" extends="BaseResultMap">
