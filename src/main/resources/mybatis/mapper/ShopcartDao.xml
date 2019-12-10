@@ -235,7 +235,7 @@ set  courseId = #{courseId,jdbcType=INTEGER}, userId = #{userId,jdbcType=INTEGER
  shopcart.state as shopcart_state
   ,course.id as course_id,
   course.title as course_title,
-  course.imgUrl as course_img_url,
+  course.imgUrl as course_imgUrl,
   course.price as course_price
   from shopcart as shopcart
 LEFT JOIN course as course
