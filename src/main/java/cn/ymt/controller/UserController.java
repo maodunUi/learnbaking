@@ -36,6 +36,9 @@ public class UserController {
     public jsonResult update(UserView detailView, HttpServletRequest request){
         try {
             userServiceDao.updateNotNullField(detailView) ;
+            User user = (User) request.getSession().getAttribute("user");
+            UserView userView = userServiceDao.getBasicById(user.getId());
+            request.getSession().setAttribute("user",userView) ;
             return new jsonResult(true,"更新成功") ;
         } catch (Exception e) {
             e.printStackTrace();
