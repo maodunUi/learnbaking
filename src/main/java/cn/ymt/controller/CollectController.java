@@ -47,8 +47,8 @@ public class CollectController  {
         collect.setUserId(user.getId());
         collect.setCollectTime(new Date());
         try {
-            collectServiceDao.insert(collect) ;
-            return new jsonResult(true,"收藏成功") ;
+            int returnId = collectServiceDao.insert(collect);
+            return new jsonResult(true,"" + returnId) ;
         } catch (Exception e) {
             e.printStackTrace();
             return new jsonResult(false,"收藏失败") ;

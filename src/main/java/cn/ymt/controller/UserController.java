@@ -55,6 +55,15 @@ public class UserController {
             return new jsonResult(false,"查询失败") ;
         }
     }
-
+    //得到用户的登录状态
+    @RequestMapping("/getUserStatus")
+    public jsonResult getUserStatus(HttpServletRequest request){
+        User u = (User) request.getSession().getAttribute("user");
+        if (u == null){
+            return new jsonResult(false,"未登录") ;
+        }else {
+            return new jsonResult(true,"已经登录") ;
+        }
+    }
 
 }
