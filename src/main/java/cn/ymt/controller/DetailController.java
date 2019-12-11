@@ -57,7 +57,7 @@ public class DetailController {
         }
     }
     //上传食谱
-    @RequestMapping("/update")
+    @RequestMapping("/insert")
     public jsonResult update(DetailView detailView,HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");
         detailView.setAddTime(new Date());
