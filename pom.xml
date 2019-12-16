@@ -85,11 +85,11 @@
             <version>1.0.0</version>
         </dependency>
         <!--支付宝支付接入jar-->
-        <dependency>
+        <!--<dependency>
             <groupId>com.alipay.sdk</groupId>
             <artifactId>alipay-sdk-java</artifactId>
             <version>3.0.1</version>
-        </dependency>
+        </dependency>-->
         <!--七牛-->
         <dependency>
             <groupId>com.qiniu</groupId>
@@ -114,6 +114,14 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java -->
+        <dependency>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+            <version>3.3.49.ALL</version>
+        </dependency>
+
     </dependencies>
 
     <build>
