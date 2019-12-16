@@ -279,6 +279,6 @@ set  courseId = #{courseId,jdbcType=INTEGER}, orderTime = #{orderTime,jdbcType=T
  <!--%%%%%%%%%%%-->
  <select id="getByNumber"  resultMap="BaseResultMap" parameterType="java.lang.String">
   <include refid="Base_Column" />
-  where order.number = #{number,jdbcType=INTEGER}
+  where orders.number = #{number,jdbcType=INTEGER}
  </select>
 </mapper>
