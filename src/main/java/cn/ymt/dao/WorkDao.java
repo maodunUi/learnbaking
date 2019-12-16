@@ -10,4 +10,6 @@ public interface WorkDao extends DaoTemplate<WorkView,WorkQueryParams>{
     List<WorkView> get(WorkQueryParams queryParams) throws Exception;
 
     List<WorkView> getMyself(@Param("id") Integer id) throws Exception ;
+
+    WorkView getById(@Param("id") int id) throws Exception;
 }

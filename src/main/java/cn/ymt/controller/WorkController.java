@@ -63,4 +63,19 @@ public class WorkController  {
             return new jsonResult(true,"查询失败") ;
         }
     }
+
+    //id work的id  得到work和发布work的用户
+    @RequestMapping("/getById")
+    public jsonResult getById(int id){
+        try {
+            WorkView workView = workServiceDao.getById(id) ;
+            jsonResult jsonResult  = new jsonResult( ) ;
+            jsonResult.setSuccess(true);
+            jsonResult.add(workView);
+            return jsonResult ;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new jsonResult(false,"查询失败" + e.getMessage()) ;
+        }
+    }
 }

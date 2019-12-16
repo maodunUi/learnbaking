@@ -1,4 +1,4 @@
-﻿package cn.ymt.util;
+package cn.ymt.util;
 
 import java.io.FileWriter;
 import java.io.IOException;

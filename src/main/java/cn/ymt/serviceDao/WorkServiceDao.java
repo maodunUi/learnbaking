@@ -16,4 +16,8 @@ public class WorkServiceDao extends serviceDaoTemplate<WorkView,WorkDao> {
     public List<WorkView> getMyself(Integer id) throws Exception{
         return dao.getMyself(id) ;
     }
+
+    public WorkView getById(int id) throws Exception{
+        return dao.getById(id) ;
+    }
 }
