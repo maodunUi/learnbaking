@@ -279,5 +279,25 @@ select distinct work.id from work as work
   WHERE userId = #{id,jdbcType=INTEGER}
   ORDER BY addTime desc
  </select>
-
+<!--￥￥￥￥￥￥￥￥￥￥-->
+ <select id="getById" resultMap="DetailResultMap">
+  select
+ work.id as work_id,
+ work.userId as work_userId,
+ work.title as work_title,
+ work.addTime as work_addTime,
+ work.state as work_state,
+ work.count as work_count,
+ work.categoryId as work_categoryId,
+ work.commentCount as work_commentCount,
+ img.imgUrl as img_imgUrl,
+ user.nickName as user_nickName,
+  user.imgUrl as user_imgUrl
+ from work as work
+  LEFT JOIN user as `user`
+on `work`.userId = `user`.id
+left join img as img
+on `work`.id = img.workId
+  WHERE `work`.id = #{id,jdbcType=INTEGER}
+ </select>
 </mapper>
