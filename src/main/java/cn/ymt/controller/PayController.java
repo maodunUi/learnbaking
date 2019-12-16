@@ -24,10 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/pay")
@@ -54,7 +52,8 @@ public class PayController {
 		String subject = null ;
 		String body = null ;
 		try {
-			 out_trade_no = new String(request.getParameter("number").getBytes("ISO-8859-1"),"UTF-8");
+			 //out_trade_no = new String(request.getParameter("number").getBytes("ISO-8859-1"),"UTF-8");
+			out_trade_no = UUID.randomUUID().toString() ;
 			 total_amount = new String(request.getParameter("totalPrice").getBytes("ISO-8859-1"),"UTF-8");
 			 subject = new String(request.getParameter("subject").getBytes("ISO-8859-1"),"UTF-8"); //商品名
 			 body = new String(request.getParameter("body").getBytes("ISO-8859-1"),"UTF-8"); //描述
