@@ -1,7 +1,7 @@
 package cn.ymt.view.simple;
 import cn.ymt.pojo.BasicModel;
 import java.util.Date;
-public class OrderSimpleView extends BasicModel {
+public class OrdersSimpleView extends BasicModel {
 protected Integer courseId;//
 protected Date orderTime=new Date();//
 protected Byte payType;//

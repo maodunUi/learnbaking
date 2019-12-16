@@ -1,13 +1,11 @@
 package cn.ymt.controller;
 
 
-import cn.ymt.pojo.Order;
 import cn.ymt.pojo.User;
 import cn.ymt.serviceDao.OrderServiceDao;
 import cn.ymt.serviceDao.ShopcartServiceDao;
 import cn.ymt.util.AlipayConfig;
-import cn.ymt.view.OrderView;
-import cn.ymt.view.ShopcartView;
+import cn.ymt.view.OrdersView;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
@@ -62,7 +60,7 @@ public class PayController {
 			out.print("参数得到失败，或者字符编码出错");
 		}
 		User user = (User) request.getSession().getAttribute("user");
-		OrderView orderView = new OrderView() ;
+		OrdersView orderView = new OrdersView() ;
 		orderView.setOrderTime(new Date());
 		orderView.setCourseId(Integer.parseInt(request.getParameter("courseId")));
 		orderView.setUserId(user.getId());
@@ -118,7 +116,7 @@ public class PayController {
 			String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");//支付宝交易号
 			String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"),"UTF-8");//付款金额
 			// 请在这里加上商户的业务逻辑程序代码
-			OrderView userorder = orderServiceDao.getByNumber(out_trade_no); // 通过订单号找到订单
+			OrdersView userorder = orderServiceDao.getByNumber(out_trade_no); // 通过订单号找到订单
 			userorder.setState((byte)1); //订单支付成功
 			orderServiceDao.updateNotNullField(userorder); // 更新订单表
 

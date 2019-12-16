@@ -1,11 +1,10 @@
 package cn.ymt.dao;
-import cn.ymt.pojo.Order;
-import cn.ymt.view.OrderView;
-import cn.ymt.query.OrderQueryParams;
+import cn.ymt.view.OrdersView;
+import cn.ymt.query.OrdersQueryParams;
 import org.apache.ibatis.annotations.Param;
 
-public interface OrderDao extends DaoTemplate<OrderView,OrderQueryParams>{
+public interface OrderDao extends DaoTemplate<OrdersView, OrdersQueryParams>{
 
     //通过订单号找到订单
-    OrderView getByNumber(@Param("number") String number) throws Exception;
+    OrdersView getByNumber(@Param("number") String number) throws Exception;
 }
