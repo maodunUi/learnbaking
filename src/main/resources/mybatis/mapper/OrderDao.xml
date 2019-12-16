@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.maodun.dao.OrdersDao">
+<mapper namespace="cn.ymt.dao.OrdersDao">
 
  <sql id="Simple_Column">
  select
@@ -53,7 +53,7 @@
  from orders as orders
 </sql>
 
- <resultMap id="SimpleResultMap" type="cn.maodun.view.simple.OrdersSimpleView">
+ <resultMap id="SimpleResultMap" type="cn.ymt.view.simple.OrdersSimpleView">
   <id column="orders_id" jdbcType="INTEGER" property="id" />
   <result column="orders_courseId" jdbcType="INTEGER" property="courseId" />
   <result column="orders_orderTime" jdbcType="TIMESTAMP" property="orderTime" />
@@ -68,7 +68,7 @@
   <result column="orders_name" jdbcType="VARCHAR" property="name" />
  </resultMap>
 
- <resultMap id="BaseResultMap" type="cn.maodun.view.OrdersView">
+ <resultMap id="BaseResultMap" type="cn.ymt.view.OrdersView">
   <id column="orders_id" jdbcType="INTEGER" property="id" />
   <result column="orders_courseId" jdbcType="INTEGER" property="courseId" />
   <result column="orders_orderTime" jdbcType="TIMESTAMP" property="orderTime" />
@@ -83,7 +83,7 @@
   <result column="orders_name" jdbcType="VARCHAR" property="name" />
  </resultMap>
 
- <resultMap id="DetailResultMap" type="cn.maodun.view.OrdersView" extends="BaseResultMap">
+ <resultMap id="DetailResultMap" type="cn.ymt.view.OrdersView" extends="BaseResultMap">
  </resultMap>
 
  <delete id="deleteById" parameterType="java.lang.Integer">
@@ -100,17 +100,17 @@ delete from orders where id = #{id,jdbcType=INTEGER}
   where <foreach collection="list" item="i" open="(" close=")" separator=" or "> id=#{i.id,jdbcType=INTEGER} </foreach>
  </delete>
 
- <delete id="deleteByParams" parameterType="cn.maodun.query.OrdersQueryParams">
+ <delete id="deleteByParams" parameterType="cn.ymt.query.OrdersQueryParams">
   delete from orders
   <where><if test="condition != null">${condition}</if></where>
  </delete>
 
- <insert id="save" parameterType="cn.maodun.view.OrdersView" useGeneratedKeys="true" keyProperty="id">
+ <insert id="save" parameterType="cn.ymt.view.OrdersView" useGeneratedKeys="true" keyProperty="id">
 insert into orders (courseId,orderTime,payType,userId,publisherId,orderIndex,state,price,number,subject,name)
  values(#{courseId,jdbcType=INTEGER},#{orderTime,jdbcType=TIMESTAMP},#{payType,jdbcType=TINYINT},#{userId,jdbcType=INTEGER},#{publisherId,jdbcType=INTEGER},#{orderIndex,jdbcType=TINYINT},#{state,jdbcType=TINYINT},#{price,jdbcType=DOUBLE},#{number,jdbcType=VARCHAR},#{subject,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR})
 </insert>
 
- <insert id="saveNoNull" parameterType="cn.maodun.view.OrdersView" useGeneratedKeys="true" keyProperty="id">
+ <insert id="saveNoNull" parameterType="cn.ymt.view.OrdersView" useGeneratedKeys="true" keyProperty="id">
   insert into orders
   <trim prefix="(" suffix=")" suffixOverrides=",">
    <if test="courseId != null">
@@ -189,11 +189,11 @@ insert into orders (courseId,orderTime,payType,userId,publisherId,orderIndex,sta
   insert into orders (courseId,orderTime,payType,userId,publisherId,orderIndex,state,price,number,subject,name)
   values <foreach collection="list" item="obj" separator=",">(#{obj.courseId,jdbcType=INTEGER},#{obj.orderTime,jdbcType=TIMESTAMP},#{obj.payType,jdbcType=TINYINT},#{obj.userId,jdbcType=INTEGER},#{obj.publisherId,jdbcType=INTEGER},#{obj.orderIndex,jdbcType=TINYINT},#{obj.state,jdbcType=TINYINT},#{obj.price,jdbcType=DOUBLE},#{obj.number,jdbcType=VARCHAR},#{obj.subject,jdbcType=VARCHAR},#{obj.name,jdbcType=VARCHAR})</foreach>
  </insert>
- <update id="updateAll" parameterType="cn.maodun.view.OrdersView">
+ <update id="updateAll" parameterType="cn.ymt.view.OrdersView">
 update orders
 set  courseId = #{courseId,jdbcType=INTEGER}, orderTime = #{orderTime,jdbcType=TIMESTAMP}, payType = #{payType,jdbcType=TINYINT}, userId = #{userId,jdbcType=INTEGER}, publisherId = #{publisherId,jdbcType=INTEGER}, orderIndex = #{orderIndex,jdbcType=TINYINT}, state = #{state,jdbcType=TINYINT}, price = #{price,jdbcType=DOUBLE}, number = #{number,jdbcType=VARCHAR}, subject = #{subject,jdbcType=VARCHAR}, name = #{name,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER}
 </update>
- <update id="updateNoNull" parameterType="cn.maodun.view.OrdersView">
+ <update id="updateNoNull" parameterType="cn.ymt.view.OrdersView">
   update orders
   <set>
    <if test="courseId != null"> courseId = #{courseId,jdbcType=INTEGER},</if>
@@ -221,14 +221,14 @@ set  courseId = #{courseId,jdbcType=INTEGER}, orderTime = #{orderTime,jdbcType=T
   where orders.id = #{id,jdbcType=INTEGER}
  </select>
 
- <select id="count" parameterType="cn.maodun.query.OrdersQueryParams" resultType="long">
+ <select id="count" parameterType="cn.ymt.query.OrdersQueryParams" resultType="long">
   select count(distinct orders.id) from orders as orders
   <where>
    <if test="condition != null">(${condition})</if>
   </where>
  </select>
 
- <select id="getDistinctIds" parameterType="cn.maodun.query.OrdersQueryParams" resultType="java.lang.Integer">
+ <select id="getDistinctIds" parameterType="cn.ymt.query.OrdersQueryParams" resultType="java.lang.Integer">
   select distinct orders.id from orders as orders
   <where>
    <if test="condition != null">(${condition})</if>
@@ -236,7 +236,7 @@ set  courseId = #{courseId,jdbcType=INTEGER}, orderTime = #{orderTime,jdbcType=T
   <if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
  </select>
 
- <select id="getSimple" parameterType="cn.maodun.query.OrdersQueryParams" resultMap="SimpleResultMap">
+ <select id="getSimple" parameterType="cn.ymt.query.OrdersQueryParams" resultMap="SimpleResultMap">
   <include refid="Simple_Column" />
   <where>
    <if test="condition != null">(${condition})</if>
@@ -251,7 +251,7 @@ set  courseId = #{courseId,jdbcType=INTEGER}, orderTime = #{orderTime,jdbcType=T
   <if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
  </select>
 
- <select id="getBasic" parameterType="cn.maodun.query.OrdersQueryParams" resultMap="BaseResultMap">
+ <select id="getBasic" parameterType="cn.ymt.query.OrdersQueryParams" resultMap="BaseResultMap">
   <include refid="Base_Column" />
   <where>
    <if test="condition != null">(${condition})</if>
@@ -266,7 +266,7 @@ set  courseId = #{courseId,jdbcType=INTEGER}, orderTime = #{orderTime,jdbcType=T
   <if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
  </select>
 
- <select id="getDetail" parameterType="cn.maodun.query.OrdersQueryParams" resultMap="DetailResultMap">
+ <select id="getDetail" parameterType="cn.ymt.query.OrdersQueryParams" resultMap="DetailResultMap">
   <include refid="Detail_Column" />
   where orders.id in
   (select * from(select distinct orders.id from orders as orders
