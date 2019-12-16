@@ -1,13 +1,13 @@
 package cn.ymt.serviceDao;
 import cn.ymt.view.OrdersView;
-import cn.ymt.dao.OrderDao;
+import cn.ymt.dao.OrdersDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 @Service
-public class OrderServiceDao extends serviceDaoTemplate<OrdersView,OrderDao> {
+public class OrdersServiceDao extends serviceDaoTemplate<OrdersView,OrdersDao> {
 @Autowired
-    private OrderDao orderDao ;
+    private OrdersDao ordersDao ;
     public OrdersView getByNumber(String out_trade_no) throws Exception{
-        return orderDao.getByNumber(out_trade_no);
+        return ordersDao.getByNumber(out_trade_no);
     }
 }

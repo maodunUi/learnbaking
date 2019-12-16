@@ -2,7 +2,7 @@ package cn.ymt.controller;
 
 
 import cn.ymt.pojo.User;
-import cn.ymt.serviceDao.OrderServiceDao;
+import cn.ymt.serviceDao.OrdersServiceDao;
 import cn.ymt.serviceDao.ShopcartServiceDao;
 import cn.ymt.util.AlipayConfig;
 import cn.ymt.view.OrdersView;
@@ -29,7 +29,7 @@ import java.util.*;
 @RequestMapping("/pay")
 public class PayController {
 	@Autowired
-	private OrderServiceDao orderServiceDao ;
+	private OrdersServiceDao orderServiceDao ;
 	@Autowired
 	private ShopcartServiceDao shopcartServiceDao ;
 	//点击付款跳转到支付宝付款页面 传number totalPrice subject body courseId
