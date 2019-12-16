@@ -41,11 +41,11 @@ public class PayControllerApp {
 			// 商户订单号，商户网站订单系统中唯一订单号，必填
 			String out_trade_no = UUID.randomUUID().toString() ;
 			// 订单名称，必填
-			String subject = new String(request.getParameter("subject").getBytes("ISO-8859-1"), "UTF-8");
+			String subject = request.getParameter("subject") ; //new String(request.getParameter("subject").getBytes("ISO-8859-1"), "UTF-8");
 			// 付款金额，必填
-			String total_amount = new String(request.getParameter("totalPrice").getBytes("ISO-8859-1"), "UTF-8");
+			String total_amount = request.getParameter("totalPrice") ; //new String(request.getParameter("totalPrice").getBytes("ISO-8859-1"), "UTF-8");
 			// 商品描述，可空
-			String body = new String(request.getParameter("body").getBytes("ISO-8859-1"), "UTF-8");
+			String body = request.getParameter("body") ; // new String(request.getParameter("body").getBytes("ISO-8859-1"), "UTF-8");
 			// 超时时间 可空
 			String timeout_express = "2m";
 			// 销售产品码 必填
@@ -81,6 +81,7 @@ public class PayControllerApp {
 		orderView.setCourseId(Integer.parseInt(request.getParameter("courseId")));
 		orderView.setUserId(user.getId());
 		orderView.setPrice(Double.valueOf(total_amount));
+		orderView.setNumber(out_trade_no);
 		orderView.setSubject(body);
 		orderView.setName(subject);
 		orderView.setState((byte)0); //刚刚生成订单，未支付
