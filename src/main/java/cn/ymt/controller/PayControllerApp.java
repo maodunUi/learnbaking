@@ -14,6 +14,7 @@ import cn.ymt.util.AlipayConfig;
 import cn.ymt.view.OrdersView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,7 +25,7 @@ import com.alipay.api.domain.AlipayTradeWapPayModel;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradeWapPayRequest;
 
-
+@CrossOrigin
 @Controller
 @RequestMapping("/payApp")
 public class PayControllerApp {
@@ -149,7 +150,6 @@ public class PayControllerApp {
 			String str = sf.toString();
 			out.println(str);
 			// out.println(params) ;
-
 			// ——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
 
 		} else {
