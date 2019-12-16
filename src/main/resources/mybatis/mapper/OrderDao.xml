@@ -206,7 +206,8 @@ update order
 <if test="price != null"> price = #{price,jdbcType=DOUBLE},</if>
 <if test="number != null"> number = #{number,jdbcType=VARCHAR},</if>
 <if test="subject != null"> subject = #{subject,jdbcType=VARCHAR},</if>
-<if test="name != null"> name = #{name,jdbcType=VARCHAR},</if></set>
+<if test="name != null"> name = #{name,jdbcType=VARCHAR},</if>
+</set>
  where id = #{id,jdbcType=INTEGER}
 </update>
 
@@ -275,5 +276,9 @@ select distinct order.id from order as order
 <if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
 ) as ordertempTable)
 </select>
-
+<!--%%%%%%%%%%%-->
+ <select id="getByNumber"  resultMap="BaseResultMap" parameterType="java.lang.String">
+  <include refid="Base_Column" />
+  where order.number = #{number,jdbcType=INTEGER}
+ </select>
 </mapper>
