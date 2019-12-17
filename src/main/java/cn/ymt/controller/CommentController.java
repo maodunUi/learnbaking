@@ -59,16 +59,20 @@ jsonResult jsonResult = new jsonResult( );
         }
         jsonResult.setSuccess(true);
         if (commentView.getParentId()==null){ //对work评论
-            jsonResult.setMsg(user.getName());
+            jsonResult.setMsg(user.getNickName());
             jsonResult.add(comment);
+            jsonResult.add(user);
                // return new jsonResult(true,"" + user.getName()) ;
             return  jsonResult ;
         }else {
-            jsonResult.setMsg(user.getName());
+            jsonResult.setMsg(user.getNickName());
             jsonResult.add(comment);
+            jsonResult.add(user);
             return jsonResult ;
 
                 //return new jsonResult(true,user.getName() + "：" + userView.getName());
         }
     }
+
+
 }

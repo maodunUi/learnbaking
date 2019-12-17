@@ -35,4 +35,16 @@ public class ShopcartController {
         shopcartServiceDao.insert(shopcartView) ;
         return new jsonResult(true,"添加成功") ;
     }
+
+    //删除购物车 id 购物车id
+    @RequestMapping("/delete")
+    public jsonResult delete(int id){
+        try {
+            shopcartServiceDao.deleteById(id) ;
+            return new jsonResult(true,"删除成功") ;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new jsonResult(false,"删除失败" + e.getMessage()) ;
+        }
+    }
 }

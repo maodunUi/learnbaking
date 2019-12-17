@@ -69,4 +69,10 @@ public class UserController {
         }
     }
 
+    @RequestMapping("/logout")
+    public  jsonResult logout(HttpServletRequest request){
+        request.getSession().removeAttribute("user");
+        //request.getSession().setAttribute("user",null);
+        return new jsonResult(true,"注销成功") ;
+    }
 }
