@@ -36,8 +36,11 @@ public class CommentController  {
         UserView userView = null;
         try {
           //  WorkView work = workServiceDao.getBasicById(commentView.getWorkId());
-            CommentView comm = commentServiceDao.getBasicById(commentView.getId()); // 通过传过来的评论id 找到 评论的用户id userid
-            userView = userServiceDao.getBasicById(comm.getUserId());
+            if (commentView.getId() != null){
+                CommentView comm = commentServiceDao.getBasicById(commentView.getId()); // 通过传过来的评论id 找到 评论的用户id userid
+                userView = userServiceDao.getBasicById(comm.getUserId());
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             return new jsonResult(false,"添加评论失败" + e.getMessage()) ;
@@ -45,6 +48,7 @@ public class CommentController  {
         commentView.setUserId(user.getId());
         commentView.setCommentTime(new Date());
         try {
+            commentView.setId(null);
             commentServiceDao.insert(commentView) ;
             CommentView comment = commentServiceDao.getBasicById(commentView.getId());
            // return new jsonResult(true,"添加评论成功") ;
