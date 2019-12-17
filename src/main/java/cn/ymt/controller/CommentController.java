@@ -32,7 +32,7 @@ public class CommentController  {
     @RequestMapping("/addComment")
     public jsonResult addComment(CommentView commentView , HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");
-
+jsonResult jsonResult = new jsonResult( );
         UserView userView = null;
         try {
           //  WorkView work = workServiceDao.getBasicById(commentView.getWorkId());
@@ -47,19 +47,28 @@ public class CommentController  {
         }
         commentView.setUserId(user.getId());
         commentView.setCommentTime(new Date());
+        CommentView comment ;
         try {
             commentView.setId(null);
             commentServiceDao.insert(commentView) ;
-            CommentView comment = commentServiceDao.getBasicById(commentView.getId());
+             comment = commentServiceDao.getBasicById(commentView.getId());
            // return new jsonResult(true,"添加评论成功") ;
         } catch (Exception e) {
             e.printStackTrace();
             return new jsonResult(false,"添加评论失败" + e.getMessage()) ;
         }
+        jsonResult.setSuccess(true);
         if (commentView.getParentId()==null){ //对work评论
-                return new jsonResult(true,"" + user.getName()) ;
+            jsonResult.setMsg(user.getName());
+            jsonResult.add(comment);
+               // return new jsonResult(true,"" + user.getName()) ;
+            return  jsonResult ;
         }else {
-                return new jsonResult(true,user.getName() + "：" + userView.getName());
+            jsonResult.setMsg(user.getName());
+            jsonResult.add(comment);
+            return jsonResult ;
+
+                //return new jsonResult(true,user.getName() + "：" + userView.getName());
         }
     }
 }
