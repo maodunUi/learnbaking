@@ -26,7 +26,7 @@ public class WorkController  {
     private ImgServiceDao imgServiceDao ;
     //上传食谱 不需要categoryId  传json对象 post
     @PostMapping("/add")
-    public jsonResult  add(WorkView workView, HttpServletRequest request) throws Exception{
+    public jsonResult  add(@RequestBody WorkView workView, HttpServletRequest request) throws Exception{
         User user = (User) request.getSession().getAttribute("user");
         workView.setAddTime(new Date());
         workView.setState((byte)1);
