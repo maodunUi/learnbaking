@@ -5,18 +5,18 @@ public class UserQueryParams extends QueryParams<UserView> {
     private String telphone ;
 
     public String getName() {
-        return this.name = name == "" ? null : name.trim();
+       return this.name ;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == "" ? null : name.trim();
     }
 
     public String getTelphone() {
-        return this.telphone = telphone == "" ? null : telphone.trim();
+        return this.telphone ;
     }
 
     public void setTelphone(String telphone) {
-        this.telphone = telphone;
+        this.telphone = telphone == "" ? null : telphone.trim() ;
     }
 }

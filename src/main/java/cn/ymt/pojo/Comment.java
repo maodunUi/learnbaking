@@ -3,6 +3,7 @@ import java.util.Date;
 public class Comment extends BasicModel {
 protected Integer userId;//
 protected String message;//
+
 protected Date commentTime=new Date();//
 protected Integer parentId;//
 protected Integer workId;//
