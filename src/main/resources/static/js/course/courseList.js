@@ -6,8 +6,8 @@ layui.use('table', function () {
         elem: '#test',
         id: 'idTest',
         // url: '/user/get',
-        url:'/UserAction/list',
-        title: '用户数据表',
+        url:'/CourseAction/search',
+        title: '食谱数据表',
         toolbar: '#toolbarDemo',
         totalRow: true
         ,response: {
@@ -17,16 +17,13 @@ layui.use('table', function () {
         cols: [
             [{type: 'radio',fixed: 'left'},
                 {field: 'id',title: 'ID',width: 60,fixed: 'left',unresize: true,sort: true,fixed: true,totalRowText: '合计'},
-                {field: 'name',title: '姓名',width: 80,},
-                {field: 'imgUrl',title: '头像',width: 150,templet: '<div><img src="{{d.imgUrl}}"/></div>'},
-                {field: 'sex',title: '性别',width: 80,sort: true,templet: '#mysex'},
-                {field: 'age',title: '年龄',width: 80,sort: true},
-                {field: 'email',title: '邮件',width: 180,sort: true},
-                {field: 'nickName',title: '用户名',width: 100},
-                {field: 'telphone',title: '电话号码',width: 120,sort: true},
-                {field: 'address',title: '家庭地址',width: 270,},
-                {field: 'memo',title: '个人描述',width: 270,},
-                {field:'state', title:'是否正常', width:100, templet: '#switchTpl', unresize: true},
+                {field: 'title',title: '课程名',width: 80,},
+                {field: 'imgUrl',title: '展示图片',width: 150,templet: '<div><img src="{{d.imgUrl}}"/></div>'},
+                {field: 'videoUrl',title: '展示视频',width: 180,sort: true,templet: '#mysex'},
+                {field: 'memo',title: '介绍1',width: 280,sort: true},
+                {field: 'memoTwo',title: '介绍2',width: 280,sort: true},
+                {field: 'howLearn',title: '如何学习',width: 280},
+                {field: 'price',title: '价格',width: 120,sort: true},
                 {fixed: 'right',title: '操作',toolbar: '#barDemo',width: 100}]
         ],
         page: true,
@@ -37,7 +34,7 @@ layui.use('table', function () {
             alert(1)
             //执行重载UserAction/get
             table.reload('idTest', {
-                url: '/UserAction/list'
+                url: '/CourseAction/search'
                 ,where:{
                     name : $("input[name='realName']").val(),
                     telphone : $("input[name='telphone']").val(),

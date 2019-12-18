@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>课程上传</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+<style>
+    .layui-form{
+        width: 80%;
+    }
+</style>
+<body>
+<form class="layui-form" action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">课程名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" required  lay-verify="required" placeholder="请输入课程名称" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">价格</label>
+        <div class="layui-input-inline">
+            <input type="text" name="password" required lay-verify="required" placeholder="请输入课程价格" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux">确保输入价格为数值</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择分类</label>
+        <div class="layui-input-block">
+            <select name="categoryId" lay-verify="required">
+                <option value=""></option>
+                <option value="1">蛋糕</option>
+                <option value="2">甜品点心</option>
+                <option value="3">面包</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">描述1</label>
+        <div class="layui-input-block">
+            <textarea name="memo" placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">描述2</label>
+        <div class="layui-input-block">
+            <textarea name="memoTwo" placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">如何学习</label>
+        <div class="layui-input-block">
+            <textarea name="howLearn" placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+    </div>
+
+   <!-- <button type="button" class="layui-btn">上传视频</button>
+    <video src=""></video>-->
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+    <script src="/js/course/upload.js"></script>
+</body>
+</html>
