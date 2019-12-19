@@ -49,8 +49,14 @@
  detail.userId as detail_userId,
  detail.introduce as detail_introduce,
  detail.materials as detail_materials,
- detail.step as detail_step
- from detail as detail 
+ detail.step as detail_step,
+detailimg.id as detailimg_id,
+ detailimg.detailId as detailimg_detailId,
+ detailimg.imgUrl as detailimg_imgUrl,
+ detailimg.msg as detailimg_msg
+ from detail as detail
+LEFT JOIN detailimg as detailimg
+on detail.id = detailimg.detailId
 </sql>
 
 <resultMap id="SimpleResultMap" type="cn.ymt.view.simple.DetailSimpleView">
@@ -84,6 +90,12 @@
 </resultMap>
 
 <resultMap id="DetailResultMap" type="cn.ymt.view.DetailView" extends="BaseResultMap">
+ <collection property="detailimgViews" ofType="cn.ymt.view.DetailimgView">
+  <id column="detailimg_id" jdbcType="INTEGER" property="id" />
+  <result column="detailimg_detailId" jdbcType="INTEGER" property="detailId" />
+  <result column="detailimg_imgUrl" jdbcType="VARCHAR" property="imgUrl" />
+  <result column="detailimg_msg" jdbcType="LONGVARCHAR" property="msg" />
+ </collection>
 </resultMap>
 
 <delete id="deleteById" parameterType="java.lang.Integer">
@@ -288,4 +300,6 @@ select distinct detail.id from detail as detail
  <select id="getMySelf" resultMap="BaseResultMap">
   <include refid="Base_Column" /> where userId = #{id,jdbcType=INTEGER} order by addTime desc
  </select>
+
+
 </mapper>

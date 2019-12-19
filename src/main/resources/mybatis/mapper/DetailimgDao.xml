@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ymt.dao.DetailimgDao">
+
+<sql id="Simple_Column">
+ select
+ detailimg.id as detailimg_id,
+ detailimg.detailId as detailimg_detailId,
+ detailimg.imgUrl as detailimg_imgUrl,
+ detailimg.msg as detailimg_msg
+ from detailimg as detailimg 
+</sql>
+
+<sql id="Base_Column">
+ select
+ detailimg.id as detailimg_id,
+ detailimg.detailId as detailimg_detailId,
+ detailimg.imgUrl as detailimg_imgUrl,
+ detailimg.msg as detailimg_msg
+ from detailimg as detailimg 
+</sql>
+
+<sql id="Detail_Column">
+ select
+ detailimg.id as detailimg_id,
+ detailimg.detailId as detailimg_detailId,
+ detailimg.imgUrl as detailimg_imgUrl,
+ detailimg.msg as detailimg_msg
+ from detailimg as detailimg 
+</sql>
+
+<resultMap id="SimpleResultMap" type="cn.ymt.view.simple.DetailimgSimpleView">
+<id column="detailimg_id" jdbcType="INTEGER" property="id" />
+ <result column="detailimg_detailId" jdbcType="INTEGER" property="detailId" />
+ <result column="detailimg_imgUrl" jdbcType="VARCHAR" property="imgUrl" />
+ <result column="detailimg_msg" jdbcType="LONGVARCHAR" property="msg" />
+</resultMap>
+
+<resultMap id="BaseResultMap" type="cn.ymt.view.DetailimgView">
+<id column="detailimg_id" jdbcType="INTEGER" property="id" />
+ <result column="detailimg_detailId" jdbcType="INTEGER" property="detailId" />
+ <result column="detailimg_imgUrl" jdbcType="VARCHAR" property="imgUrl" />
+ <result column="detailimg_msg" jdbcType="LONGVARCHAR" property="msg" />
+</resultMap>
+
+<resultMap id="DetailResultMap" type="cn.ymt.view.DetailimgView" extends="BaseResultMap">
+</resultMap>
+
+<delete id="deleteById" parameterType="java.lang.Integer">
+delete from detailimg where id = #{id,jdbcType=INTEGER}
+</delete>
+
+<delete id="deleteByIds">
+delete from detailimg
+where <foreach collection="list" item="i" open="(" close=")" separator=" or "> id=#{i,jdbcType=INTEGER} </foreach>
+  </delete>
+
+<delete id="deleteObjects">
+delete from detailimg
+where <foreach collection="list" item="i" open="(" close=")" separator=" or "> id=#{i.id,jdbcType=INTEGER} </foreach>
+  </delete>
+
+<delete id="deleteByParams" parameterType="cn.ymt.query.DetailimgQueryParams">
+delete from detailimg 
+<where><if test="condition != null">${condition}</if></where>
+</delete>
+
+<insert id="save" parameterType="cn.ymt.view.DetailimgView" useGeneratedKeys="true" keyProperty="id">
+insert into detailimg (detailId,imgUrl,msg) 
+ values(#{detailId,jdbcType=INTEGER},#{imgUrl,jdbcType=VARCHAR},#{msg,jdbcType=LONGVARCHAR})
+</insert>
+
+<insert id="saveNoNull" parameterType="cn.ymt.view.DetailimgView" useGeneratedKeys="true" keyProperty="id">
+insert into detailimg
+<trim prefix="(" suffix=")" suffixOverrides=",">
+ <if test="detailId != null">
+detailId,
+</if>
+ <if test="imgUrl != null">
+imgUrl,
+</if>
+ <if test="msg != null">
+msg,
+</if>
+</trim>
+
+<trim prefix="values(" suffix=")" suffixOverrides=",">
+<if test="detailId != null">
+#{detailId,jdbcType=INTEGER},
+</if>
+<if test="imgUrl != null">
+#{imgUrl,jdbcType=VARCHAR},
+</if>
+<if test="msg != null">
+#{msg,jdbcType=LONGVARCHAR},
+</if>
+</trim>
+</insert>
+
+<insert id="saves" >
+insert into detailimg (detailId,imgUrl,msg) 
+ values <foreach collection="list" item="obj" separator=",">(#{obj.detailId,jdbcType=INTEGER},#{obj.imgUrl,jdbcType=VARCHAR},#{obj.msg,jdbcType=LONGVARCHAR})</foreach>
+</insert>
+<update id="updateAll" parameterType="cn.ymt.view.DetailimgView">
+update detailimg 
+set  detailId = #{detailId,jdbcType=INTEGER}, imgUrl = #{imgUrl,jdbcType=VARCHAR}, msg = #{msg,jdbcType=LONGVARCHAR} where id = #{id,jdbcType=INTEGER}
+</update>
+ <update id="updateNoNull" parameterType="cn.ymt.view.DetailimgView">
+update detailimg 
+<set>
+<if test="detailId != null"> detailId = #{detailId,jdbcType=INTEGER},</if>
+<if test="imgUrl != null"> imgUrl = #{imgUrl,jdbcType=VARCHAR},</if>
+<if test="msg != null"> msg = #{msg,jdbcType=LONGVARCHAR},</if></set>
+ where id = #{id,jdbcType=INTEGER}
+</update>
+
+<select id="getBasicById"  resultMap="BaseResultMap" parameterType="java.lang.Integer">
+<include refid="Base_Column" />
+where detailimg.id = #{id,jdbcType=INTEGER}
+</select>
+
+<select id="getDetailById"  resultMap="DetailResultMap" parameterType="java.lang.Integer">
+<include refid="Detail_Column" />
+where detailimg.id = #{id,jdbcType=INTEGER}
+</select>
+
+<select id="count" parameterType="cn.ymt.query.DetailimgQueryParams" resultType="long">
+select count(distinct detailimg.id) from detailimg as detailimg
+<where>
+<if test="condition != null">(${condition})</if>
+</where>
+</select>
+
+<select id="getDistinctIds" parameterType="cn.ymt.query.DetailimgQueryParams" resultType="java.lang.Integer">
+select distinct detailimg.id from detailimg as detailimg
+<where>
+<if test="condition != null">(${condition})</if>
+</where>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+</select>
+
+<select id="getSimple" parameterType="cn.ymt.query.DetailimgQueryParams" resultMap="SimpleResultMap">
+<include refid="Simple_Column" />
+<where>
+<if test="condition != null">(${condition})</if>
+<if test="pojos != null">
+ and <foreach collection="pojos" open="(" close=")" separator=" or " item="pojo">detailimg.id=#{pojo.id,jdbcType=INTEGER}</foreach>
+</if>
+<if test="ids != null">
+ and <foreach collection="ids" open="(" close=")" separator=" or " item="idTemp">detailimg.id=#{idTemp,jdbcType=INTEGER}</foreach>
+</if>
+</where>
+<if test="orderBy != null"> order by ${orderBy}</if>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+</select>
+
+<select id="getBasic" parameterType="cn.ymt.query.DetailimgQueryParams" resultMap="BaseResultMap">
+<include refid="Base_Column" />
+<where>
+<if test="condition != null">(${condition})</if>
+<if test="pojos != null">
+ and <foreach collection="pojos" open="(" close=")" separator=" or " item="pojo">detailimg.id=#{pojo.id,jdbcType=INTEGER}</foreach>
+</if>
+<if test="ids != null">
+ and <foreach collection="ids" open="(" close=")" separator=" or " item="idTemp">detailimg.id=#{idTemp,jdbcType=INTEGER}</foreach>
+</if>
+</where>
+<if test="orderBy != null"> order by ${orderBy}</if>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+</select>
+
+<select id="getDetail" parameterType="cn.ymt.query.DetailimgQueryParams" resultMap="DetailResultMap">
+<include refid="Detail_Column" />
+ where detailimg.id in 
+(select * from(select distinct detailimg.id from detailimg as detailimg 
+<where>
+<if test="condition != null">(${condition})</if>
+</where>
+<if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
+) as detailimgtempTable)
+</select>
+
+</mapper>
