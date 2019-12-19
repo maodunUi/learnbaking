@@ -1,12 +1,14 @@
 package cn.ymt.controller;
-import cn.ymt.pojo.Detail;
 import cn.ymt.pojo.User;
 import cn.ymt.query.DetailQueryParams;
 import cn.ymt.serviceDao.DetailServiceDao;
+import cn.ymt.serviceDao.DetailimgServiceDao;
 import cn.ymt.util.jsonResult;
 import cn.ymt.view.DetailView;
+import cn.ymt.view.DetailimgView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +21,8 @@ import java.util.List;
 public class DetailController {
     @Autowired
     private DetailServiceDao detailServiceDao ;
-
+    @Autowired
+    private DetailimgServiceDao detailimgServiceDao ;
     @RequestMapping("/getBasic")
     public jsonResult getBasic(DetailQueryParams queryParam) {
         try {
@@ -44,6 +47,14 @@ public class DetailController {
         jsonResult.add(detailView);
         return jsonResult ;
     }
+
+    @RequestMapping("/getDetailById")
+    public jsonResult getDetailById(Integer id)throws Exception{
+        DetailView detailView = detailServiceDao.getDetailById(id);
+        jsonResult jsonResult = new jsonResult(true,"查询成功") ;
+        jsonResult.add(detailView);
+        return jsonResult ;
+    }
     //得到自己的食谱
     @RequestMapping("/getMySelf")
     public jsonResult getMySelf(HttpServletRequest request) {
@@ -56,15 +67,20 @@ public class DetailController {
             return new jsonResult(false,"查询失败") ;
         }
     }
-    //上传食谱
+    //上传食谱 传递json过来
     @RequestMapping("/insert")
-    public jsonResult update(DetailView detailView,HttpServletRequest request){
+    public jsonResult update(@RequestBody DetailView detailView, HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");
         detailView.setAddTime(new Date());
         detailView.setState((byte)1);
         detailView.setUserId(user.getId());
         try {
             detailServiceDao.insert(detailView) ;
+            List<DetailimgView> detailimgViews = detailView.getDetailimgViews();
+            for (DetailimgView detailimgView:detailimgViews) {
+                detailimgView.setDetailId(detailView.getId());
+            }
+            detailimgServiceDao.inserts(detailimgViews) ;
             return new jsonResult(true,"上传成功") ;
         } catch (Exception e) {
             e.printStackTrace();
