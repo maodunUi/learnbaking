@@ -66,7 +66,7 @@ public class DetailController {
     }
     //上传食谱 传递json过来 post方法
     @PostMapping("/insert")
-    public jsonResult update(@RequestBody DetailView detailView, HttpServletRequest request){
+    public jsonResult update(DetailView detailView, HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");
         detailView.setAddTime(new Date());
         detailView.setState((byte)1);
