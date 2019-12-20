@@ -7,10 +7,7 @@ import cn.ymt.util.jsonResult;
 import cn.ymt.view.DetailView;
 import cn.ymt.view.DetailimgView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -67,8 +64,8 @@ public class DetailController {
             return new jsonResult(false,"查询失败") ;
         }
     }
-    //上传食谱 传递json过来
-    @RequestMapping("/insert")
+    //上传食谱 传递json过来 post方法
+    @PostMapping("/insert")
     public jsonResult update(@RequestBody DetailView detailView, HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");
         detailView.setAddTime(new Date());
