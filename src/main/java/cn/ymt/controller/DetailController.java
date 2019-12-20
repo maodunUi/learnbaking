@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @CrossOrigin
@@ -73,10 +74,23 @@ public class DetailController {
         detailView.setUserId(user.getId());
         try {
             detailServiceDao.insert(detailView) ;
-            List<DetailimgView> detailimgViews = detailView.getDetailimgViews();
+
+            List<DetailimgView> detailimgViews = new ArrayList<>() ;
+            int length1 = detailView.getImgUrlTwo().length ;
+            int length2 = detailView.getMsgTwo().length ;
+            int len = length1 > length2 ? length1 : length2 ;
+            for (int i = 0 ; i < len ; i++){
+                DetailimgView view = new DetailimgView() ;
+                view.setImgUrl(detailView.getImgUrlTwo()[i]);
+                view.setMsg(detailView.getMsgTwo()[i]);
+                view.setDetailId(detailView.getId());
+                detailimgViews.add(view) ;
+            }
+
+         /*   List<DetailimgView> detailimgViews = detailView.getDetailimgViews();
             for (DetailimgView detailimgView:detailimgViews) {
                 detailimgView.setDetailId(detailView.getId());
-            }
+            }*/
             detailimgServiceDao.inserts(detailimgViews) ;
             return new jsonResult(true,"上传成功") ;
         } catch (Exception e) {
