@@ -158,7 +158,8 @@ update video
 <if test="userId != null"> userId = #{userId,jdbcType=INTEGER},</if>
 <if test="createTime != null"> createTime = #{createTime,jdbcType=TIMESTAMP},</if>
 <if test="orderIndex != null"> orderIndex = #{orderIndex,jdbcType=INTEGER},</if>
-<if test="courseId != null"> courseId = #{courseId,jdbcType=INTEGER},</if></set>
+<if test="courseId != null"> courseId = #{courseId,jdbcType=INTEGER},</if>
+</set>
  where id = #{id,jdbcType=INTEGER}
 </update>
 
@@ -212,6 +213,7 @@ select distinct video.id from video as video
 <if test="ids != null">
  and <foreach collection="ids" open="(" close=")" separator=" or " item="idTemp">video.id=#{idTemp,jdbcType=INTEGER}</foreach>
 </if>
+ <if test="courseId != null">and video.courseId=#{courseId,jdbcType=INTEGER}</if>
 </where>
 <if test="orderBy != null"> order by ${orderBy}</if>
 <if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>

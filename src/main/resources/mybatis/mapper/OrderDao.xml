@@ -261,6 +261,9 @@ set  courseId = #{courseId,jdbcType=INTEGER}, orderTime = #{orderTime,jdbcType=T
    <if test="ids != null">
     and <foreach collection="ids" open="(" close=")" separator=" or " item="idTemp">orders.id=#{idTemp,jdbcType=INTEGER}</foreach>
    </if>
+   <if test="userId != null">
+    and orders.userId = #{userId,jdbcType=INTEGER}
+   </if>
   </where>
   <if test="orderBy != null"> order by ${orderBy}</if>
   <if test="recordIndex != null"> limit #{recordIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}</if>
