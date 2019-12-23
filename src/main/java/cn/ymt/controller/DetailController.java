@@ -66,7 +66,7 @@ public class DetailController {
         }
     }
     //上传食谱 传递json过来 post方法
-    @PostMapping("/insert")
+   /* @PostMapping("/insert")
     public jsonResult update(DetailView detailView, HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");
         detailView.setAddTime(new Date());
@@ -87,10 +87,44 @@ public class DetailController {
                 detailimgViews.add(view) ;
             }
 
-         /*   List<DetailimgView> detailimgViews = detailView.getDetailimgViews();
+         *//*   List<DetailimgView> detailimgViews = detailView.getDetailimgViews();
             for (DetailimgView detailimgView:detailimgViews) {
                 detailimgView.setDetailId(detailView.getId());
-            }*/
+            }*//*
+            detailimgServiceDao.inserts(detailimgViews) ;
+            return new jsonResult(true,"上传成功") ;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new jsonResult(false,"上传失败") ;
+        }
+    }*/
+
+    //上传食谱 传递json过来 post方法
+    @PostMapping("/insert")
+    public jsonResult update(@RequestBody DetailView detailView, HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("user");
+        detailView.setAddTime(new Date());
+        detailView.setState((byte)1);
+        detailView.setUserId(user.getId());
+        try {
+            detailServiceDao.insert(detailView) ;
+
+    /*    List<DetailimgView> detailimgViews = new ArrayList<>() ;
+        int length1 = detailView.getImgUrlTwo().length ;
+        int length2 = detailView.getMsgTwo().length ;
+        int len = length1 > length2 ? length1 : length2 ;
+        for (int i = 0 ; i < len ; i++){
+            DetailimgView view = new DetailimgView() ;
+            view.setImgUrl(detailView.getImgUrlTwo()[i]);
+            view.setMsg(detailView.getMsgTwo()[i]);
+            view.setDetailId(detailView.getId());
+            detailimgViews.add(view) ;
+        }*/
+
+            List<DetailimgView> detailimgViews = detailView.getDetailimgViews();
+            for (DetailimgView detailimgView:detailimgViews) {
+                detailimgView.setDetailId(detailView.getId());
+            }
             detailimgServiceDao.inserts(detailimgViews) ;
             return new jsonResult(true,"上传成功") ;
         } catch (Exception e) {

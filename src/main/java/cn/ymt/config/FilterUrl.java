@@ -13,7 +13,7 @@ import java.util.List;
 public class FilterUrl {
     private static String[] strArrays  = {
             "/test","/CollectAction/auth","/CollectAction/getCollect","/WorkAction/getMyself","/ShopcartAction/addToCart","/UserAction/get","/DetailAction/update",
-            "/CollectAction/collect","/getUserStatus"
+            "/CollectAction/collect","/getUserStatus","/CourseAction/getMyCourse"
     } ;
     public static List<String> getFilterUrl(){
         return Arrays.asList(FilterUrl.strArrays) ;

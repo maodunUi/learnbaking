@@ -2,7 +2,7 @@ package cn.ymt.query;
 import java.util.List;
 public abstract class QueryParams<T extends cn.ymt.pojo.BasicModel>{
 
-protected Integer pageSize = 8;
+protected Integer pageSize;
 protected Integer recordIndex;
 protected String orderBy;
 protected List<Integer> ids;
@@ -22,7 +22,7 @@ protected String condition;
     }
 
     public Integer getPageSize() {
-        return pageSize;
+        return limit; //这里返回limit
     }
 
     public void setPageSize(Integer pageSize) {
@@ -34,6 +34,14 @@ protected String condition;
             recordIndex = (page - 1) * limit ;
         }
         return recordIndex;
+    }
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
     }
 
     public void setRecordIndex(Integer recordIndex) {

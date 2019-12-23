@@ -32,7 +32,7 @@ public class PayController {
 	private OrdersServiceDao orderServiceDao ;
 	@Autowired
 	private ShopcartServiceDao shopcartServiceDao ;
-	//点击付款跳转到支付宝付款页面 传number totalPrice subject body courseId
+	//点击付款跳转到支付宝付款页面 传number totalPrice subject body courseId 通过1,2,3
 	@RequestMapping(value = "/toPayPage", method = { RequestMethod.GET, RequestMethod.POST })
 	public void toPayPage(HttpServletRequest request, HttpServletResponse response){
 		PrintWriter out = null;
@@ -62,6 +62,11 @@ public class PayController {
 		User user = (User) request.getSession().getAttribute("user");
 		OrdersView orderView = new OrdersView() ;
 		orderView.setOrderTime(new Date());
+		/*String courseIds = request.getParameter("courseIds");
+		String[] ids = courseIds.split(",");
+		for (String courseId:ids) {
+
+		}*/
 		orderView.setCourseId(Integer.parseInt(request.getParameter("courseId")));
 		orderView.setUserId(user.getId());
 		orderView.setPrice(Double.valueOf(total_amount));
